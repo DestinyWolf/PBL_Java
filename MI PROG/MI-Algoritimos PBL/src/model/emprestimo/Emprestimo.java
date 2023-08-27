@@ -54,13 +54,13 @@ public class Emprestimo {
         this.livro = livro;
     }
 
-    public void renovacaoEmprestimo(Integer isbn, Integer id) {
+    /*public void renovacaoEmprestimo(Integer isbn, Integer id) {
 
-        /*ainda falta parte da imprlementação mas parte ta feito*/
-        if(leitor.getId() == id && livro.getIsbn = isbn){
+
+        if(leitor.getId() == id && livro.getIsbn() == isbn){
             if()
 
             this.dataDevolucao.addDia(7);
         }
-    }
+    }*/
 }
