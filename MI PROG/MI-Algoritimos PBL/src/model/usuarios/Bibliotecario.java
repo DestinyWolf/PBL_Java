@@ -1,3 +1,4 @@
+package model.usuarios;
 public class Bibliotecario extends Pessoa{
     private String Cargo;
 
