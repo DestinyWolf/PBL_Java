@@ -5,9 +5,9 @@ import java.util.LinkedList;
 public interface Dao<T> {
 
     public T findById(Integer id);
-    public void save(Object obj);
+    public void save(T obj);
 
-    public void deleteById();
+    public void deleteById(Integer id);
 
     public void Update(T t);
 
