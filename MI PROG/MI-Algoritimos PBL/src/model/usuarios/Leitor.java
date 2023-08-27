@@ -1,5 +1,5 @@
 package model.usuarios;
-import dao.*;
+import dao.Dao;
 import model.emprestimo.Emprestimo;
 
 import java.util.LinkedList;
