@@ -5,16 +5,36 @@ import dao.Dao;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Estoque {
     private HashMap<Integer, LinkedList<Leitor>> filaDeReserva;
+    private List<Livro> livros;
 
     public Estoque() {
         this.filaDeReserva = new HashMap<>();
+        this.livros = new LinkedList<>();
     }
 
-    public Integer getTotalLivros(Dao<Livro> livros) {
-        return livros.findAll().size();
+    public Livro novoLivro(Livro livro){
+        this.livros.add(livro);
+        return livro;
+    }
+
+    public void RemoveLivro(Livro livro){
+        this.livros.remove(livro);
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+
+    public Integer getTotalLivros() {
+        return this.livros.size();
     }
 
     public HashMap<Integer, LinkedList<Leitor>> getFilaDeReserva() {
@@ -37,6 +57,7 @@ public class Estoque {
             leitores.add(leitor);
         }
         filaDeReserva.put(livro.getIsbn(), leitores);
+
     }
 
 
