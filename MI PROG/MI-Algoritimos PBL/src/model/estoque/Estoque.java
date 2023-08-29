@@ -1,5 +1,6 @@
 package model.estoque;
 
+import dao.MasterDao;
 import model.usuarios.Leitor;
 import dao.Dao;
 
@@ -9,20 +10,18 @@ import java.util.List;
 
 public class Estoque {
     private HashMap<Integer, LinkedList<Leitor>> filaDeReserva;
-    private List<Livro> livros;
 
     public Estoque() {
         this.filaDeReserva = new HashMap<>();
-        this.livros = new LinkedList<>();
     }
 
     public Livro novoLivro(Livro livro){
-        this.livros.add(livro);
+        MasterDao.getLivroDao().save(livro);
         return livro;
     }
 
     public void RemoveLivro(Livro livro){
-        this.livros.remove(livro);
+        MasterDao.getLivroDao().deleteById(livro.getIsbn());
     }
 
     public List<Livro> getLivros() {
