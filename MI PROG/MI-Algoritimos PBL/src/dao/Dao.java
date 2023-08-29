@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.LinkedList;
+import java.util.List
 
 public interface Dao<T> {
 
