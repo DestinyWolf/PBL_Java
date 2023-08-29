@@ -24,14 +24,6 @@ public class Estoque {
         MasterDao.getLivroDao().deleteById(livro.getIsbn());
     }
 
-    public List<Livro> getLivros() {
-        return livros;
-    }
-
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
-    }
-
     public Integer getTotalLivros() {
         return this.livros.size();
     }
