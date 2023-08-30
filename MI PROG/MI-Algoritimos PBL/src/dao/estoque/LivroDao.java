@@ -9,6 +9,8 @@ import java.util.LinkedList;
 public interface LivroDao extends Dao<Livro> {
     public LinkedList<Livro> findByAutor(String autor);
     public LinkedList<Livro> findByCategoria(String categoria);
-    public Livro findByNome(String nome);
+    public LinkedList<Livro> findByNome(String nome);
+
+    public void deleteOnlyOne(Livro obj);
 
 }
