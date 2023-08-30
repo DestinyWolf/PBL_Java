@@ -25,7 +25,7 @@ public class Estoque {
     }
 
     public Integer getTotalLivros() {
-        return this.livros.size();
+        return MasterDao.getLivroDao().findAll().size();
     }
 
     public HashMap<Integer, LinkedList<Leitor>> getFilaDeReserva() {
