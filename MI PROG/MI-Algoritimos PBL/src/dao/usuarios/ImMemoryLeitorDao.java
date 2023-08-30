@@ -26,7 +26,7 @@ public class ImMemoryLeitorDao implements LeitorDao{
     }
 
     @Override
-    public void Update(Leitor leitor) {
+    public void Update(Leitor leitor, Leitor old) {
         this.leitores.remove(leitor.getId());
         this.leitores.put(leitor.getId(), leitor);
     }
