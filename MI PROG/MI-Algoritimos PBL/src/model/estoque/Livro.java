@@ -7,15 +7,17 @@ public class Livro {
     private String enderecoLivro;
     private String editora;
     private Integer anoDePublicacao;
+    private String nome;
 
 
-    public Livro (Integer isbn, String autor, String categoria,String enderecoLivro, String editora, Integer anoDePublicacao) {
+    public Livro (Integer isbn, String autor, String categoria,String enderecoLivro, String editora, Integer anoDePublicacao, String nome) {
         this.isbn = isbn;
         this.autor = autor;
         this.categoria = categoria;
         this.enderecoLivro = enderecoLivro;
         this.editora = editora;
         this.anoDePublicacao = anoDePublicacao;
+        this.nome = nome;
     }
 
     public Integer getAnoDePublicacao() {
@@ -42,6 +44,10 @@ public class Livro {
         return enderecoLivro;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void setAnoDePublicacao(Integer anoDePublicacao) {
         this.anoDePublicacao = anoDePublicacao;
     }
@@ -64,5 +70,9 @@ public class Livro {
 
     public void setIsbn(Integer isbn) {
         this.isbn = isbn;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
