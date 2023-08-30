@@ -10,7 +10,7 @@ public interface Dao<T> {
 
     public void deleteById(Integer id);
 
-    public void Update(T t);
+    public void Update(T t, T old);
 
     public LinkedList<T> findAll();
 }
