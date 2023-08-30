@@ -51,5 +51,10 @@ public class Estoque {
 
     }
 
+    public void removerFilaDeReserva(Livro livro, Leitor leitor) {
+        LinkedList<Leitor> reservaLeitorList = this.filaDeReserva.get(livro.getIsbn());
+        reservaLeitorList.remove(leitor);
+    }
+
 
 }

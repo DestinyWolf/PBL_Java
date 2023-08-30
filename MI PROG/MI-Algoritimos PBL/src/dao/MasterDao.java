@@ -1,5 +1,6 @@
 package dao;
 
+import dao.estoque.ImMemoryLivroDao;
 import dao.estoque.LivroDao;
 import dao.usuarios.ImMemoryLeitorDao;
 import dao.usuarios.LeitorDao;
@@ -18,13 +19,12 @@ public class MasterDao {
     }
 
     public static LivroDao getLivroDao(){
-
+        if(livroDao == null) {
+            livroDao = new ImMemoryLivroDao();
+        }
         return livroDao;
     }
 
-    public static void main(String[] args){
-
-    }
 }
 
 
