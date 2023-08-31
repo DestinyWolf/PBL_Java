@@ -1,5 +1,7 @@
 package dao;
 
+import dao.emprestimo.FiladeReservaDao;
+import dao.emprestimo.ImMemoryFilaDeReservaDao;
 import dao.estoque.ImMemoryLivroDao;
 import dao.estoque.LivroDao;
 import dao.usuarios.BibliotecarioDao;
@@ -13,6 +15,7 @@ public class MasterDao {
     private static LeitorDao leitorDao;
     private static LivroDao livroDao;
     private static BibliotecarioDao bibliotecarioDao;
+    public static FiladeReservaDao filadeReservaDao;
 
     public static LeitorDao getLeitorDAO(){
         if(leitorDao == null){
@@ -33,6 +36,13 @@ public class MasterDao {
             bibliotecarioDao = new ImMemoryBibliotecarioDao();
         }
         return bibliotecarioDao;
+    }
+
+    public static FiladeReservaDao getFiladeReservaDao() {
+        if (filadeReservaDao == null) {
+            filadeReservaDao = new ImMemoryFilaDeReservaDao();
+        }
+        return filadeReservaDao;
     }
 
 }
