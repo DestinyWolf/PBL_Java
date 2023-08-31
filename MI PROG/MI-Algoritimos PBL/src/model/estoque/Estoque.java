@@ -9,10 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Estoque {
-    private HashMap<Integer, LinkedList<Leitor>> filaDeReserva;
 
     public Estoque() {
-        this.filaDeReserva = new HashMap<>();
+
     }
 
     public Livro novoLivro(Livro livro){
