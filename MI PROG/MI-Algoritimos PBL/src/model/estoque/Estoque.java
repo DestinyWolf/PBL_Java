@@ -1,6 +1,7 @@
 package model.estoque;
 
 import dao.MasterDao;
+import model.emprestimo.FilaDeReserva;
 import model.usuarios.Leitor;
 import dao.Dao;
 
@@ -25,34 +26,6 @@ public class Estoque {
 
     public Integer getTotalLivros() {
         return MasterDao.getLivroDao().findAll().size();
-    }
-
-    public HashMap<Integer, LinkedList<Leitor>> getFilaDeReserva() {
-        return filaDeReserva;
-    }
-
-    public void setFilaDeReserva(HashMap<Integer, LinkedList<Leitor>> filaDeReserva) {
-        this.filaDeReserva = filaDeReserva;
-    }
-
-    public void addFilaDeReserva(Livro livro, Leitor leitor){
-        LinkedList<Leitor> leitores;
-        if(this.filaDeReserva.containsKey(livro.getIsbn())){
-            leitores = this.filaDeReserva.get(livro.getIsbn());
-            leitores.add(leitor);
-            filaDeReserva.remove(livro.getIsbn());
-        }
-        else{
-            leitores = new LinkedList<>();
-            leitores.add(leitor);
-        }
-        filaDeReserva.put(livro.getIsbn(), leitores);
-
-    }
-
-    public void removerFilaDeReserva(Livro livro, Leitor leitor) {
-        LinkedList<Leitor> reservaLeitorList = this.filaDeReserva.get(livro.getIsbn());
-        reservaLeitorList.remove(leitor);
     }
 
 
