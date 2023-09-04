@@ -1,5 +1,7 @@
 package model.emprestimo;
 
+import dao.MasterDao;
+import dao.emprestimo.EmprestimoDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
@@ -13,6 +15,16 @@ public class Emprestimo {
     private Data dataEmprestimo;
     private Data dataDevolucao;
     private boolean devolvido;
+    private Integer Id;
+
+    public Emprestimo(Leitor leitor, Livro livro, Data dataEmprestimo, Data dataDevolucao) {
+        this.leitor = leitor;
+        this.livro = livro;
+        this.dataDevolucao = dataDevolucao;
+        this.dataEmprestimo = dataEmprestimo;
+        this.devolvido = false;
+        this.Id = livro.getIsbn() + leitor.getId() + dataEmprestimo.getDia()%7;
+    }
 
     public Data getDataDevolucao() {
         return dataDevolucao;
@@ -32,6 +44,10 @@ public class Emprestimo {
 
     public boolean isDevolvido() {
         return devolvido;
+    }
+
+    public Integer getId() {
+        return Id;
     }
 
     public void setDataDevolucao(Data dataDevolucao) {
@@ -54,13 +70,17 @@ public class Emprestimo {
         this.livro = livro;
     }
 
-    /*public void renovacaoEmprestimo(Integer isbn, Integer id) {
+    public void setId(Integer id) {
+        this.Id = id;
+    }
+
+    public void renovacaoEmprestimo(Integer isbn, Integer id) {
 
 
-        if(leitor.getId() == id && livro.getIsbn() == isbn){
-            if()
-
-            this.dataDevolucao.addDia(7);
+        if(this.leitor.getId() == id && this.livro.getIsbn() == isbn ){
+            if(MasterDao.getFiladeReservaDao().findById(isbn) == null && leitor.getNumEmprestimos() > 0){
+                this.dataDevolucao.addDia(7);
+            }
         }
-    }*/
+    }
 }
