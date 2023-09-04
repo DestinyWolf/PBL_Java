@@ -6,11 +6,8 @@ import dao.emprestimo.ImMemoryEmprestimoDao;
 import dao.emprestimo.ImMemoryFilaDeReservaDao;
 import dao.estoque.ImMemoryLivroDao;
 import dao.estoque.LivroDao;
-import dao.usuarios.BibliotecarioDao;
-import dao.usuarios.ImMemoryBibliotecarioDao;
-import dao.usuarios.ImMemoryLeitorDao;
-import dao.usuarios.LeitorDao;
-import model.usuarios.Leitor;
+import dao.usuarios.*;
+
 
 public class MasterDao {
 
@@ -19,6 +16,7 @@ public class MasterDao {
     private static BibliotecarioDao bibliotecarioDao;
     public static FiladeReservaDao filadeReservaDao;
     public static EmprestimoDao emprestimoDao;
+    public static AdministradorDao administradorDao;
 
     public static LeitorDao getLeitorDAO(){
         if(leitorDao == null){
@@ -53,6 +51,14 @@ public class MasterDao {
             emprestimoDao = new ImMemoryEmprestimoDao();
         }
         return emprestimoDao;
+    }
+
+    public static AdministradorDao getAdministradorDao() {
+        if (administradorDao == null) {
+            administradorDao = new ImMemoryAdministradorDao();
+        }
+
+        return administradorDao;
     }
 }
 
