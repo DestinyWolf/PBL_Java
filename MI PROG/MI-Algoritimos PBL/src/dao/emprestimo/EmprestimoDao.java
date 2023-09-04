@@ -8,4 +8,5 @@ import java.util.LinkedList;
 
 public interface EmprestimoDao extends Dao<Emprestimo> {
     public LinkedList<Emprestimo> findByUser(Leitor leitor);
+    public LinkedList<Emprestimo> findById(Integer isbn, Integer id);
 }

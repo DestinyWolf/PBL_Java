@@ -39,4 +39,9 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     public LinkedList<Emprestimo> findByUser(Leitor leitor) {
         return null;
     }
+
+    @Override
+    public LinkedList<Emprestimo> findById(Integer isbn, Integer id) {
+        return null;
+    }
 }
