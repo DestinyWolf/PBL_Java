@@ -12,6 +12,10 @@ public class Data {
 
     private final ArrayList<Integer> meses31dias = new ArrayList<>();
 
+    /**Construtor da classe Data
+     * @param dia
+     * @param mes
+     * @param ano */
     public Data(Integer dia, Integer mes, Integer ano) {
         this.dia = dia;
         this.mes = mes;
@@ -28,32 +32,44 @@ public class Data {
 
     }
 
-    /**
+    /**Metodo resposavel por retornar o ano
      * @return ano*/
     public Integer getAno() {
         return ano;
     }
 
+    /**Metodo resposavel por retornar o mes
+     * @return mes*/
     public Integer getMes() {
         return mes;
     }
 
+    /**Metodo resposavel por retornar o dia
+     * @return dia*/
     public Integer getDia() {
         return dia;
     }
 
+    /**Metodo responsavel por settar o ano
+     * @param ano */
     public void setAno(Integer ano) {
         this.ano = ano;
     }
 
+    /**Metodo responsavel por settar o dia
+     * @param dia */
     public void setDia(Integer dia) {
         this.dia = dia;
     }
 
+    /**Metodo responsavel por settar o mes
+     * @param mes */
     public void setMes(Integer mes) {
             this.mes = mes;
     }
 
+    /**Metodo responsavel por adicionar dias a data e calcular a nova data
+     * @param qntDias */
     public  void addDia(Integer qntDias) {
         this.dia += qntDias;
         if (this.dia > 31 && this.meses31dias.contains(this.mes)){
@@ -75,6 +91,8 @@ public class Data {
         }
     }
 
+    /**Metodo responsavel por adicionar meses a data e calcular a nova data
+     * @param qntMes */
     public void addMes(Integer qntMes) {
         this.mes += qntMes;
 
@@ -84,6 +102,8 @@ public class Data {
         }
     }
 
+    /**Metodo responsavel por adicionar anos a data e calcular a nova data
+     * @param qntAno */
     public void addAno(Integer qntAno) {
         this.ano += ano;
     }
