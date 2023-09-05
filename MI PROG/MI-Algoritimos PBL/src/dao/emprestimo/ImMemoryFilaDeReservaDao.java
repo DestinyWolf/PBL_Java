@@ -5,7 +5,8 @@ import model.emprestimo.FilaDeReserva;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class ImMemoryFilaDeReservaDao implements FiladeReservaDao{
+/**Classe que implementa a interface FilaDeReservaDao*/
+public class ImMemoryFilaDeReservaDao implements FilaDeReservaDao {
     private HashMap<Integer, FilaDeReserva> filasDeReserva;
 
     public ImMemoryFilaDeReservaDao() {

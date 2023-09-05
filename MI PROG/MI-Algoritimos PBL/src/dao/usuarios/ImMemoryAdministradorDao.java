@@ -5,6 +5,7 @@ import model.usuarios.Administrador;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**Classe que implementar a interface AdministradorDao*/
 public class ImMemoryAdministradorDao implements AdministradorDao{
     private HashMap<Integer, Administrador> administradores;
 

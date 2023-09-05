@@ -6,6 +6,7 @@ import model.usuarios.Bibliotecario;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**Classe que impelementa a interface BibliotecarioDao*/
 public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
     private HashMap<Integer, Bibliotecario> bibliotecarios;
 

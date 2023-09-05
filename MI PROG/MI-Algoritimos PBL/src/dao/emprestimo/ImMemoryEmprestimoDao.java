@@ -1,13 +1,12 @@
 package dao.emprestimo;
 
 import model.emprestimo.Emprestimo;
-import model.estoque.Livro;
-import model.usuarios.Leitor;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**Classe que impelmenta a interface EmprestimoDao*/
 public class ImMemoryEmprestimoDao implements EmprestimoDao{
     private HashMap<Integer, Emprestimo> emprestimos;
     @Override
@@ -42,11 +41,11 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public List<Emprestimo> findByUser(Leitor leitor) {
+    public List<Emprestimo> findByUser(Integer id) {
        List<Emprestimo> emprestimosUser = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
              ) {
-            if(Objects.equals(emprestimo.getLeitor(), leitor)) {
+            if(emprestimo.getLeitor().getId() == id) {
                 emprestimosUser.add(emprestimo);
             }
         }
@@ -55,15 +54,26 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public List<Emprestimo> findByLivro(Livro livro) {
+    public List<Emprestimo> findByLivro(Integer id) {
         List<Emprestimo> emprestimosLivros = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
         ) {
-            if(Objects.equals(emprestimo.getLivro(), livro)) {
+            if(Objects.equals(emprestimo.getLivro().getIsbn(), id)) {
                 emprestimosLivros.add(emprestimo);
             }
         }
 
         return emprestimosLivros;
+    }
+
+    @Override
+    public Emprestimo findByUserAndLivro(Integer isbn, Integer id) {
+        for(Emprestimo emprestimo: this.findByUser(id)) {
+            if (emprestimo.getLivro().getIsbn() == isbn) {
+                return emprestimo;
+            }
+        }
+
+        return null;
     }
 }

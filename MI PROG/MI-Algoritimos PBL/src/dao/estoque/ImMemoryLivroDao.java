@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Objects;
 
+/**Classe que implementa a interface LivroDao*/
 public class ImMemoryLivroDao implements LivroDao{
     private HashMap<Integer, LinkedList<Livro>> livros;
 

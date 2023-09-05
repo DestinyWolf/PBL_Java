@@ -1,14 +1,11 @@
 package model.emprestimo;
 
 import dao.MasterDao;
-import dao.emprestimo.EmprestimoDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
 
-
-import java.util.Date;
-
+/**Classe model para emprestimos*/
 public class Emprestimo {
     private Leitor leitor;
     private Livro livro;
@@ -17,6 +14,11 @@ public class Emprestimo {
     private boolean devolvido;
     private Integer Id;
 
+    /**Construtor da classe emprestimo
+     * @param leitor
+     * @param livro
+     * @param dataEmprestimo
+     * @param dataDevolucao */
     public Emprestimo(Leitor leitor, Livro livro, Data dataEmprestimo, Data dataDevolucao) {
         this.leitor = leitor;
         this.livro = livro;
@@ -26,54 +28,81 @@ public class Emprestimo {
         this.Id = livro.getIsbn() + leitor.getId() + dataEmprestimo.getDia()%7;
     }
 
+    /**Metodo responsavel por retornar a data de devolução do livro
+     * @return Data de devolução do livro*/
     public Data getDataDevolucao() {
         return dataDevolucao;
     }
 
+    /**Metodo responsavel por retornar a data de emprestimo do livro
+     * @return Data de emprestimo do livro*/
     public Data getDataEmprestimo() {
         return dataEmprestimo;
     }
 
+    /**Metodo responsavel por retornar o leitor que pegou livro emprestado
+     * @return leitor que pegou o livro emprestado*/
     public Leitor getLeitor() {
         return leitor;
     }
 
+    /**Metodo responsavel por retornar o livro que foi pego emprestado
+     * @return Livro que foi emprestado*/
     public Livro getLivro() {
         return livro;
     }
 
+    /**Metodo que retorna se o livro foi devolvido ou não
+     * @return Livro devolvido*/
     public boolean isDevolvido() {
         return devolvido;
     }
 
+    /**Metodo responsavel por retornar o Id do emprestimo
+     * @return Id do emprestimo*/
     public Integer getId() {
         return Id;
     }
 
+    /**Metodo responsavel por settar a data de devolução do livro
+     * @param dataDevolucao */
     public void setDataDevolucao(Data dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
+    /**Metodo responsavel por settar a data de emprestimo do livro
+     * @param dataEmprestimo */
     public void setDataEmprestimo(Data dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
+    /**Metodo responsavel por settar se o livro foi devolvido
+     * @param devolvido */
     public void setDevolvido(boolean devolvido) {
         this.devolvido = devolvido;
     }
 
+    /**Metodo responsavel por settar o leitor que fez o emprestimo
+     * @param leitor */
     public void setLeitor(Leitor leitor) {
         this.leitor = leitor;
     }
 
+    /**Metodo responsavel por settar o livro emprestado
+     * @param livro */
     public void setLivro(Livro livro) {
         this.livro = livro;
     }
 
+    /**Metodo responsavel por settar o id do emprestimo
+     * @param id */
     public void setId(Integer id) {
         this.Id = id;
     }
 
+    /**Metodo responsavel por renovar o emprestimo do livro
+     * @param isbn
+     * @param id */
     public void renovacaoEmprestimo(Integer isbn, Integer id) {
 
 

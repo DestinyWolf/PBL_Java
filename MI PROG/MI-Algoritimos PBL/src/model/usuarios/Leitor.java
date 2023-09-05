@@ -1,9 +1,12 @@
 package model.usuarios;
-import dao.Dao;
+import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 
-import java.util.LinkedList;
 
+import java.util.List;
+
+/**
+ * Classes modelo para usuarios do tipo leitor*/
 public class Leitor extends Pessoa{
     private boolean  bloqueio;
     private Integer numEmprestimos;
@@ -11,7 +14,6 @@ public class Leitor extends Pessoa{
     private String endereco;
     private String telefone;
     private Integer maximoDeLivros;
-    private Integer DiasRestantesRenovacao;
 
     /**
      * construtor da classe leitor
@@ -25,7 +27,7 @@ public class Leitor extends Pessoa{
         super.setSenha(senha);
         super.setId(id);
         this.bloqueio = false;
-        this.numEmprestimos = 0;
+        this.numEmprestimos = 2;
         this.diasRestantesMulta = 0;
         this.endereco = endereco;
         this.telefone = telefone;
@@ -34,59 +36,96 @@ public class Leitor extends Pessoa{
 
     }
 
+    /**
+     * @return numero de dias que o usuario ainda esta multado*/
     public Integer getDiasRestantesMulta() {
         return diasRestantesMulta;
     }
 
-    public Integer getDiasRestantesRenovacao() {
-        return DiasRestantesRenovacao;
+    /**
+     * @param isbn do livro que deseja ser pesquisado
+     * @return numero de dias que o usuario tem para devolver o livro*/
+    public Integer getDiasRestantesRenovacao(Integer isbn) {
+        return MasterDao.emprestimoDao.findByUserAndLivro(isbn, this.getId()).getDataDevolucao().getDia();
     }
 
+    /**
+     * @return numero maximo de livros que o usuario pode pegar*/
     public Integer getMaximoDeLivros() {
         return maximoDeLivros;
     }
 
+    /**
+     * @return numero de emprestimos que o usuario realizou*/
     public Integer getNumEmprestimos() {
         return numEmprestimos;
     }
 
+    /**
+     * @return endereço do leitor*/
     public String getEndereco() {
         return endereco;
     }
 
+    /**
+     * @return telefone do leitor*/
     public String getTelefone() {
         return telefone;
     }
 
+    /**
+     * @param diasRestantesMulta
+     * @return void
+     * Metodo para alteração do numero de dias de multa de um usuario
+     * */
     public void setDiasRestantesMulta(Integer diasRestantesMulta) {
         this.diasRestantesMulta = diasRestantesMulta;
     }
 
-    public void setDiasRestantesRenovacao(Integer diasRestantesRenovacao) {
-        DiasRestantesRenovacao = diasRestantesRenovacao;
-    }
-
+    /**
+     * @param maximoDeLivros
+     * @return void
+     * Metodo responsavel por settar o maximo de livros que um usuario pode emrpestar ao mesmo tempo*/
     public void setMaximoDeLivros(Integer maximoDeLivros) {
         this.maximoDeLivros = maximoDeLivros;
     }
 
+    /**
+     * @param bloqueio
+     * @return void
+     * Metodo responsavel por settar o bloqueio um usuario*/
     public void setBloqueio(boolean bloqueio) {
         this.bloqueio = bloqueio;
     }
 
+    /**
+     * @param endereco
+     * @return void
+     * Metodo responsavel por settar o endereço um usuario*/
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 
+    /**
+     * @param numEmprestimos
+     * @return void
+     * Metodo responsavel por settar o numero de emprestimos que um usuario pode fazer um usuario*/
     public void setNumEmprestimos(Integer numEmprestimos) {
         this.numEmprestimos = numEmprestimos;
     }
 
+    /**
+     * @param telefone
+     * @return void
+     * Metodo responsavel por settar o telefone um usuario*/
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public LinkedList<Emprestimo> getEmprestimos(Dao<Emprestimo> emprestimo) {
-        return emprestimo.findAll();
+    /**
+     * @return Lista de emprestimos de um usuario
+     * Metodo responsavel por settar o bloqueio um usuario*/
+    public List<Emprestimo> getEmprestimos() {
+        return MasterDao.getEmprestimoDao().findByUser(this.getId());
     }
 }

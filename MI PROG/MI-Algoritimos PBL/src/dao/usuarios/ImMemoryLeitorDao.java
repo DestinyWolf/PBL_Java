@@ -5,6 +5,7 @@ import model.usuarios.Leitor;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**Classe de implementação ta interface LeitorDao*/
 public class ImMemoryLeitorDao implements LeitorDao{
     private HashMap<Integer, Leitor> leitores;
     public ImMemoryLeitorDao() {
