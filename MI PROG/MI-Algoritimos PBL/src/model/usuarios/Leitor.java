@@ -1,4 +1,5 @@
 package model.usuarios;
+import LibraryExceptions.UserExcepitions.LoguinException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 
@@ -127,5 +128,15 @@ public class Leitor extends Pessoa{
      * Metodo responsavel por settar o bloqueio um usuario*/
     public List<Emprestimo> getEmprestimos() {
         return MasterDao.getEmprestimoDao().findByUser(this.getId());
+    }
+
+    public void login(Integer id, String senha) throws LoguinException {
+        if(id == this.getId() && senha == this.getSenha()) {
+        }
+        else {
+            LoguinException le;
+            le = new LoguinException(new Leitor(this.getNome(), this.getSenha(), this.getId(), this.endereco, this.telefone));
+            throw le;
+        }
     }
 }
