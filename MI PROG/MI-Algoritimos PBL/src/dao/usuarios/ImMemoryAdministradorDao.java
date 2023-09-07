@@ -1,5 +1,6 @@
 package dao.usuarios;
 
+import dao.MasterDao;
 import model.usuarios.Administrador;
 
 import java.util.HashMap;
@@ -16,7 +17,14 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void save(Administrador obj) {
-        administradores.put(obj.getId(), obj);
+        if(MasterDao.getAdministradorDao().findById(obj.getId()) != null) {
+            //lançar exceção
+        }
+        else {
+            Administrador administrador = new Administrador(obj.getSenha(), obj.getNome(), "Administrador", obj.getId());
+            administradores.put(administrador.getId(), administrador);
+        }
+
     }
 
     @Override
