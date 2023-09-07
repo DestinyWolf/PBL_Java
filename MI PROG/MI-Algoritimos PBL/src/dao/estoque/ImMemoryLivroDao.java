@@ -22,10 +22,11 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public void save(Livro obj) {
-        if(this.livros.get(obj.getIsbn()) != null) {
-             LinkedList<Livro> livrosList = this.livros.get(obj.getIsbn());
-             livrosList.add(obj);
-             this.livros.put(obj.getIsbn(), livrosList);
+        Livro livro = new Livro(obj.getIsbn(), obj.getAutor(), obj.getCategoria(), obj.getEnderecoLivro(), obj.getEditora(), obj.getAnoDePublicacao(), obj.getNome());
+        if(this.livros.get(livro.getIsbn()) != null) {
+             LinkedList<Livro> livrosList = this.livros.get(livro.getIsbn());
+             livrosList.add(livro);
+             this.livros.put(livro.getIsbn(), livrosList);
         }
 
     }
