@@ -1,5 +1,7 @@
 package model.usuarios;
 
+import LibraryExceptions.UserExcepitions.LoguinException;
+
 /**Classe model do Administrador*/
 public class Administrador extends Pessoa{
     private String cargo;
@@ -25,5 +27,15 @@ public class Administrador extends Pessoa{
      * @param cargo */
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public void login(Integer id, String senha) throws LoguinException {
+        if(id == this.getId() && senha == this.getSenha()) {
+        }
+        else {
+            LoguinException le;
+            le = new LoguinException(new Administrador(this.getSenha(), this.getNome(), this.cargo, this.getId()));
+            throw le;
+        }
     }
 }
