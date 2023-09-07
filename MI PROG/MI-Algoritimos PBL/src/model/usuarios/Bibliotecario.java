@@ -1,5 +1,7 @@
 package model.usuarios;
 
+import LibraryExceptions.UserExcepitions.LoguinException;
+
 /**
  * classe Model do usuario do tipo bibliotecario*/
 public class Bibliotecario extends Pessoa{
@@ -30,4 +32,13 @@ public class Bibliotecario extends Pessoa{
         return cargo;
     }
 
+    public void login(Integer id, String senha) throws LoguinException {
+        if(id == this.getId() && senha == this.getSenha()) {
+        }
+        else {
+            LoguinException le;
+            le = new LoguinException(new Bibliotecario(this.getNome(), this.getSenha(), this.getId(), this.cargo));
+            throw le;
+        }
+    }
 }
