@@ -1,5 +1,7 @@
 package model.emprestimo;
 
+import LibraryExceptions.UserExcepitions.FindUserException;
+import LibraryExceptions.emprestimoExceptions.RenovacaoException;
 import dao.MasterDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
@@ -13,6 +15,7 @@ public class Emprestimo {
     private Data dataDevolucao;
     private boolean devolvido;
     private Integer Id;
+    private Integer renovacoes;
 
     /**Construtor da classe emprestimo
      * @param leitor
@@ -25,7 +28,8 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
         this.dataEmprestimo = dataEmprestimo;
         this.devolvido = false;
-        this.Id = livro.getIsbn() + leitor.getId() + dataEmprestimo.getDia()%7;
+        this.Id = livro.getIsbn() + leitor.getId()%100109;
+        this.renovacoes = 0;
     }
 
     /**Metodo responsavel por retornar a data de devolução do livro
@@ -64,6 +68,12 @@ public class Emprestimo {
         return Id;
     }
 
+    /**Metodo responsavel por retornar a quantidade de renovações deste emprestimo
+     * @return renovações do emprestimo*/
+    public Integer getRenovacoes() {
+        return renovacoes;
+    }
+
     /**Metodo responsavel por settar a data de devolução do livro
      * @param dataDevolucao */
     public void setDataDevolucao(Data dataDevolucao) {
@@ -100,16 +110,34 @@ public class Emprestimo {
         this.Id = id;
     }
 
+    /**Metodo responsavel por settar as rennovações do emprestimo
+     * @param renovacoes */
+    public void setRenovacoes(Integer renovacoes) {
+        this.renovacoes = renovacoes;
+    }
+
     /**Metodo responsavel por renovar o emprestimo do livro
      * @param isbn
-     * @param id */
-    public void renovacaoEmprestimo(Integer isbn, Integer id) {
+     * @param id*/
+    public void renovacaoEmprestimo(Integer isbn, Integer id) throws RenovacaoException {
 
+        try {
+            if (this.leitor.getId() == id && this.livro.getIsbn() == isbn) {
 
-        if(this.leitor.getId() == id && this.livro.getIsbn() == isbn ){
-            if(MasterDao.getFiladeReservaDao().findById(isbn) == null && leitor.getNumEmprestimos() > 0){
-                this.dataDevolucao.addDia(7);
+                if (MasterDao.getFiladeReservaDao().findById(isbn).getReservas().isEmpty() && this.renovacoes < 2) {
+                    this.dataDevolucao.addDia(7);
+                    this.renovacoes ++;
+
+                }
+                else if (renovacoes >= 2){
+                    RenovacaoException renovacaoException = new RenovacaoException();
+                    throw renovacaoException;
+                }
+
             }
+        } catch (Exception e) {
+            throw new RenovacaoException();
         }
+
     }
 }
