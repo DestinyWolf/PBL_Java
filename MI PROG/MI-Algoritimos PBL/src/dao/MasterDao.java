@@ -7,6 +7,9 @@ import dao.emprestimo.ImMemoryFilaDeReservaDao;
 import dao.estoque.ImMemoryLivroDao;
 import dao.estoque.LivroDao;
 import dao.usuarios.*;
+import dao.estoque.EstoqueDao;
+import dao.estoque.ImMemoryEstoqueDao;
+
 
 
 /**Classe MasterDao, reune todos os outros DAOs menores e implementa o Padão singleton*/
@@ -18,6 +21,15 @@ public class MasterDao {
     public static FilaDeReservaDao filadeReservaDao;
     public static EmprestimoDao emprestimoDao;
     public static AdministradorDao administradorDao;
+
+    public static EstoqueDao estoqueDao;
+
+    public static EstoqueDao getEstoqueDao(){
+        if(estoqueDao == null){
+            estoqueDao = new ImMemoryEstoqueDao();
+        }
+        return estoqueDao;
+    }
 
     public static LeitorDao getLeitorDAO(){
         if(leitorDao == null){
