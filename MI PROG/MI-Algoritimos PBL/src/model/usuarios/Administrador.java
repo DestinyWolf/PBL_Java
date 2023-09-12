@@ -29,13 +29,4 @@ public class Administrador extends Pessoa{
         this.cargo = cargo;
     }
 
-    public void login(Integer id, String senha) throws LoguinException {
-        if(id == this.getId() && senha == this.getSenha()) {
-        }
-        else {
-            LoguinException le;
-            le = new LoguinException(new Administrador(this.getSenha(), this.getNome(), this.cargo, this.getId()));
-            throw le;
-        }
-    }
 }

@@ -31,14 +31,4 @@ public class Bibliotecario extends Pessoa{
     public String getCargo() {
         return cargo;
     }
-
-    public void login(Integer id, String senha) throws LoguinException {
-        if(id == this.getId() && senha == this.getSenha()) {
-        }
-        else {
-            LoguinException le;
-            le = new LoguinException(new Bibliotecario(this.getNome(), this.getSenha(), this.getId(), this.cargo));
-            throw le;
-        }
-    }
 }
