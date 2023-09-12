@@ -138,6 +138,5 @@ public class Emprestimo {
         } catch (Exception e) {
             throw new RenovacaoException();
         }
-
     }
 }
