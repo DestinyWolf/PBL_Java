@@ -1,7 +1,7 @@
 package LibraryExceptions.emprestimoExceptions;
 
 public class LivroEmprestimoException extends Exception{
-    public LivroEmprestimoException() {
+    public LivroEmprestimoException(){
         super("nao ha livros para emprestimo");
     }
 }
