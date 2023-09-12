@@ -1,5 +1,8 @@
 package dao.emprestimo;
 
+import LibraryExceptions.emprestimoExceptions.LivroEmprestadoException;
+import LibraryExceptions.emprestimoExceptions.LivroEmprestimoException;
+import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,11 +19,20 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public void save(Emprestimo obj) {
-        if(!emprestimos.containsKey(obj.getId())){
-            emprestimos.put(obj.getId(), obj);
+    public void save(Emprestimo obj) throws Exception {
+        if (!MasterDao.getLivroDao().findByIsbn(obj.getLivro().getIsbn()).isEmpty()) {
+            if (!emprestimos.containsKey(obj.getId())) {
+                Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro(), obj.getDataEmprestimo(), obj.getDataDevolucao());
+                emprestimos.put(emprestimo.getId(), emprestimo);
+            }
+        }
+        else {
+            throw new LivroEmprestimoException();
         }
     }
+
+
+
 
     @Override
     public void deleteById(Integer id) {

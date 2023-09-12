@@ -52,5 +52,7 @@ public abstract class Pessoa extends Object{
     public String getSenha() {
         return senha;
     }
+
+
 }
 
