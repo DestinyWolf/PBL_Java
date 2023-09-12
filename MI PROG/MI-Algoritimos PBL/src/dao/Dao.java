@@ -9,20 +9,20 @@ public interface Dao<T> {
     /**Metodo responsavel por retornar um objeto pelo id
      * @param id
      * @return Um objeto do tipo T*/
-    public T findById(Integer id);
+    public T findById(Integer id) throws Exception;
 
     /**Metodo responsavel por savar/Adicionar um novo objeto ao CRUD
      * @param obj */
-    public void save(T obj);
+    public void save(T obj) throws Exception;
 
     /**Metodo responsavel por deletar um objeto do CRUD
      * @param id */
-    public void deleteById(Integer id);
+    public void deleteById(Integer id) throws Exception;
 
     /**Metodo responsavel pelo update dos dados de um objeto
      * @param old
      * @param t */
-    public void Update(T t, T old);
+    public void Update(T t, T old) throws Exception;
 
     /**Metodo responsavel por retornar dos os objetos de determinado tipo em uma lista
      * @return lista de objetos do tipo T*/
