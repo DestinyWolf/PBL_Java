@@ -7,7 +7,7 @@ import LibraryExceptions.estoqueExceptions.LivroDeleteException;
 import dao.MasterDao;
 
 /**Classe model para o estoque*/
-public class Estoque {
+public class Estoque { 
 
     /**Construtor do Estoque*/
     public Estoque() {
