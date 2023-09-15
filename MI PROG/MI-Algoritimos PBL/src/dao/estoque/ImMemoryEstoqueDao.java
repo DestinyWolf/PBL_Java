@@ -1,5 +1,6 @@
 package dao.estoque;
 import dao.Dao;
+import model.estoque.Estoque;
 import model.estoque.Livro;
 
 
@@ -7,7 +8,37 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class ImMemoryEstoqueDao implements EstoqueDao {
+    Estoque estoque;
 
+    public ImMemoryEstoqueDao() {
+        this.estoque = new Estoque();
+    }
+    @Override
+    public Estoque findById(Integer id) throws Exception {
+        return this.estoque;
+    }
+
+    @Override
+    public void save(Estoque obj) throws Exception {
+        this.estoque = obj;
+    }
+
+    @Override
+    public void deleteById(Integer id) throws Exception {
+        this.estoque = new Estoque();
+    }
+
+    @Override
+    public void Update(Estoque estoque, Estoque old) throws Exception {
+        this.estoque = estoque;
+    }
+
+    @Override
+    public LinkedList<Estoque> findAll() {
+        return null;
+    }
+
+    /*
     //create
     @Override
     public void create(HashMap<String, LinkedList<Livro>> estante, String titulo, Livro livro){
@@ -38,6 +69,6 @@ public class ImMemoryEstoqueDao implements EstoqueDao {
         else return 0;
     }
 
-
+*/
 
 }
