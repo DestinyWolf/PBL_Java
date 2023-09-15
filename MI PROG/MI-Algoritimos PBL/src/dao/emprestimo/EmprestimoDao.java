@@ -5,7 +5,7 @@ import model.emprestimo.Emprestimo;
 import java.util.List;
 
 /**Interface CRUD da classe Emprestimo*/
-public interface EmprestimoDao extends Dao<Emprestimo> {
+public interface EmprestimoDao extends Dao<Emprestimo, Exception> {
     /**Metodo responsavel por retornar uma lista de emprestimos de um mesmo usuario
      * @param id
      * @return Lista de Emprestimos*/

@@ -5,5 +5,5 @@ import dao.Dao;
 
 /**
  * Interface das operações CRUD do Bibliotecario*/
-public interface BibliotecarioDao extends Dao<Bibliotecario>{
+public interface BibliotecarioDao extends Dao<Bibliotecario, Exception>{
 }

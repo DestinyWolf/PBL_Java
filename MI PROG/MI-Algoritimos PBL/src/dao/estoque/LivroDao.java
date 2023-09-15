@@ -7,7 +7,7 @@ import model.estoque.Livro;
 import java.util.LinkedList;
 
 /**Interface das operações CRUD do Livro*/
-public interface LivroDao extends Dao<Livro> {
+public interface LivroDao extends Dao<Livro, Exception> {
 
     /**Retornar uma lista de livros de um determinado autor
      * @param autor
