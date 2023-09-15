@@ -26,9 +26,9 @@ class EstoqueTest {
     }
 
     @Test
-    void getTotalLivros() throws LivroCreateException{
-        Livro livro = new Livro(null,null,null,null,null,null,null);
+    void getTotalLivros() throws LivroCreateException {
+        Livro livro = new Livro(null, null, null, null, null, null, null);
         e.novoLivro(livro);
-        assertEquals(1,MasterDao.getLivroDao().findAll().size());
+        assertEquals(1, MasterDao.getLivroDao().findAll().size());
     }
 }
