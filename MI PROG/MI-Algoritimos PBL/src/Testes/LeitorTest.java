@@ -59,7 +59,7 @@ class LeitorTest {
     @org.junit.jupiter.api.Test
     void setBloqueio() {
         l.setBloqueio(true);
-        assertEquals(true,l.getBloqueio());
+        assertEquals(true,l.isBloqueio());
     }
 
     @org.junit.jupiter.api.Test

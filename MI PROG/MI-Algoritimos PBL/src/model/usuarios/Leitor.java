@@ -37,6 +37,10 @@ public class Leitor extends Pessoa{
 
     }
 
+    public boolean isBloqueio() {
+        return bloqueio;
+    }
+
     /**
      * @return numero de dias que o usuario ainda esta multado*/
     public Integer getDiasRestantesMulta() {
