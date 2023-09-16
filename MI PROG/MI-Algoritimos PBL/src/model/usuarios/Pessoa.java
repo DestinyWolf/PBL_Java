@@ -53,6 +53,15 @@ public abstract class Pessoa extends Object{
         return senha;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Pessoa) {
+            return (this.getId() == ((Pessoa) obj).getId());
+        } else {
+            return false;
+        }
+    }
+
 
 }
 

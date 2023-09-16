@@ -1,5 +1,6 @@
 package model.emprestimo;
 
+import model.estoque.Livro;
 import model.usuarios.Leitor;
 
 
@@ -56,5 +57,14 @@ public class FilaDeReserva {
         this.reservas.remove();
         return leitorTop;
 
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof FilaDeReserva) {
+            return ((this.getIsbn() == ((FilaDeReserva) obj).getIsbn()) && this.getReservas() == ((FilaDeReserva) obj).getReservas());
+        } else {
+            return false;
+        }
     }
 }

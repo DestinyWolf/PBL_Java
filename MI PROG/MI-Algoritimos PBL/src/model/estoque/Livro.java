@@ -1,5 +1,7 @@
 package model.estoque;
 
+import model.usuarios.Bibliotecario;
+
 /**Classe model para livro*/
 public class Livro {
     private Integer isbn;
@@ -110,5 +112,14 @@ public class Livro {
      *@param nome  */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Livro) {
+            return ((this.getIsbn() == ((Livro) obj).getIsbn()) || this.getNome() == ((Livro) obj).getNome());
+        } else {
+            return false;
+        }
     }
 }

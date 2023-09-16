@@ -139,4 +139,12 @@ public class Emprestimo {
             throw new RenovacaoException();
         }
     }
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Emprestimo) {
+            return ((this.getId() == ((Emprestimo) obj).getId()));
+        } else {
+            return false;
+        }
+    }
 }

@@ -42,5 +42,14 @@ public class Estoque {
         return MasterDao.getLivroDao().findAll().size();
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Estoque) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

@@ -129,4 +129,13 @@ public class Leitor extends Pessoa{
     public List<Emprestimo> getEmprestimos() {
         return MasterDao.getEmprestimoDao().findByUser(this.getId());
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Leitor) {
+            return (this.getId() == ((Leitor) obj).getId());
+        } else {
+            return false;
+        }
+    }
 }

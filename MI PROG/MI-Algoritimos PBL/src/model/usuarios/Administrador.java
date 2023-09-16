@@ -29,4 +29,13 @@ public class Administrador extends Pessoa{
         this.cargo = cargo;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Administrador) {
+            return (this.getId() == ((Administrador) obj).getId());
+        } else {
+            return false;
+        }
+    }
+
 }

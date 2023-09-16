@@ -31,4 +31,13 @@ public class Bibliotecario extends Pessoa{
     public String getCargo() {
         return cargo;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj instanceof Bibliotecario) {
+            return (this.getId() == ((Bibliotecario) obj).getId());
+        } else {
+            return false;
+        }
+    }
 }
