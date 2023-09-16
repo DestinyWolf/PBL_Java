@@ -1,14 +1,13 @@
 package dao.usuarios;
 
-import LibraryExceptions.UserExcepitions.FindUserException;
-import LibraryExceptions.UserExcepitions.UserCreateException;
-import LibraryExceptions.UserExcepitions.UserDeleteException;
-import LibraryExceptions.UserExcepitions.UserUpdateException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Leitor;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import static util.Constantes.*;
 
 /**Classe de implementação ta interface LeitorDao*/
 public class ImMemoryLeitorDao implements LeitorDao{
@@ -18,10 +17,9 @@ public class ImMemoryLeitorDao implements LeitorDao{
     }
 
     @Override
-    public void save(Leitor obj) throws Exception{
+    public void save(Leitor obj) throws LeitorException {
         if (MasterDao.getLeitorDAO().findById(obj.getId()) != null) {
-            UserCreateException uce = new UserCreateException();
-            throw uce;
+            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(obj.getId()));
         }
         else {
             Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
@@ -31,37 +29,45 @@ public class ImMemoryLeitorDao implements LeitorDao{
     }
 
     @Override
-    public void deleteById(Integer id) throws Exception{
-        if(MasterDao.getLeitorDAO().findById(id) != null) {
+    public void deleteById(Integer id) throws LeitorException{
+        if(MasterDao.getLeitorDAO().findById(id) != null && MasterDao.getEmprestimoDao().findByUser(id) == null) {
             leitores.remove(id);
         }
+        else if (MasterDao.getEmprestimoDao().findByUser(id) != null){
+            throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findById(id));
+        }
         else {
-            UserDeleteException ude = new UserDeleteException();
-            throw ude;
+            throw new LeitorException(deleteUser, null);
         }
 
     }
 
     @Override
-    public void Update(Leitor leitor, Leitor old) throws Exception{
+    public void Update(Leitor leitor, Leitor old) throws LeitorException{
         if (this.leitores.get(old.getId()) != null) {
             this.leitores.remove(leitor.getId());
             this.leitores.put(leitor.getId(), leitor);
         }
+        else if(this.leitores.isEmpty()) {
+            throw new LeitorException(updateWhenNotHaveObj, null);
+        }
         else {
-            throw new UserUpdateException();
+            throw new LeitorException(updateUser, null);
         }
     }
 
     @Override
-    public Leitor findById(Integer id) throws Exception{
+    public Leitor findById(Integer id) throws LeitorException{
         if(MasterDao.getLeitorDAO().findById(id) != null) {
             return this.leitores.get(id);
         }
-        else {
-            FindUserException fue = new FindUserException();
-            throw fue;
+        else if (this.leitores.isEmpty()) {
+            throw new LeitorException(findWhenNotHaveObj, null);
         }
+        else {
+            throw new LeitorException(findUser, null);
+        }
+
     }
 
     @Override
