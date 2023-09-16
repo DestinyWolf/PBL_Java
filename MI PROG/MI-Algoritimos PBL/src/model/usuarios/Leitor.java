@@ -1,5 +1,4 @@
 package model.usuarios;
-import LibraryExceptions.UserExcepitions.LoguinException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 
