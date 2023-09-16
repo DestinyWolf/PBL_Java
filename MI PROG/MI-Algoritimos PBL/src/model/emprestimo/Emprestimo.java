@@ -1,11 +1,13 @@
 package model.emprestimo;
 
-import LibraryExceptions.UserExcepitions.FindUserException;
-import LibraryExceptions.emprestimoExceptions.RenovacaoException;
+
+import LibraryExceptions.emprestimoexception.EmprestimoException;
 import dao.MasterDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
+
+import static util.Constantes.*;
 
 /**Classe model para emprestimos*/
 public class Emprestimo {
@@ -22,14 +24,20 @@ public class Emprestimo {
      * @param livro
      * @param dataEmprestimo
      * @param dataDevolucao */
-    public Emprestimo(Leitor leitor, Livro livro, Data dataEmprestimo, Data dataDevolucao) {
-        this.leitor = leitor;
-        this.livro = livro;
-        this.dataDevolucao = dataDevolucao;
-        this.dataEmprestimo = dataEmprestimo;
-        this.devolvido = false;
-        this.Id = livro.getIsbn() + leitor.getId()%100109;
-        this.renovacoes = 0;
+    public Emprestimo(Leitor leitor, Livro livro, Data dataEmprestimo, Data dataDevolucao) throws EmprestimoException {
+        try {
+            this.leitor = leitor;
+            this.livro = MasterDao.getLivroDao().findById(livro.getIsbn());
+            MasterDao.getLivroDao().deleteOnlyOne(this.livro);
+            this.dataDevolucao = dataDevolucao;
+            this.dataEmprestimo = dataEmprestimo;
+            this.devolvido = false;
+            this.Id = livro.getIsbn() + leitor.getId() % 100109;
+            this.renovacoes = 0;
+            this.leitor.setNumEmprestimos(leitor.getNumEmprestimos()-1);
+        } catch (Exception e) {
+            throw new EmprestimoException(createEmprestimo, null);
+        }
     }
 
     /**Metodo responsavel por retornar a data de devolução do livro
@@ -119,24 +127,32 @@ public class Emprestimo {
     /**Metodo responsavel por renovar o emprestimo do livro
      * @param isbn
      * @param id*/
-    public void renovacaoEmprestimo(Integer isbn, Integer id) throws RenovacaoException {
+    public void renovacaoEmprestimo(Integer isbn, Integer id) throws EmprestimoException {
 
         try {
             if (this.leitor.getId() == id && this.livro.getIsbn() == isbn) {
+                if (!this.leitor.isBloqueio() && this.leitor.getDiasRestantesMulta() == 0) {
+                    if (MasterDao.getFiladeReservaDao().findById(isbn).getReservas().isEmpty() && this.renovacoes < 2) {
+                        this.dataDevolucao.addDia(7);
+                        this.renovacoes++;
 
-                if (MasterDao.getFiladeReservaDao().findById(isbn).getReservas().isEmpty() && this.renovacoes < 2) {
-                    this.dataDevolucao.addDia(7);
-                    this.renovacoes ++;
-
+                    }
                 }
                 else if (renovacoes >= 2){
-                    RenovacaoException renovacaoException = new RenovacaoException();
-                    throw renovacaoException;
+                    throw new EmprestimoException(renovacaoEmprestimoWithLimiteDeRenovacoes, MasterDao.getEmprestimoDao().findById(this.getId()));
+                }
+                else if (leitor.isBloqueio()) {
+                    throw new EmprestimoException(renovacaoEmprestimoWithBlock,MasterDao.getEmprestimoDao().findById(this.getId()));
+                } else if (this.leitor.getDiasRestantesMulta() > 0) {
+                    throw new EmprestimoException(renovacaoEmprestimoWithMulta,MasterDao.getEmprestimoDao().findById(this.getId()));
+                }
+                else {
+                    throw new EmprestimoException(renovacaoEmprestimoWithReserva, MasterDao.getEmprestimoDao().findById(this.getId()));
                 }
 
             }
         } catch (Exception e) {
-            throw new RenovacaoException();
+            throw new EmprestimoException(renovacaoEmprestimo, null);
         }
     }
     @Override
