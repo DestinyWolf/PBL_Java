@@ -1,11 +1,13 @@
 package model.emprestimo;
 
-import model.estoque.Livro;
+import LibraryExceptions.emprestimoexception.ReservarException;
 import model.usuarios.Leitor;
 
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import static util.Constantes.*;
 
 /**Classe model para a fila de reserva*/
 public class FilaDeReserva {
@@ -46,16 +48,28 @@ public class FilaDeReserva {
 
     /**Metodo responsavel por adicionar um leitor a fila de reserva
      * @param leitor */
-    public void addOnReservas(Leitor leitor) {
-        this.reservas.add(leitor);
+    public void addOnReservas(Leitor leitor) throws ReservarException{
+        if (!leitor.isBloqueio() && leitor.getDiasRestantesMulta() == 0) {
+            this.reservas.add(leitor);
+        } else if (leitor.isBloqueio()) {
+            throw new ReservarException(createReservaWithBlock, null);
+        } else if (leitor.getNumEmprestimos() > 0) {
+            throw new ReservarException(createReservaWithMulta, null);
+        } else {
+            throw new ReservarException(createReserva, null);
+        }
     }
 
     /**Metodo responsavel por remover o leitor que esta no topo da fila de reserva
      * @return leitor que estava no topo da fila */
-    public Leitor removeOnReservas() {
-        Leitor leitorTop = reservas.element();
-        this.reservas.remove();
-        return leitorTop;
+    public Leitor removeOnReservas() throws ReservarException{
+
+        for (Leitor leitor: reservas) {
+            if(!leitor.isBloqueio() && leitor.getDiasRestantesMulta() == 0 && leitor.getMaximoDeLivros()>0){
+                return leitor;
+            }
+        }
+        throw new ReservarException(reservaLivro, null);
 
     }
 
