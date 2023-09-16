@@ -1,9 +1,5 @@
 package dao.usuarios;
 
-import LibraryExceptions.UserExcepitions.FindUserException;
-import LibraryExceptions.UserExcepitions.UserCreateException;
-import LibraryExceptions.UserExcepitions.UserDeleteException;
-import LibraryExceptions.UserExcepitions.UserUpdateException;
 import dao.MasterDao;
 import model.usuarios.Administrador;
 
