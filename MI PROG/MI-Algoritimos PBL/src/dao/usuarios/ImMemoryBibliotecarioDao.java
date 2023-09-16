@@ -29,7 +29,7 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
     @Override
     public void save(Bibliotecario obj) throws BibliotecarioException {
         if (MasterDao.getBibliotecarioDao().findById(obj.getId()) != null) {
-            throw new BibliotecarioException(createUser, MasterDao.getBibliotecarioDao().findById(obj.getId()));
+            throw new BibliotecarioException(createExistUser, MasterDao.getBibliotecarioDao().findById(obj.getId()));
         }
         else {
             Bibliotecario bibliotecario = new Bibliotecario(obj.getNome(), obj.getSenha(), obj.getId(), "Bibliotecario");
