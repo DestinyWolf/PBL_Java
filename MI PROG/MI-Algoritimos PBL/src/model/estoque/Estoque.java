@@ -1,10 +1,11 @@
 package model.estoque;
 
 
-import LibraryExceptions.estoqueExceptions.LivroCreateException;
-
-import LibraryExceptions.estoqueExceptions.LivroDeleteException;
+import LibraryExceptions.estoqueExceptions.LivroException;
 import dao.MasterDao;
+
+import static util.Constantes.createLivro;
+import static util.Constantes.deleteLivro;
 
 /**Classe model para o estoque*/
 public class Estoque { 
@@ -16,22 +17,22 @@ public class Estoque {
 
     /**metodo de adição de um livro novo ao estoque
      * @param livro */
-    public Livro novoLivro(Livro livro) throws LivroCreateException{
+    public Livro novoLivro(Livro livro) throws LivroException {
         try {
             MasterDao.getLivroDao().save(livro);
             return livro;
-        } catch (Exception lce) {
-            throw new LivroCreateException();
+        } catch (Exception e) {
+            throw new LivroException(createLivro, null);
         }
     }
 
     /**Metodo responsavel por remover um livro do estoque
      * @param livro */
-    public void RemoveLivro(Livro livro) throws LivroDeleteException {
+    public void RemoveLivro(Livro livro) throws LivroException {
         try {
             MasterDao.getLivroDao().deleteById(livro.getIsbn());
         } catch (Exception lde) {
-            throw new LivroDeleteException();
+            throw new LivroException(deleteLivro, null);
         }
 
     }
