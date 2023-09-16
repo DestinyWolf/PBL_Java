@@ -1,8 +1,9 @@
 package dao.usuarios;
 
+import LibraryExceptions.userexcepitions.AdministradorException;
 import dao.MasterDao;
 import model.usuarios.Administrador;
-
+import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -11,21 +12,19 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     private HashMap<Integer, Administrador> administradores;
 
     @Override
-    public Administrador findById(Integer id) throws Exception {
+    public Administrador findById(Integer id) throws AdministradorException {
         if (MasterDao.getAdministradorDao().findById(id) != null){
             return administradores.get(id);
         }
         else {
-            FindUserException fue = new FindUserException();
-            throw fue;
+            throw new AdministradorException(findUser, null);
         }
     }
 
     @Override
-    public void save(Administrador obj) throws Exception{
+    public void save(Administrador obj) throws AdministradorException{
         if(MasterDao.getAdministradorDao().findById(obj.getId()) != null) {
-            UserCreateException uce = new UserCreateException();
-            throw uce;
+            throw new AdministradorException(createExistUser, MasterDao.getAdministradorDao().findById(obj.getId()));
         }
         else {
             Administrador administrador = new Administrador(obj.getSenha(), obj.getNome(), "Administrador", obj.getId());
@@ -35,24 +34,25 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     }
 
     @Override
-    public void deleteById(Integer id) throws Exception{
-        if (MasterDao.getAdministradorDao().findById(id) != null) {
+    public void deleteById(Integer id) throws AdministradorException{
+        if (!this.administradores.isEmpty() && MasterDao.getAdministradorDao().findById(id) != null) {
             administradores.remove(id);
-        }
-        else{
-            UserDeleteException ude = new UserDeleteException();
-            throw ude;
+        } else if (this.administradores.isEmpty()) {
+            throw new AdministradorException(deleteWhenNotHaveObj, null);
+        } else{
+            throw new AdministradorException(deleteUser, MasterDao.getAdministradorDao().findById(id));
         }
     }
 
     @Override
-    public void Update(Administrador administrador, Administrador old) throws Exception{
-        if (this.administradores.get(old.getId()) != null) {
+    public void Update(Administrador administrador, Administrador old) throws AdministradorException{
+        if (!this.administradores.isEmpty() && this.administradores.get(old.getId()) != null) {
             administradores.remove(old.getId());
             administradores.put(administrador.getId(), administrador);
-        }
-        else {
-            throw new UserUpdateException();
+        } else if (this.administradores.isEmpty()) {
+            throw new AdministradorException(updateWhenNotHaveObj, null);
+        } else {
+            throw new AdministradorException(updateUser, old);
         }
     }
 
