@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Classes modelo para usuarios do tipo leitor*/
-public class Leitor extends Pessoa{
+public class    Leitor extends Pessoa{
     private boolean  bloqueio;
     private Integer numEmprestimos;
     private Integer diasRestantesMulta;
@@ -36,6 +36,11 @@ public class Leitor extends Pessoa{
 
 
     }
+
+    /**
+     * @return se o usuario está bloqueado*/
+    public boolean getBloqueio(){return bloqueio;}
+
 
     /**
      * @return numero de dias que o usuario ainda esta multado*/
@@ -130,12 +135,6 @@ public class Leitor extends Pessoa{
         return MasterDao.getEmprestimoDao().findByUser(this.getId());
     }
 
-    @Override
-    public boolean equals(Object obj){
-        if (obj != null && obj instanceof Leitor) {
-            return (this.getId() == ((Leitor) obj).getId());
-        } else {
-            return false;
-        }
+    public void setDiasRestantesRenovacao(int i) {
     }
 }
