@@ -1,7 +1,5 @@
 package model.usuarios;
 
-import LibraryExceptions.UserExcepitions.LoguinException;
-
 /**
  * classe Model do usuario do tipo bibliotecario*/
 public class Bibliotecario extends Pessoa{

@@ -1,7 +1,5 @@
 package model.usuarios;
 
-import LibraryExceptions.UserExcepitions.LoguinException;
-
 /**Classe model do Administrador*/
 public class Administrador extends Pessoa{
     private String cargo;
