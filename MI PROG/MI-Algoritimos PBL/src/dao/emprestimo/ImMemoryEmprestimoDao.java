@@ -1,7 +1,8 @@
 package dao.emprestimo;
 
-import LibraryExceptions.emprestimoExceptions.LivroEmprestadoException;
-import LibraryExceptions.emprestimoExceptions.LivroEmprestimoException;
+import static util.Constantes.*;
+import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.estoqueExceptions.LivroException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 import java.util.HashMap;
@@ -19,15 +20,30 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public void save(Emprestimo obj) throws Exception {
-        if (!MasterDao.getLivroDao().findByIsbn(obj.getLivro().getIsbn()).isEmpty()) {
-            if (!emprestimos.containsKey(obj.getId())) {
-                Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro(), obj.getDataEmprestimo(), obj.getDataDevolucao());
-                emprestimos.put(emprestimo.getId(), emprestimo);
+    public void save(Emprestimo obj) throws EmprestimoException{
+        try {
+            if (!MasterDao.getLivroDao().findByIsbn(obj.getLivro().getIsbn()).isEmpty()) {
+                if (obj.getLeitor().getNumEmprestimos() > 0 && !obj.getLeitor().isBloqueio() && obj.getLeitor().getDiasRestantesMulta() == 0) {
+
+                    if (!emprestimos.containsKey(obj.getId())) {
+                        Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro(), obj.getDataEmprestimo(), obj.getDataDevolucao());
+                        emprestimos.put(emprestimo.getId(), emprestimo);
+                    }
+                    else{
+                        throw new EmprestimoException(createEmprestimo, null);
+                    }
+                } else if (obj.getLeitor().getNumEmprestimos() <= 0) {
+                    throw new EmprestimoException(createEmprestimoWithLimiteEmprestimo, null);
+                } else if (obj.getLeitor().isBloqueio()) {
+                    throw new EmprestimoException(createReservaWithBlock, null);
+                } else if (obj.getLeitor().getDiasRestantesMulta() > 0) {
+                    throw new EmprestimoException(createEmprestimoWithMulta, null);
+                }
+            } else {
+                throw new EmprestimoException(createEmprestimo, null);
             }
-        }
-        else {
-            throw new LivroEmprestimoException();
+        } catch (LivroException le) {
+            throw new EmprestimoException(createEmprestimo, null);
         }
     }
 
@@ -35,16 +51,26 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
 
 
     @Override
-    public void deleteById(Integer id) {
-        if(emprestimos.containsKey(id)){
-           emprestimos.remove(id);
+    public void deleteById(Integer id) throws EmprestimoException{
+        if (!emprestimos.containsKey(id)) {
+            throw new EmprestimoException(deleteEmprestimo, null);
+        } else if (!MasterDao.getEmprestimoDao().findById(id).isDevolvido()) {
+            throw new EmprestimoException(deleteEmprestimoWhenIsNotDevolvido, this.emprestimos.get(id));
+        }else if (emprestimos.containsKey(id)) {
+            emprestimos.remove(id);
         }
     }
 
     @Override
-    public void Update(Emprestimo emprestimo, Emprestimo old) {
-        emprestimos.remove(old.getId());
-        emprestimos.put(emprestimo.getId(), emprestimo);
+    public void Update(Emprestimo emprestimo, Emprestimo old) throws EmprestimoException{
+        if (!emprestimos.isEmpty() && emprestimos.containsKey(old.getId())){
+            emprestimos.remove(old.getId());
+            emprestimos.put(emprestimo.getId(), emprestimo);
+        } else if (emprestimos.isEmpty()) {
+            throw new EmprestimoException(updateWhenNotHaveObj, null);
+        } else {
+            throw new EmprestimoException(updateEmprestimo, old);
+        }
     }
 
     @Override
@@ -53,7 +79,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public List<Emprestimo> findByUser(Integer id) {
+    public List<Emprestimo> findByUser(Integer id) throws EmprestimoException{
        List<Emprestimo> emprestimosUser = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
              ) {
@@ -61,12 +87,15 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
                 emprestimosUser.add(emprestimo);
             }
         }
+        if (emprestimosUser.isEmpty()) {
+            throw new EmprestimoException(findWhenNotHaveObj, null);
+        }
 
         return emprestimosUser;
     }
 
     @Override
-    public List<Emprestimo> findByLivro(Integer id) {
+    public List<Emprestimo> findByLivro(Integer id) throws EmprestimoException{
         List<Emprestimo> emprestimosLivros = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
         ) {
@@ -74,18 +103,21 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
                 emprestimosLivros.add(emprestimo);
             }
         }
+        if (emprestimosLivros.isEmpty()) {
+            throw new EmprestimoException(findWhenNotHaveObj, null);
+        }
 
         return emprestimosLivros;
     }
 
     @Override
-    public Emprestimo findByUserAndLivro(Integer isbn, Integer id) {
+    public Emprestimo findByUserAndLivro(Integer isbn, Integer id) throws EmprestimoException{
         for(Emprestimo emprestimo: this.findByUser(id)) {
             if (emprestimo.getLivro().getIsbn() == isbn) {
                 return emprestimo;
             }
         }
 
-        return null;
+        throw new EmprestimoException(findEmprestimo, null);
     }
 }
