@@ -78,4 +78,17 @@ public class ImMemoryLeitorDao implements LeitorDao{
     public LinkedList<Leitor> findAll() {
         return (LinkedList<Leitor>) this.leitores.values();
     }
+
+    @Override
+    public Leitor findLogin(Integer id, String senha) throws LeitorException{
+        for (Leitor leitor: leitores.values()
+             ) {
+            if (leitor.getId() == id){
+                if (leitor.getSenha() == senha){
+                    return leitor;
+                }
+            }
+        }
+        throw new LeitorException(loguinUser, null);
+    }
 }

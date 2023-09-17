@@ -6,4 +6,5 @@ import model.usuarios.Leitor;
 
 /**Interface CRUD do leitor*/
 public interface LeitorDao extends Dao<Leitor, LeitorException> {
+    public Leitor findLogin(Integer id, String senha) throws LeitorException;
 }

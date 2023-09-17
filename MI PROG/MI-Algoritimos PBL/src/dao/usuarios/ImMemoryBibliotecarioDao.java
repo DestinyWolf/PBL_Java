@@ -2,8 +2,11 @@ package dao.usuarios;
 
 
 import LibraryExceptions.userexcepitions.BibliotecarioException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Bibliotecario;
+import model.usuarios.Leitor;
+
 import static util.Constantes.*;
 
 import java.util.HashMap;
@@ -65,5 +68,18 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
     public LinkedList<Bibliotecario> findAll() {
         LinkedList<Bibliotecario> values = (LinkedList<Bibliotecario>) this.bibliotecarios.values();
         return values;
+    }
+
+    @Override
+    public Bibliotecario findLogin(Integer id, String senha) throws BibliotecarioException {
+        for (Bibliotecario bibliotecario: bibliotecarios.values()
+        ) {
+            if (bibliotecario.getId() == id){
+                if (bibliotecario.getSenha() == senha){
+                    return bibliotecario;
+                }
+            }
+        }
+        throw new BibliotecarioException(loguinUser, null);
     }
 }

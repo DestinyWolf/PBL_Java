@@ -1,8 +1,12 @@
 package dao.usuarios;
 
 import LibraryExceptions.userexcepitions.AdministradorException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Administrador;
+import model.usuarios.Bibliotecario;
+import model.usuarios.Leitor;
+
 import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -59,5 +63,18 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     @Override
     public LinkedList<Administrador> findAll() {
         return (LinkedList<Administrador>) administradores.values();
+    }
+
+    @Override
+    public Administrador findLogin(Integer id, String senha) throws AdministradorException {
+        for (Administrador administrador: administradores.values()
+        ) {
+            if (administrador.getId() == id){
+                if (administrador.getSenha() == senha){
+                    return administrador;
+                }
+            }
+        }
+        throw new AdministradorException(loguinUser, null);
     }
 }

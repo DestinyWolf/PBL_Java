@@ -51,7 +51,11 @@ public class Leitor extends Pessoa{
      * @param isbn do livro que deseja ser pesquisado
      * @return numero de dias que o usuario tem para devolver o livro*/
     public Integer getDiasRestantesRenovacao(Integer isbn) {
-        return MasterDao.emprestimoDao.findByUserAndLivro(isbn, this.getId()).getDataDevolucao().getDia();
+        try {
+            return MasterDao.emprestimoDao.findByUserAndLivro(isbn, this.getId()).getDataDevolucao().getDia();
+        } catch (EmprestimoException ee) {
+            return -1;
+        }
     }
 
     /**
