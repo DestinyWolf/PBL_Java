@@ -2,14 +2,11 @@ package dao.estoque;
 
 import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.estoqueExceptions.*;
-
 import dao.MasterDao;
 import model.estoque.Livro;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Objects;
-
 import static util.Constantes.*;
 
 /**Classe que implementa a interface LivroDao*/

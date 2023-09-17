@@ -1,6 +1,6 @@
 package dao.emprestimo;
 
-import LibraryExceptions.emprestimoexception.EmprestimoException;
+
 import LibraryExceptions.emprestimoexception.ReservarException;
 import model.emprestimo.FilaDeReserva;
 import static util.Constantes.*;

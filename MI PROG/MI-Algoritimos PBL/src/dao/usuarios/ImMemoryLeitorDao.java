@@ -4,10 +4,8 @@ import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Leitor;
-
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import static util.Constantes.*;
 
 /**Classe de implementação ta interface LeitorDao*/

@@ -1,7 +1,6 @@
 package dao.estoque;
 
 import LibraryExceptions.estoqueExceptions.*;
-import LibraryExceptions.userexcepitions.LeitorException;
 import dao.Dao;
 import model.estoque.Livro;
 

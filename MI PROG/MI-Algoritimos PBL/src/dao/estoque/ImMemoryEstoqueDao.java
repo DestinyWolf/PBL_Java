@@ -1,10 +1,7 @@
 package dao.estoque;
-import dao.Dao;
+
+
 import model.estoque.Estoque;
-import model.estoque.Livro;
-
-
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class ImMemoryEstoqueDao implements EstoqueDao {

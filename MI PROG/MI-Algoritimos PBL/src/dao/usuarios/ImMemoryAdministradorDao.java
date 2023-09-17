@@ -1,11 +1,9 @@
 package dao.usuarios;
 
 import LibraryExceptions.userexcepitions.AdministradorException;
-import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Administrador;
-import model.usuarios.Bibliotecario;
-import model.usuarios.Leitor;
+
 
 import static util.Constantes.*;
 import java.util.HashMap;

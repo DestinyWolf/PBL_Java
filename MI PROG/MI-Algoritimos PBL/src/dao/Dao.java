@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**Interface CRUD do DAO*/
 public interface Dao<T, E extends Exception> {
