@@ -1,4 +1,5 @@
 package model.usuarios;
+import LibraryExceptions.emprestimoexception.EmprestimoException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 
@@ -130,7 +131,12 @@ public class Leitor extends Pessoa{
      * @return Lista de emprestimos de um usuario
      * Metodo responsavel por settar o bloqueio um usuario*/
     public List<Emprestimo> getEmprestimos() {
-        return MasterDao.getEmprestimoDao().findByUser(this.getId());
+        try {
+            return MasterDao.getEmprestimoDao().findByUser(this.getId());
+        } catch (EmprestimoException ee) {
+            return null;
+        }
+
     }
 
     @Override
