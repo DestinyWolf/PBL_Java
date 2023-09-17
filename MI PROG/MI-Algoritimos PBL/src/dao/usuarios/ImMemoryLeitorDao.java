@@ -1,5 +1,6 @@
 package dao.usuarios;
 
+import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Leitor;
@@ -30,15 +31,18 @@ public class ImMemoryLeitorDao implements LeitorDao{
 
     @Override
     public void deleteById(Integer id) throws LeitorException{
-        if(MasterDao.getLeitorDAO().findById(id) != null && MasterDao.getEmprestimoDao().findByUser(id) == null) {
-            leitores.remove(id);
-        }
-        else if (MasterDao.getEmprestimoDao().findByUser(id) != null){
-            throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findById(id));
-        }
-        else {
+        try {
+            if (MasterDao.getLeitorDAO().findById(id) != null && MasterDao.getEmprestimoDao().findByUser(id) == null) {
+                leitores.remove(id);
+            } else if (MasterDao.getEmprestimoDao().findByUser(id) != null) {
+                throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findById(id));
+            } else {
+                throw new LeitorException(deleteUser, null);
+            }
+        } catch (EmprestimoException ee){
             throw new LeitorException(deleteUser, null);
         }
+
 
     }
 
