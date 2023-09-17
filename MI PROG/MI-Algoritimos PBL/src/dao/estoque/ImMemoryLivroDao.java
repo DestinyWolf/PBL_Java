@@ -1,5 +1,6 @@
 package dao.estoque;
 
+import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.estoqueExceptions.*;
 
 import dao.MasterDao;
@@ -49,13 +50,15 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public void deleteById(Integer id) throws LivroException {
-        if (livros.get(id) != null && MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
-            this.livros.remove(id);
-        }
-        else if(!MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
-            throw new LivroException(deleteLivroWithEmprestimo, livros.get(id).getFirst());
-        }
-        else {
+        try {
+            if (livros.get(id) != null && MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
+                this.livros.remove(id);
+            } else if (!MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
+                throw new LivroException(deleteLivroWithEmprestimo, livros.get(id).getFirst());
+            } else {
+                throw new LivroException(deleteLivro, null);
+            }
+        } catch (EmprestimoException ee){
             throw new LivroException(deleteLivro, null);
         }
     }
