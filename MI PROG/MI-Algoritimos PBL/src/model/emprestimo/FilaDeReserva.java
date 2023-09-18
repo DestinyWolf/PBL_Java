@@ -66,6 +66,7 @@ public class FilaDeReserva {
 
         for (Leitor leitor: reservas) {
             if(!leitor.isBloqueio() && leitor.getDiasRestantesMulta() == 0 && leitor.getMaximoDeLivros()>0){
+                reservas.remove(leitor);
                 return leitor;
             }
         }
