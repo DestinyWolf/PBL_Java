@@ -12,6 +12,7 @@ import static util.Constantes.*;
 public class ImMemoryLeitorDao implements LeitorDao{
     private HashMap<Integer, Leitor> leitores;
     public ImMemoryLeitorDao(){
+
         this.leitores = new HashMap<>();
     }
 
