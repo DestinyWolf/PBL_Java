@@ -15,14 +15,15 @@ import dao.estoque.ImMemoryEstoqueDao;
 /**Classe MasterDao, reune todos os outros DAOs menores e implementa o Padão singleton*/
 public class MasterDao {
 
+
     private static LeitorDao leitorDao;
     private static LivroDao livroDao;
     private static BibliotecarioDao bibliotecarioDao;
     public static FilaDeReservaDao filadeReservaDao;
-    public static EmprestimoDao emprestimoDao;
-    public static AdministradorDao administradorDao;
+    private static EmprestimoDao emprestimoDao;
 
-    public static EstoqueDao estoqueDao;
+    private static EstoqueDao estoqueDao;
+    private static AdministradorDao administradorDao;
 
     public static EstoqueDao getEstoqueDao(){
         if(estoqueDao == null){
