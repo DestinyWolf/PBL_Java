@@ -18,11 +18,11 @@ public class ImMemoryLeitorDao implements LeitorDao{
 
     @Override
     public void save(Leitor obj) throws LeitorException {
-        for (Leitor existingLeitor : leitores.values()) {
-            if (existingLeitor.getId().equals(obj.getId())) {
-                throw new LeitorException(createExistUser, existingLeitor);
-            }
+
+        if (this.leitores.get(obj.getId()) != null) {
+            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(obj.getId()));
         }
+
         Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
         leitores.put(leitor.getId(), leitor);
     }
