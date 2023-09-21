@@ -22,4 +22,7 @@ public interface EmprestimoDao extends Dao<Emprestimo, EmprestimoException> {
      * @param id
      * @return  Emprestimo*/
     public Emprestimo findByUserAndLivro(Integer isbn, Integer id) throws EmprestimoException;
+    public List<Emprestimo> findEmprestimosAtivosPorUsuario(Integer id) throws EmprestimoException;
+
+    public List<Emprestimo> findEmprestimosAtivos() throws EmprestimoException;
 }
