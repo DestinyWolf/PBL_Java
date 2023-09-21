@@ -1,5 +1,7 @@
 package model.usuarios;
 
+import LibraryExceptions.userexcepitions.BibliotecarioException;
+import static util.Constantes.createUser;
 /**
  * classe Model do usuario do tipo bibliotecario*/
 public class Bibliotecario extends Pessoa{
@@ -11,11 +13,15 @@ public class Bibliotecario extends Pessoa{
      * @param id
      * @param nome
      * @param senha */
-    public Bibliotecario(String nome, String senha, Integer id, String cargo) {
-        this.cargo = cargo;
-        super.setId(id);
-        super.setSenha(senha);
-        super.setNome(nome);
+    public Bibliotecario(String nome, String senha, Integer id, String cargo) throws BibliotecarioException {
+        try {
+            this.cargo = cargo;
+            super.setId(id);
+            super.setSenha(senha);
+            super.setNome(nome);
+        } catch (Exception e) {
+            throw new BibliotecarioException(createUser, null);
+        }
     }
     /**
      * Metodo responsavel por settar o cargo do usuario
