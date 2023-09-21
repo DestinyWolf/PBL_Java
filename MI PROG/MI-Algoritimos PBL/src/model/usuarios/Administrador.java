@@ -1,5 +1,8 @@
 package model.usuarios;
 
+import LibraryExceptions.userexcepitions.AdministradorException;
+import static util.Constantes.createUser;
+
 /**Classe model do Administrador*/
 public class Administrador extends Pessoa{
     private String cargo;
@@ -9,11 +12,15 @@ public class Administrador extends Pessoa{
      * @param nome
      * @param id
      * @param cargo */
-    public Administrador(String senha, String nome, String cargo, Integer id) {
-        super.setNome(nome);
-        super.setId(id);
-        super.setSenha(senha);
-        this.cargo = cargo;
+    public Administrador(String senha, String nome, String cargo, Integer id) throws AdministradorException {
+        try {
+            super.setNome(nome);
+            super.setId(id);
+            super.setSenha(senha);
+            this.cargo = cargo;
+        } catch (Exception e){
+            throw new AdministradorException(createUser, null);
+        }
     }
     /**Metodo responsavel por retornar o cargo do Usuario
      * @return cargo do usuario*/
