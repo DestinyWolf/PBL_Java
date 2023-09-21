@@ -48,13 +48,4 @@ public class Constantes {
     public final static String reservaLivro = "Impossivel realizar reserva";
     public final static String deleteEmprestimoWhenIsNotDevolvido = "Impossivel deletar, emprestimo não devolvido";
     public final static String devolucaoError = "Impossivel realizar devolução";
-
-
-
-
-
-
-
-
-
 }
