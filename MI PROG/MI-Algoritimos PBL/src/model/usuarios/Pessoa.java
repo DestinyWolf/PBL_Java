@@ -1,19 +1,22 @@
 package model.usuarios;
 
+import util.Cpf;
+
 /**
  * classe abstrata usada como base para as classes leitor, administrador e bibliotecario
  * */
 public abstract class Pessoa extends Object{
     private String nome;
     private String senha;
-    private Integer id;
+    private Cpf cpf;
 
     /**
      * @param id
      * @return void
      * Metodo responvavel por setar o id do usuario*/
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id) throws Exception{
+           this.cpf.setCpf(new String(id.toString()));
+
     }
 
     /**
@@ -36,7 +39,7 @@ public abstract class Pessoa extends Object{
      * @return id do usuario
      * Metodo responsavel por retornar o id do usuario*/
     public Integer getId() {
-        return id;
+        return Integer.parseInt(this.cpf.getCpf());
     }
 
     /**
