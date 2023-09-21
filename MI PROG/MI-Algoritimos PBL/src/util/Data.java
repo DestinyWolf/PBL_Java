@@ -1,5 +1,6 @@
 package util;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -12,14 +13,45 @@ public class Data {
 
     private final ArrayList<Integer> meses31dias = new ArrayList<>();
 
-    /**Construtor da classe Data
-     * @param dia
-     * @param mes
-     * @param ano */
+    /**Construtor da classe Data*/
+    public Data() {
+        this.dia = LocalDate.now().getDayOfMonth();
+        this.mes = LocalDate.now().getMonthValue();
+        this.ano = LocalDate.now().getYear();
+
+        this.meses31dias.add(1);
+        this.meses31dias.add(3);
+        this.meses31dias.add(5);
+        this.meses31dias.add(7);
+        this.meses31dias.add(8);
+        this.meses31dias.add(10);
+        this.meses31dias.add(12);
+
+
+    }
+
     public Data(Integer dia, Integer mes, Integer ano) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
+
+        if (this.dia > 31 && this.meses31dias.contains(this.mes)){
+            this.mes +=1;
+            this.dia -= 31;
+        }
+
+        else if (this.dia >28 && this.mes == 2 && this.ano%4 !=0) {
+            this.mes +=1;
+            this.dia -= 28;
+        }
+        else if (this.dia >29 && this.mes == 2 && this.ano%4 ==0) {
+            this.mes +=1;
+            this.dia -= 29;
+        }
+        else if (this.dia > 30) {
+            this.mes +=1;
+            this.dia -= 30;
+        }
 
         this.meses31dias.add(1);
         this.meses31dias.add(3);
