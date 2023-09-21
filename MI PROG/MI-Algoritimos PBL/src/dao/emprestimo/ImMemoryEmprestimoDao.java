@@ -22,11 +22,11 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     @Override
     public void save(Emprestimo obj) throws EmprestimoException{
         try {
-            if (!MasterDao.getLivroDao().findByIsbn(obj.getLivro().getIsbn()).isEmpty()) {
+            if (MasterDao.getLivroDao().findByIsbn(obj.getLivro().getIsbn()) != null) {
                 if (obj.getLeitor().getNumEmprestimos() > 0 && !obj.getLeitor().isBloqueio() && obj.getLeitor().getDiasRestantesMulta() == 0) {
 
                     if (!emprestimos.containsKey(obj.getId())) {
-                        Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro(), obj.getDataEmprestimo(), obj.getDataDevolucao());
+                        Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro());
                         emprestimos.put(emprestimo.getId(), emprestimo);
                     }
                     else{
@@ -119,5 +119,41 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
         }
 
         throw new EmprestimoException(findEmprestimo, null);
+    }
+
+    @Override
+    public List<Emprestimo> findEmprestimosAtivosPorUsuario(Integer id) throws EmprestimoException {
+        List<Emprestimo> emprestimosList = new LinkedList<>();
+
+        for(Emprestimo emprestimo: this.findByUser(id)) {
+            if (!emprestimo.isDevolvido()) {
+                emprestimosList.add(emprestimo);
+            }
+        }
+
+        if(emprestimosList.isEmpty()) {
+            throw new EmprestimoException(findEmprestimo, null);
+        }
+        else {
+            return emprestimosList;
+        }
+    }
+
+    @Override
+    public List<Emprestimo> findEmprestimosAtivos() throws EmprestimoException {
+        List<Emprestimo> emprestimosList = new LinkedList<>();
+
+        for(Emprestimo emprestimo: this.emprestimos.values()) {
+            if (!emprestimo.isDevolvido()) {
+                emprestimosList.add(emprestimo);
+            }
+        }
+
+        if(emprestimosList.isEmpty()) {
+            throw new EmprestimoException(findEmprestimo, null);
+        }
+        else {
+            return emprestimosList;
+        }
     }
 }
