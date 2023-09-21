@@ -24,7 +24,7 @@ public interface LivroDao extends Dao<Livro, LivroException> {
      * @return Lista de livros*/
     public LinkedList<Livro> findByNome(String nome) throws LivroException;
 
-    public LinkedList<Livro> findByIsbn(Integer isbn) throws LivroException;
+    public Livro findByIsbn(Integer isbn) throws LivroException;
 
     /**Função responsavel por deletar um unico livro dentro de uma lista de lviros com o mesmo isbn
      * @param obj */
