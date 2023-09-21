@@ -1,7 +1,9 @@
 package model.usuarios;
 import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
+import static util.Constantes.createUser;
 
 
 import java.util.List;
@@ -23,16 +25,21 @@ public class Leitor extends Pessoa{
      * @param id numero de identificação do usuario
      * @param endereco endereco do usuario
      * @param telefone telefone do usuario*/
-    public Leitor (String nome, String senha, Integer id, String endereco, String telefone) {
-        super.setNome(nome);
-        super.setSenha(senha);
-        super.setId(id);
-        this.bloqueio = false;
-        this.numEmprestimos = 2;
-        this.diasRestantesMulta = 0;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.maximoDeLivros = 2;
+    public Leitor (String nome, String senha, Integer id, String endereco, String telefone) throws LeitorException {
+        try {
+            super.setNome(nome);
+            super.setSenha(senha);
+            super.setId(id);
+            this.bloqueio = false;
+            this.numEmprestimos = 2;
+            this.diasRestantesMulta = 0;
+            this.endereco = endereco;
+            this.telefone = telefone;
+            this.maximoDeLivros = 2;
+        } catch (Exception e) {
+            throw new LeitorException(createUser, null);
+        }
+
 
 
     }
