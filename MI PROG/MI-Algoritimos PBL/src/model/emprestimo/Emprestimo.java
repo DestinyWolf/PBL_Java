@@ -6,6 +6,7 @@ import dao.MasterDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
+import static util.Constantes.*;
 
 import static util.Constantes.*;
 
@@ -21,20 +22,20 @@ public class Emprestimo {
 
     /**Construtor da classe emprestimo
      * @param leitor
-     * @param livro
-     * @param dataEmprestimo
-     * @param dataDevolucao */
-    public Emprestimo(Leitor leitor, Livro livro, Data dataEmprestimo, Data dataDevolucao) throws EmprestimoException {
+     * @param livro*/
+    public Emprestimo(Leitor leitor, Livro livro) throws EmprestimoException {
         try {
             this.leitor = leitor;
             this.livro = MasterDao.getLivroDao().findById(livro.getIsbn());
             MasterDao.getLivroDao().deleteOnlyOne(this.livro);
-            this.dataDevolucao = dataDevolucao;
-            this.dataEmprestimo = dataEmprestimo;
+            this.dataEmprestimo = new Data();
+            this.dataDevolucao = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
             this.devolvido = false;
             this.Id = livro.getIsbn() + leitor.getId() % 100109;
             this.renovacoes = 0;
             this.leitor.setNumEmprestimos(leitor.getNumEmprestimos()-1);
+
+            MasterDao.getLivroDao().deleteOnlyOne(livro);
         } catch (Exception e) {
             throw new EmprestimoException(createEmprestimo, null);
         }
@@ -96,8 +97,19 @@ public class Emprestimo {
 
     /**Metodo responsavel por settar se o livro foi devolvido
      * @param devolvido */
-    public void setDevolvido(boolean devolvido) {
-        this.devolvido = devolvido;
+    public void setDevolvido(boolean devolvido) throws EmprestimoException{
+        try {
+            if (devolvido) {
+                MasterDao.getLivroDao().save(this.livro);
+                Leitor leitor1 = MasterDao.getLeitorDAO().findById(leitor.getId());
+                leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
+                MasterDao.getLeitorDAO().deleteById(leitor1.getId());
+                MasterDao.getLeitorDAO().save(leitor1);
+            }
+            this.devolvido = devolvido;
+        } catch (Exception e) {
+            throw new EmprestimoException(devolucaoError, null);
+        }
     }
 
     /**Metodo responsavel por settar o leitor que fez o emprestimo
