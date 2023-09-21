@@ -11,7 +11,7 @@ import static util.Constantes.*;
 
 /**Classe que implementa a interface LivroDao*/
 public class ImMemoryLivroDao implements LivroDao{
-    private HashMap<Integer, LinkedList<Livro>> livros;
+    private HashMap<Integer, Livro> livros;
 
     public ImMemoryLivroDao() {
         this.livros = new HashMap<>();
@@ -21,7 +21,7 @@ public class ImMemoryLivroDao implements LivroDao{
     @Override
     public Livro findById(Integer id) throws LivroException {
         if(this.livros.get(id) != null) {
-            return livros.get(id).getFirst();
+            return livros.get(id);
         } else if (livros.isEmpty()) {
             throw new LivroException(findWhenNotHaveObj, null);
         } else {
@@ -31,19 +31,18 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public void save(Livro obj) throws LivroException {
-            Livro livro = new Livro(obj.getIsbn(), obj.getAutor(), obj.getCategoria(), obj.getEnderecoLivro(), obj.getEditora(), obj.getAnoDePublicacao(), obj.getNome());
-            if(this.livros.get(livro.getIsbn()) != null) {
-                 LinkedList<Livro> livrosList = this.livros.get(livro.getIsbn());
-                 livrosList.add(livro);
-                 this.livros.put(livro.getIsbn(), livrosList);
-            }
-            else {
-                LinkedList<Livro> livrosList = new LinkedList<>();
-                livrosList.add(livro);
-                this.livros.put(livro.getIsbn(), livrosList);
-            }
+        Livro livro = new Livro(obj.getIsbn(), obj.getAutor(), obj.getCategoria(), obj.getEnderecoLivro(), obj.getEditora(), obj.getAnoDePublicacao(), obj.getNome());
 
+        if (this.livros.get(livro.getIsbn()) != null) {
+            Livro livros = this.livros.get(livro.getIsbn());
+            livros.setQuantidade(livro.getQuantidade()+1);
+            this.livros.put(livro.getIsbn(), livros);
+        } else {
+            this.livros.put(livro.getIsbn(), livro);
+        }
     }
+
+
 
     @Override
     public void deleteById(Integer id) throws LivroException {
@@ -51,7 +50,7 @@ public class ImMemoryLivroDao implements LivroDao{
             if (livros.get(id) != null && MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
                 this.livros.remove(id);
             } else if (!MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
-                throw new LivroException(deleteLivroWithEmprestimo, livros.get(id).getFirst());
+                throw new LivroException(deleteLivroWithEmprestimo, livros.get(id));
             } else {
                 throw new LivroException(deleteLivro, null);
             }
@@ -62,21 +61,17 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public void Update(Livro livro, Livro old) throws LivroException{
-        if (livros.get(old.getIsbn()) != null && !livros.get(old.getIsbn()).isEmpty()) {
+        if (livros.get(old.getIsbn()) != null && livros.get(old.getIsbn()).getQuantidade() > 0) {
             if (Objects.equals(livro.getIsbn(), old.getIsbn())) {
-                LinkedList<Livro> livrosList = this.livros.get(livro.getIsbn());
-                livrosList.remove(old);
-                livrosList.add(livro);
-                this.livros.put(livro.getIsbn(), livrosList);
+                Livro livros = this.livros.get(livro.getIsbn());
+                this.livros.remove(old);
+                this.livros.put(livro.getIsbn(), livros);
             } else {
-                LinkedList<Livro> livrosList = this.livros.get(old.getIsbn());
-                livrosList.remove(old);
-                this.livros.put(old.getIsbn(), livrosList);
-                livrosList = this.livros.get(livro.getIsbn());
-                livrosList.add(livro);
-                this.livros.put(livro.getIsbn(), livrosList);
+                Livro livros = this.livros.get(old.getIsbn());
+                this.livros.remove(old);
+                this.livros.put(livro.getIsbn(), livros);
             }
-        } else if (livros.get(old.getIsbn()).isEmpty()) {
+        } else if (livros.get(old.getIsbn()) == null) {
             throw new LivroException(updateWhenNotHaveObj, null);
         } else {
             throw new LivroException(updateLivro, null);
@@ -86,26 +81,19 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public LinkedList<Livro> findAll() {
-        LinkedList<Livro> livros = new LinkedList<>();
-
-        for (LinkedList<Livro> livro:
-             this.livros.values()) {
-            livros.addAll(livro);
-        }
-        return livros;
+        return (LinkedList<Livro>)  this.livros.values();
     }
 
     @Override
     public LinkedList<Livro> findByAutor(String autor) throws LivroException {
         LinkedList<Livro> livrosList = new LinkedList<>();
-        for (LinkedList<Livro> livros:
-                this.livros.values()) {
-            for (Livro livro:
-                 livros) {
-                if (Objects.equals(livro.getAutor(), autor)) {
-                    livrosList.add(livro);
-                }
+
+        for (Livro livro:
+             livros.values()) {
+            if (Objects.equals(livro.getAutor(), autor)) {
+                livrosList.add(livro);
             }
+
         }
         if(livrosList.isEmpty()){
             throw new LivroException(autorNotExist, null);
@@ -118,14 +106,13 @@ public class ImMemoryLivroDao implements LivroDao{
     @Override
     public LinkedList<Livro> findByCategoria(String categoria) throws LivroException{
         LinkedList<Livro> livrosList = new LinkedList<>();
-        for (LinkedList<Livro> livros:
-                this.livros.values()) {
-            for (Livro livro:
-                    livros) {
-                if (Objects.equals(categoria, livro.getCategoria())) {
-                    livrosList.add(livro);
-                }
+
+        for (Livro livro:
+                livros.values()) {
+            if (Objects.equals(categoria, livro.getCategoria())) {
+                livrosList.add(livro);
             }
+
         }
         if(livrosList.isEmpty()){
             throw new LivroException(categoriaNotExist, null);
@@ -138,14 +125,13 @@ public class ImMemoryLivroDao implements LivroDao{
     @Override
     public LinkedList<Livro> findByNome(String nome)  throws LivroException {
         LinkedList<Livro> livrosList = new LinkedList<>();
-        for (LinkedList<Livro> livros:
-                this.livros.values()) {
-            for (Livro livro:
-                    livros) {
-                if (Objects.equals(nome, livro.getNome())) {
-                    livrosList.add(livro);
-                }
+
+        for (Livro livro:
+                livros.values()) {
+            if (Objects.equals(nome, livro.getNome())) {
+                livrosList.add(livro);
             }
+
         }
         if(livrosList.isEmpty()){
             throw new LivroException(nomeNotExist, null);
@@ -156,8 +142,8 @@ public class ImMemoryLivroDao implements LivroDao{
     }
 
     @Override
-    public LinkedList<Livro> findByIsbn(Integer isbn) throws LivroException{
-        if(this.livros.get(isbn).isEmpty()) {
+    public Livro findByIsbn(Integer isbn) throws LivroException{
+        if(this.livros.get(isbn) == null) {
             throw new LivroException(findLivro, null);
         }
         else {
@@ -168,9 +154,9 @@ public class ImMemoryLivroDao implements LivroDao{
     @Override
     public void deleteOnlyOne(Livro obj) throws LivroException{
         if (livros.get(obj.getIsbn()) != null){
-            LinkedList<Livro> livrosList = this.livros.get(obj.getIsbn());
-            livrosList.remove(obj);
-            this.livros.put(obj.getIsbn(), livrosList);
+            Livro livros = this.livros.get(obj.getIsbn());
+            livros.setQuantidade(livros.getQuantidade()-1);
+            this.livros.put(obj.getIsbn(), livros);
         } else if (livros.isEmpty()) {
             throw new LivroException(deleteWhenNotHaveObj, null);
         } else {
