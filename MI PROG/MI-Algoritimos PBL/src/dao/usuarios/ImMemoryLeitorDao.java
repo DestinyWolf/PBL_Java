@@ -18,20 +18,21 @@ public class ImMemoryLeitorDao implements LeitorDao{
 
     @Override
     public void save(Leitor obj) throws LeitorException {
-        if (MasterDao.getLeitorDAO().findById(obj.getId()) != null) {
-            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(obj.getId()));
+        for (Leitor existingLeitor : leitores.values()) {
+            if (existingLeitor.getId().equals(obj.getId())) {
+                throw new LeitorException(createExistUser, existingLeitor);
+            }
         }
-        else {
-            Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
-            this.leitores.put(leitor.getId(), leitor);
-        }
-
+        Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
+        leitores.put(leitor.getId(), leitor);
     }
+
+
 
     @Override
     public void deleteById(Integer id) throws LeitorException{
         try {
-            if (MasterDao.getLeitorDAO().findById(id) != null && MasterDao.getEmprestimoDao().findByUser(id) == null) {
+            if (findById(id) != null && MasterDao.getEmprestimoDao().findByUser(id) == null) {
                 leitores.remove(id);
             } else if (MasterDao.getEmprestimoDao().findByUser(id) != null) {
                 throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findById(id));
@@ -41,8 +42,6 @@ public class ImMemoryLeitorDao implements LeitorDao{
         } catch (EmprestimoException ee){
             throw new LeitorException(deleteUser, null);
         }
-
-
     }
 
     @Override
@@ -59,35 +58,43 @@ public class ImMemoryLeitorDao implements LeitorDao{
         }
     }
 
+
+
     @Override
     public Leitor findById(Integer id) throws LeitorException{
-        if(MasterDao.getLeitorDAO().findById(id) != null) {
-            return this.leitores.get(id);
-        }
-        else if (this.leitores.isEmpty()) {
+        if(this.leitores.isEmpty()){
             throw new LeitorException(findWhenNotHaveObj, null);
         }
-        else {
+        else{
+            for(Leitor leitor : this.leitores.values()){
+                if(leitor.getId() == id){
+                    return leitor;
+                }
+            }
             throw new LeitorException(findUser, null);
         }
 
     }
 
-    @Override
-    public LinkedList<Leitor> findAll() {
-        return (LinkedList<Leitor>) this.leitores.values();
-    }
 
     @Override
-    public Leitor findLogin(Integer id, String senha) throws LeitorException{
-        for (Leitor leitor: leitores.values()
-             ) {
-            if (leitor.getId() == id){
-                if (leitor.getSenha() == senha){
-                    return leitor;
-                }
+    public LinkedList<Leitor> findAll() {
+        LinkedList<Leitor> lista = new LinkedList<>();
+        for(Leitor leitor : leitores.values()){
+            lista.add(leitor);
+        }
+        return  lista;
+    }
+
+
+    @Override
+    public Leitor findLogin(Integer id, String senha) throws LeitorException {
+        for (Leitor leitor : leitores.values()) {
+            if (leitor.getId().equals(id) && leitor.getSenha().equals(senha)) {
+                return leitor;
             }
         }
         throw new LeitorException(loguinUser, null);
     }
+
 }
