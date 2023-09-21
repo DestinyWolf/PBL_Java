@@ -52,7 +52,7 @@ public class Leitor extends Pessoa{
      * @return numero de dias que o usuario tem para devolver o livro*/
     public Integer getDiasRestantesRenovacao(Integer isbn) {
         try {
-            return MasterDao.emprestimoDao.findByUserAndLivro(isbn, this.getId()).getDataDevolucao().getDia();
+            return MasterDao.getEmprestimoDao().findByUserAndLivro(isbn, this.getId()).getDataDevolucao().getDia();
         } catch (EmprestimoException ee) {
             return -1;
         }
