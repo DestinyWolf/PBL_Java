@@ -11,6 +11,8 @@ public class Livro {
     private String editora;
     private Integer anoDePublicacao;
     private String nome;
+    private Integer quantidade;
+    private Integer qntDeBuscas;
 
     /**Construtor da classe Livro
      * @param isbn
@@ -28,6 +30,8 @@ public class Livro {
         this.editora = editora;
         this.anoDePublicacao = anoDePublicacao;
         this.nome = nome;
+        this.quantidade = 1;
+        this.qntDeBuscas = 0;
     }
 
     /**Metodo responsavel por retornar o ano de publicação do livro
@@ -72,6 +76,14 @@ public class Livro {
         return nome;
     }
 
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public Integer getQntDeBuscas() {
+        return qntDeBuscas;
+    }
+
     /**Metodo responsavel por settar o ano de publicação do livro
      *@param anoDePublicacao  */
     public void setAnoDePublicacao(Integer anoDePublicacao) {
@@ -112,6 +124,14 @@ public class Livro {
      *@param nome  */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setQntDeBuscas(Integer qntDeBuscas) {
+        this.qntDeBuscas = qntDeBuscas;
     }
 
     @Override
