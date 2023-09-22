@@ -5,6 +5,7 @@ import dao.Dao;
 import model.estoque.Livro;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**Interface das operações CRUD do Livro*/
 public interface LivroDao extends Dao<Livro, LivroException> {
@@ -29,6 +30,8 @@ public interface LivroDao extends Dao<Livro, LivroException> {
     /**Função responsavel por deletar um unico livro dentro de uma lista de lviros com o mesmo isbn
      * @param obj */
     public void deleteOnlyOne(Livro obj) throws LivroException;
+
+    public List<Livro> findLivrosMaisPesquisados();
 
 
 }
