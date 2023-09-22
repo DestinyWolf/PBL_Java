@@ -1,5 +1,8 @@
 package model.estoque;
 
+import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.estoqueExceptions.LivroException;
+import dao.MasterDao;
 import model.usuarios.Bibliotecario;
 
 /**Classe model para livro*/
@@ -132,6 +135,15 @@ public class Livro {
 
     public void setQntDeBuscas(Integer qntDeBuscas) {
         this.qntDeBuscas = qntDeBuscas;
+    }
+
+    public Integer getQntDeEmprestimos() {
+        try {
+            return MasterDao.getEmprestimoDao().findByLivro(this.isbn).size();
+        } catch (EmprestimoException ee) {
+            return  -1;
+        }
+
     }
 
     @Override
