@@ -148,7 +148,7 @@ public class Livro {
 
     @Override
     public boolean equals(Object obj){
-        if (obj != null && obj instanceof Livro) {
+        if (obj instanceof Livro) {
             return ((this.getIsbn() == ((Livro) obj).getIsbn()) || this.getNome() == ((Livro) obj).getNome());
         } else {
             return false;
