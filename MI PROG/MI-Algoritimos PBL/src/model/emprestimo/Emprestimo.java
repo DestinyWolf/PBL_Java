@@ -6,6 +6,9 @@ import dao.MasterDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
+
+import java.time.LocalDate;
+
 import static util.Constantes.*;
 
 import static util.Constantes.*;
@@ -102,6 +105,13 @@ public class Emprestimo {
             if (devolvido) {
                 MasterDao.getLivroDao().save(this.livro);
                 Leitor leitor1 = MasterDao.getLeitorDAO().findById(leitor.getId());
+                if(LocalDate.now().getMonthValue() > dataDevolucao.getMes()){
+                    Integer mesesEmAtraso = LocalDate.now().getMonthValue() - dataDevolucao.getMes();
+                    leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(mesesEmAtraso*30+LocalDate.now().getDayOfMonth() - dataEmprestimo.getDia()));
+                } else if (LocalDate.now().getDayOfMonth() > dataDevolucao.getDia()) {
+                    leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(LocalDate.now().getDayOfMonth() - dataDevolucao.getDia()));
+                }
+
                 leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
                 MasterDao.getLeitorDAO().deleteById(leitor1.getId());
                 MasterDao.getLeitorDAO().save(leitor1);
