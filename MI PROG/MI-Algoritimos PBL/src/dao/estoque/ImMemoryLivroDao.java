@@ -6,6 +6,7 @@ import dao.MasterDao;
 import model.estoque.Livro;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import static util.Constantes.*;
 
@@ -162,5 +163,44 @@ public class ImMemoryLivroDao implements LivroDao{
         } else {
             throw new LivroException(deleteLivro, null);
         }
+    }
+
+    @Override
+    public List<Livro> findLivrosMaisPesquisados() {
+        Livro livroAtual = null;
+        Livro[] livrosMaisPesquisados = new Livro[10];
+        List<Livro> listaLivros = new LinkedList<>();
+        for(int i = 0; i<10;i++) {
+            if(livrosMaisPesquisados.length == 0) {
+                for (Livro livro :
+                        livros.values()) {
+                    if (livroAtual == null) {
+                        livroAtual = livro;
+                    } else {
+                        if (livroAtual.getQntDeBuscas() < livro.getQntDeBuscas()) {
+                            livroAtual = livro;
+                        }
+                    }
+                }
+                livrosMaisPesquisados[i] = livroAtual;
+                listaLivros.add(livroAtual);
+            }
+            else {
+                for (Livro livro :
+                        livros.values()) {
+                    if (livroAtual == null) {
+                        livroAtual = livro;
+                    } else {
+                        if (livroAtual.getQntDeBuscas() < livro.getQntDeBuscas() && livro.getQntDeBuscas() < livrosMaisPesquisados[i-1].getQntDeBuscas()) {
+                            livroAtual = livro;
+                        }
+                    }
+                }
+                livrosMaisPesquisados[i] = livroAtual;
+                listaLivros.add(livroAtual);
+            }
+        }
+
+        return listaLivros;
     }
 }
