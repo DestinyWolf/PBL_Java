@@ -3,6 +3,7 @@ package model.relatorio;
 import LibraryExceptions.emprestimoexception.EmprestimoException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
+import model.estoque.Livro;
 import util.Data;
 
 import java.security.spec.ECField;
@@ -14,7 +15,7 @@ public class Relatorios {
     private Integer qntLivrosEmprestados;
     private Integer qntLivrosAtrasados;
     private Integer qntLivros;
-    private Integer[] isbnLivrosMaisBuscados;
+    private List<Livro> isbnLivrosMaisBuscados;
 
 
     public Relatorios() {
@@ -22,7 +23,7 @@ public class Relatorios {
             this.qntLivros = MasterDao.getLivroDao().findAll().size();
             this.qntLivrosAtrasados = 0;
             this.qntLivrosEmprestados = MasterDao.getEmprestimoDao().findEmprestimosAtivos().size();
-            this.isbnLivrosMaisBuscados = new Integer[10];
+            this.isbnLivrosMaisBuscados = new LinkedList<>();
 
         } catch (Exception e) {
 
@@ -51,5 +52,10 @@ public class Relatorios {
 
     public String getQntLivroEmprestados(){
         return qntLivrosEmprestados.toString();
+    }
+
+    public List<Livro> getIsbnLivrosMaisBuscados() {
+
+        return isbnLivrosMaisBuscados = MasterDao.getLivroDao().findLivrosMaisPesquisados();
     }
 }
