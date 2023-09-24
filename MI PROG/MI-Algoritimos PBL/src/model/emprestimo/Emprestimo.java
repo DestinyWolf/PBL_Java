@@ -11,13 +11,12 @@ import java.time.LocalDate;
 
 import static util.Constantes.*;
 
-import static util.Constantes.*;
-
 /**Classe model para emprestimos*/
 public class Emprestimo {
     private Leitor leitor;
     private Livro livro;
     private Data dataEmprestimo;
+    private Data prazoFinal;
     private Data dataDevolucao;
     private boolean devolvido;
     private Integer Id;
@@ -32,12 +31,12 @@ public class Emprestimo {
             this.livro = MasterDao.getLivroDao().findById(livro.getIsbn());
             MasterDao.getLivroDao().deleteOnlyOne(this.livro);
             this.dataEmprestimo = new Data();
-            this.dataDevolucao = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
+            this.prazoFinal = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
             this.devolvido = false;
             this.Id = livro.getIsbn() + leitor.getId() % 100109;
             this.renovacoes = 0;
             this.leitor.setNumEmprestimos(leitor.getNumEmprestimos()-1);
-
+            this.dataDevolucao = new Data(0,0,0);
             MasterDao.getLivroDao().deleteOnlyOne(livro);
         } catch (Exception e) {
             throw new EmprestimoException(createEmprestimo, null);
@@ -46,8 +45,8 @@ public class Emprestimo {
 
     /**Metodo responsavel por retornar a data de devolução do livro
      * @return Data de devolução do livro*/
-    public Data getDataDevolucao() {
-        return dataDevolucao;
+    public Data getPrazoFinal() {
+        return prazoFinal;
     }
 
     /**Metodo responsavel por retornar a data de emprestimo do livro
@@ -87,9 +86,9 @@ public class Emprestimo {
     }
 
     /**Metodo responsavel por settar a data de devolução do livro
-     * @param dataDevolucao */
-    public void setDataDevolucao(Data dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
+     * @param prazoFinal */
+    public void setPrazoFinal(Data prazoFinal) {
+        this.prazoFinal = prazoFinal;
     }
 
     /**Metodo responsavel por settar a data de emprestimo do livro
@@ -105,11 +104,11 @@ public class Emprestimo {
             if (devolvido) {
                 MasterDao.getLivroDao().save(this.livro);
                 Leitor leitor1 = MasterDao.getLeitorDAO().findById(leitor.getId());
-                if(LocalDate.now().getMonthValue() > dataDevolucao.getMes()){
-                    Integer mesesEmAtraso = LocalDate.now().getMonthValue() - dataDevolucao.getMes();
+                if(LocalDate.now().getMonthValue() > prazoFinal.getMes()){
+                    Integer mesesEmAtraso = LocalDate.now().getMonthValue() - prazoFinal.getMes();
                     leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(mesesEmAtraso*30+LocalDate.now().getDayOfMonth() - dataEmprestimo.getDia()));
-                } else if (LocalDate.now().getDayOfMonth() > dataDevolucao.getDia()) {
-                    leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(LocalDate.now().getDayOfMonth() - dataDevolucao.getDia()));
+                } else if (LocalDate.now().getDayOfMonth() > prazoFinal.getDia()) {
+                    leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(LocalDate.now().getDayOfMonth() - prazoFinal.getDia()));
                 }
 
                 leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
@@ -117,6 +116,7 @@ public class Emprestimo {
                 MasterDao.getLeitorDAO().save(leitor1);
             }
             this.devolvido = devolvido;
+            dataDevolucao = new Data();
         } catch (Exception e) {
             throw new EmprestimoException(devolucaoError, null);
         }
@@ -155,7 +155,7 @@ public class Emprestimo {
             if (this.leitor.getId() == id && this.livro.getIsbn() == isbn) {
                 if (!this.leitor.isBloqueio() && this.leitor.getDiasRestantesMulta() == 0) {
                     if (MasterDao.getFiladeReservaDao().findById(isbn).getReservas().isEmpty() && this.renovacoes < 2) {
-                        this.dataDevolucao.addDia(7);
+                        this.prazoFinal.addDia(7);
                         this.renovacoes++;
 
                     }
