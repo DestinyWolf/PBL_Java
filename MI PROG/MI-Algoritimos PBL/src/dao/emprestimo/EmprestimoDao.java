@@ -25,4 +25,5 @@ public interface EmprestimoDao extends Dao<Emprestimo, EmprestimoException> {
     public List<Emprestimo> findEmprestimosAtivosPorUsuario(Integer id) throws EmprestimoException;
 
     public List<Emprestimo> findEmprestimosAtivos() throws EmprestimoException;
+    public List<Emprestimo> findEmprestimosEncerrados() throws EmprestimoException;
 }

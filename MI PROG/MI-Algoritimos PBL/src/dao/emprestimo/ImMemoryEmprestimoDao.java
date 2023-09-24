@@ -156,4 +156,22 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
             return emprestimosList;
         }
     }
+
+    @Override
+    public List<Emprestimo> findEmprestimosEncerrados() throws EmprestimoException {
+        List<Emprestimo> emprestimosList = new LinkedList<>();
+
+        for(Emprestimo emprestimo: this.emprestimos.values()) {
+            if (emprestimo.isDevolvido()) {
+                emprestimosList.add(emprestimo);
+            }
+        }
+
+        if(emprestimosList.isEmpty()) {
+            throw new EmprestimoException(findEmprestimo, null);
+        }
+        else {
+            return emprestimosList;
+        }
+    }
 }
