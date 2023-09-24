@@ -1,13 +1,10 @@
 package model.relatorio;
 
-import LibraryExceptions.emprestimoexception.EmprestimoException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
 import model.estoque.Livro;
 import util.Data;
 
-import java.security.spec.ECField;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,10 +36,10 @@ public class Relatorios {
             List<Emprestimo> emprestimoList = new LinkedList<>();
             Data data = new Data();
             for (Emprestimo emprestimo : MasterDao.getEmprestimoDao().findEmprestimosAtivos()) {
-                if(emprestimo.getDataDevolucao().getDia() < data.getDia()){
+                if(emprestimo.getPrazoFinal().getDia() < data.getDia()){
                     this.qntLivrosAtrasados ++;
                 }
-                else if(emprestimo.getDataDevolucao().getDia() > data.getDia() && emprestimo.getDataDevolucao().getMes() < data.getMes());
+                else if(emprestimo.getPrazoFinal().getDia() > data.getDia() && emprestimo.getPrazoFinal().getMes() < data.getMes());
             }
             return this.qntLivrosAtrasados.toString();
         } catch (Exception e) {
