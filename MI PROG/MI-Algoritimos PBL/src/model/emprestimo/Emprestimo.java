@@ -104,12 +104,6 @@ public class Emprestimo {
             if (devolvido) {
                 MasterDao.getLivroDao().save(this.livro);
                 Leitor leitor1 = MasterDao.getLeitorDAO().findById(leitor.getId());
-                if(LocalDate.now().getMonthValue() > prazoFinal.getMes()){
-                    Integer mesesEmAtraso = LocalDate.now().getMonthValue() - prazoFinal.getMes();
-                    leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(mesesEmAtraso*30+LocalDate.now().getDayOfMonth() - dataEmprestimo.getDia()));
-                } else if (LocalDate.now().getDayOfMonth() > prazoFinal.getDia()) {
-                    leitor1.setDiasRestantesMulta(leitor1.getDiasRestantesMulta()+2*(LocalDate.now().getDayOfMonth() - prazoFinal.getDia()));
-                }
 
                 leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
                 MasterDao.getLeitorDAO().deleteById(leitor1.getId());
