@@ -13,7 +13,7 @@ public class Data {
 
     private final ArrayList<Integer> meses31dias = new ArrayList<>();
 
-    /**Construtor da classe Data*/
+    /**Construtor da classe Data, atribui a data atual ao dia, mes e ano*/
     public Data() {
         this.dia = LocalDate.now().getDayOfMonth();
         this.mes = LocalDate.now().getMonthValue();
@@ -30,6 +30,11 @@ public class Data {
 
     }
 
+    /**
+     * Construtor da classe Data
+     * @param dia
+     * @param mes
+     * @param ano */
     public Data(Integer dia, Integer mes, Integer ano) {
         this.dia = dia;
         this.mes = mes;
@@ -138,5 +143,19 @@ public class Data {
      * @param qntAno */
     public void addAno(Integer qntAno) {
         this.ano += ano;
+    }
+
+    /**Metodo responsavel por fazer a comparação entre duas datas
+     * @param data
+     * @return 1 se a data do parametro é menor que esta data, 2 se esta for menor e 0 se são iguais
+     *  */
+    public Integer compareData(Data data) {
+        if(data.getDia() < this.getDia() || data.getMes() < this.getMes() || data.getAno() < this.getAno()){
+            return 1;
+        } else if (this.getDia() < data.getDia() || this.getMes() <data.getMes() || this.getAno() < data.getAno()) {
+            return 2;
+        } else {
+            return 0;
+        }
     }
 }
