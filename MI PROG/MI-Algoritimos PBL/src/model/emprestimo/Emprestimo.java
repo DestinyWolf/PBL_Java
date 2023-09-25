@@ -112,9 +112,10 @@ public class Emprestimo {
                 leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
                 MasterDao.getLeitorDAO().deleteById(leitor1.getId());
                 MasterDao.getLeitorDAO().save(leitor1);
+                dataDevolucao = new Data();
             }
             this.devolvido = devolvido;
-            dataDevolucao = new Data();
+
         } catch (Exception e) {
             throw new EmprestimoException(devolucaoError, null);
         }
