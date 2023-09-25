@@ -85,6 +85,10 @@ public class Emprestimo {
         return renovacoes;
     }
 
+    public Data getDataDevolucao() {
+        return dataDevolucao;
+    }
+
     /**Metodo responsavel por settar a data de devolução do livro
      * @param prazoFinal */
     public void setPrazoFinal(Data prazoFinal) {
@@ -138,6 +142,11 @@ public class Emprestimo {
      * @param renovacoes */
     public void setRenovacoes(Integer renovacoes) {
         this.renovacoes = renovacoes;
+    }
+
+
+    public void setDataDevolucao(Data dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 
     /**Metodo responsavel por renovar o emprestimo do livro
