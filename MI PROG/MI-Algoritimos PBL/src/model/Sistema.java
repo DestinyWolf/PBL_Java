@@ -9,7 +9,7 @@ import util.Data;
 public class Sistema {
 
 
-    public static boolean AtualizaEmprestimos() {
+    public static boolean atualizaMultas() {
         Data dataAtual = new Data();
         try {
             for (Emprestimo emprestimo : MasterDao.getEmprestimoDao().findEmprestimosAtivos()
@@ -23,7 +23,23 @@ public class Sistema {
                  ) {
                 if (MasterDao.getEmprestimoDao().findEmprestimosAtivosPorUsuario(leitor.getId()) == null) {
                     if (leitor.getDiasRestantesMulta() >= 1) {
-                        leitor.setDiasRestantesMulta(leitor.getDiasRestantesMulta() - 1);
+                        Emprestimo ultimoEmprestimo = null;
+                        for (Emprestimo emprestimo: MasterDao.getEmprestimoDao().findByUser(leitor.getId())
+                             ) {
+
+                            if (ultimoEmprestimo == null) {
+                                ultimoEmprestimo = emprestimo;
+                            }
+                            else if (emprestimo.getDataDevolucao().compareData(ultimoEmprestimo.getDataDevolucao()) == 1) {
+                                ultimoEmprestimo = emprestimo;
+                            }
+                        }
+                        Integer qntDiasQuePassaram = 30*(ultimoEmprestimo.getDataDevolucao().getMes() - dataAtual.getMes());
+                        qntDiasQuePassaram += (ultimoEmprestimo.getDataDevolucao().getDia() - dataAtual.getDia());
+                        qntDiasQuePassaram += 365*(ultimoEmprestimo.getDataDevolucao().getAno() - dataAtual.getAno());
+
+
+                        leitor.setDiasRestantesMulta(leitor.getDiasRestantesMulta() - qntDiasQuePassaram);
                     }
                 }
             }
@@ -34,4 +50,5 @@ public class Sistema {
         }
 
     }
+
 }
