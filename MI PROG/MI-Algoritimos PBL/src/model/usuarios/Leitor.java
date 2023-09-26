@@ -59,7 +59,7 @@ public class Leitor extends Pessoa{
      * @return numero de dias que o usuario tem para devolver o livro*/
     public Integer getDiasRestantesRenovacao(Integer isbn) {
         try {
-            return MasterDao.getEmprestimoDao().findByUserAndLivro(isbn, this.getId()).getPrazoFinal().getDia();
+            return MasterDao.getEmprestimoDao().findByUserAndLivro(isbn, Integer.parseInt(this.getId())).getPrazoFinal().getDia();
         } catch (EmprestimoException ee) {
             return -1;
         }
@@ -143,7 +143,7 @@ public class Leitor extends Pessoa{
      * Metodo responsavel por settar o bloqueio um usuario*/
     public List<Emprestimo> getEmprestimos() {
         try {
-            return MasterDao.getEmprestimoDao().findByUser(this.getId());
+            return MasterDao.getEmprestimoDao().findByUser(Integer.parseInt(this.getId()));
         } catch (EmprestimoException ee) {
             return null;
         }
