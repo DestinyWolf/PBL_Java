@@ -65,6 +65,13 @@ public abstract class Pessoa extends Object{
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", cpf=" + cpf.getCpf() +
+                '}';
+    }
 }
 

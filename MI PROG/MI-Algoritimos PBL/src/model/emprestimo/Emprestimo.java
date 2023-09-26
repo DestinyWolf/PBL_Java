@@ -7,8 +7,6 @@ import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
 
-import java.time.LocalDate;
-
 import static util.Constantes.*;
 
 /**Classe model para emprestimos*/
@@ -19,7 +17,7 @@ public class Emprestimo {
     private Data prazoFinal;
     private Data dataDevolucao;
     private boolean devolvido;
-    private Integer Id;
+    private Integer id;
     private Integer renovacoes;
 
     /**Construtor da classe emprestimo
@@ -33,7 +31,7 @@ public class Emprestimo {
             this.dataEmprestimo = new Data();
             this.prazoFinal = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
             this.devolvido = false;
-            this.Id = livro.getIsbn() + leitor.getId() % 100109;
+            this.id = livro.getIsbn() + leitor.getId() % 100109;
             this.renovacoes = 0;
             this.leitor.setNumEmprestimos(leitor.getNumEmprestimos()-1);
             this.dataDevolucao = new Data(0,0,0);
@@ -76,7 +74,7 @@ public class Emprestimo {
     /**Metodo responsavel por retornar o Id do emprestimo
      * @return Id do emprestimo*/
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     /**Metodo responsavel por retornar a quantidade de renovações deste emprestimo
@@ -136,7 +134,7 @@ public class Emprestimo {
     /**Metodo responsavel por settar o id do emprestimo
      * @param id */
     public void setId(Integer id) {
-        this.Id = id;
+        this.id = id;
     }
 
     /**Metodo responsavel por settar as rennovações do emprestimo
@@ -188,5 +186,19 @@ public class Emprestimo {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "leitor=" + leitor.getNome() +
+                ", livro=" + livro.getNome() +
+                ", dataEmprestimo=" + dataEmprestimo.toString() +
+                ", prazoFinal=" + prazoFinal.toString() +
+                ", dataDevolucao=" + dataDevolucao.toString() +
+                ", devolvido=" + devolvido +
+                ", id=" + id.toString() +
+                ", renovacoes=" + renovacoes.toString() +
+                '}';
     }
 }

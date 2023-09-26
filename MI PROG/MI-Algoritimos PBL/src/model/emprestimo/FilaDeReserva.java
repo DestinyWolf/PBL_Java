@@ -82,4 +82,12 @@ public class FilaDeReserva {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "FilaDeReserva{" +
+                "reservas=" + reservas.toString() +
+                ", isbn=" + isbn +
+                '}';
+    }
 }

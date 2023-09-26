@@ -44,4 +44,11 @@ public class Bibliotecario extends Pessoa{
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Bibliotecario{" +
+                "cargo='" + cargo + '\'' +
+                "} " + super.toString();
+    }
 }

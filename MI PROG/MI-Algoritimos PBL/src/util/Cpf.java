@@ -13,9 +13,9 @@ public class Cpf {
     }
 
     public void setCpf(String cpf) throws Exception{
-        Integer digt1 = 0;
-        Integer digt2 = 0;
-        String vetor[] = cpf.split("");
+        int digt1 = 0;
+        int digt2 = 0;
+        String[] vetor = cpf.split("");
         for(int i =1; i< vetor.length-2; i++) {
             digt1 += (Integer.parseInt(vetor[i-1]) * i);
         }

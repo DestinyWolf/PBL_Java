@@ -22,7 +22,10 @@ public class ImMemoryLivroDao implements LivroDao{
     @Override
     public Livro findById(Integer id) throws LivroException {
         if(this.livros.get(id) != null) {
-            return livros.get(id);
+            Livro livroEcontrado = livros.get(id);
+            livroEcontrado.setQntDeBuscas(livroEcontrado.getQntDeBuscas()+1);
+            this.Update(livroEcontrado, livros.get(id));
+            return livroEcontrado;
         } else if (livros.isEmpty()) {
             throw new LivroException(findWhenNotHaveObj, null);
         } else {

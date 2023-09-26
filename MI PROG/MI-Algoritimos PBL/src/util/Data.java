@@ -158,4 +158,9 @@ public class Data {
             return 0;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Data: "+dia +'/'+mes+'/'+ano;
+    }
 }

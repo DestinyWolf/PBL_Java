@@ -43,4 +43,10 @@ public class Administrador extends Pessoa{
         }
     }
 
+    @Override
+    public String toString() {
+        return "Administrador{" +
+                "cargo='" + cargo + '\'' +
+                "} " + super.toString();
+    }
 }

@@ -158,4 +158,16 @@ public class Leitor extends Pessoa{
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Leitor{" +
+                "bloqueio=" + bloqueio +
+                ", numEmprestimos=" + numEmprestimos +
+                ", diasRestantesMulta=" + diasRestantesMulta +
+                ", endereco='" + endereco + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", maximoDeLivros=" + maximoDeLivros +
+                "} " + super.toString();
+    }
 }

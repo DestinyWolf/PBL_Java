@@ -154,4 +154,19 @@ public class Livro {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Livro{" +
+                "isbn=" + isbn.toString() +
+                ", autor='" + autor + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", enderecoLivro='" + enderecoLivro + '\'' +
+                ", editora='" + editora + '\'' +
+                ", anoDePublicacao=" + anoDePublicacao.toString() +
+                ", nome='" + nome + '\'' +
+                ", quantidade=" + quantidade.toString() +
+                ", qntDeBuscas=" + qntDeBuscas.toString() +
+                '}';
+    }
 }
