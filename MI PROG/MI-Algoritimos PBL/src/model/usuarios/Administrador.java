@@ -12,7 +12,7 @@ public class Administrador extends Pessoa{
      * @param nome
      * @param id
      * @param cargo */
-    public Administrador(String senha, String nome, String cargo, Integer id) throws AdministradorException {
+    public Administrador(String senha, String nome, String cargo, String id) throws AdministradorException {
         try {
             super.setNome(nome);
             super.setId(id);

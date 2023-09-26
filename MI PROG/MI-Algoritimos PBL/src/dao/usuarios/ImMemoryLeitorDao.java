@@ -19,12 +19,12 @@ public class ImMemoryLeitorDao implements LeitorDao{
     @Override
     public void save(Leitor obj) throws LeitorException {
 
-        if (this.leitores.get(obj.getId()) != null) {
-            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(obj.getId()));
+        if (this.leitores.get(Integer.parseInt(obj.getId())) != null) {
+            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(Integer.parseInt(obj.getId())));
         }
 
         Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
-        leitores.put(leitor.getId(), leitor);
+        leitores.put(Integer.parseInt(leitor.getId()), leitor);
     }
 
 
@@ -46,9 +46,9 @@ public class ImMemoryLeitorDao implements LeitorDao{
 
     @Override
     public void Update(Leitor leitor, Leitor old) throws LeitorException{
-        if (this.leitores.get(old.getId()) != null) {
-            this.leitores.remove(leitor.getId());
-            this.leitores.put(leitor.getId(), leitor);
+        if (this.leitores.get(Integer.parseInt(old.getId())) != null) {
+            this.leitores.remove(Integer.parseInt(leitor.getId()));
+            this.leitores.put(Integer.parseInt(leitor.getId()), leitor);
         }
         else if(this.leitores.isEmpty()) {
             throw new LeitorException(updateWhenNotHaveObj, null);
@@ -67,7 +67,7 @@ public class ImMemoryLeitorDao implements LeitorDao{
         }
         else{
             for(Leitor leitor : this.leitores.values()){
-                if(leitor.getId() == id){
+                if(Integer.parseInt(leitor.getId()) == id){
                     return leitor;
                 }
             }
@@ -90,7 +90,7 @@ public class ImMemoryLeitorDao implements LeitorDao{
     @Override
     public Leitor findLogin(Integer id, String senha) throws LeitorException {
         for (Leitor leitor : leitores.values()) {
-            if (leitor.getId().equals(id) && leitor.getSenha().equals(senha)) {
+            if (Integer.parseInt(leitor.getId()) == id && leitor.getSenha().equals(senha)) {
                 return leitor;
             }
         }

@@ -25,7 +25,7 @@ public class Leitor extends Pessoa{
      * @param id numero de identificação do usuario
      * @param endereco endereco do usuario
      * @param telefone telefone do usuario*/
-    public Leitor (String nome, String senha, Integer id, String endereco, String telefone) throws LeitorException {
+    public Leitor (String nome, String senha, String id, String endereco, String telefone) throws LeitorException {
         try {
             super.setNome(nome);
             super.setSenha(senha);

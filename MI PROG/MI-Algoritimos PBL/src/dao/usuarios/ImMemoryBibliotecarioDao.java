@@ -27,12 +27,12 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
 
     @Override
     public void save(Bibliotecario obj) throws BibliotecarioException {
-        if (MasterDao.getBibliotecarioDao().findById(obj.getId()) != null) {
-            throw new BibliotecarioException(createExistUser, MasterDao.getBibliotecarioDao().findById(obj.getId()));
+        if (MasterDao.getBibliotecarioDao().findById(Integer.parseInt(obj.getId())) != null) {
+            throw new BibliotecarioException(createExistUser, MasterDao.getBibliotecarioDao().findById(Integer.parseInt(obj.getId())));
         }
         else {
             Bibliotecario bibliotecario = new Bibliotecario(obj.getNome(), obj.getSenha(), obj.getId(), "Bibliotecario");
-            this.bibliotecarios.put(bibliotecario.getId(), bibliotecario);
+            this.bibliotecarios.put(Integer.parseInt(bibliotecario.getId()), bibliotecario);
         }
 
     }
@@ -50,9 +50,9 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
 
     @Override
     public void Update(Bibliotecario bibliotecario, Bibliotecario old) throws BibliotecarioException{
-        if (!this.bibliotecarios.isEmpty() && this.bibliotecarios.get(old.getId()) != null) {
-            this.bibliotecarios.remove(old.getId(), old);
-            this.bibliotecarios.put(bibliotecario.getId(), bibliotecario);
+        if (!this.bibliotecarios.isEmpty() && this.bibliotecarios.get(Integer.parseInt(old.getId())) != null) {
+            this.bibliotecarios.remove(Integer.parseInt(old.getId()), old);
+            this.bibliotecarios.put(Integer.parseInt(bibliotecario.getId()), bibliotecario);
         } else if (this.bibliotecarios.isEmpty()) {
             throw new BibliotecarioException(updateWhenNotHaveObj, null);
         } else {
@@ -70,7 +70,7 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
     public Bibliotecario findLogin(Integer id, String senha) throws BibliotecarioException {
         for (Bibliotecario bibliotecario: bibliotecarios.values()
         ) {
-            if (bibliotecario.getId() == id){
+            if (Integer.parseInt(bibliotecario.getId()) == id){
                 if (bibliotecario.getSenha() == senha){
                     return bibliotecario;
                 }

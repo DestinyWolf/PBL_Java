@@ -25,12 +25,12 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void save(Administrador obj) throws AdministradorException{
-        if(MasterDao.getAdministradorDao().findById(obj.getId()) != null) {
-            throw new AdministradorException(createExistUser, MasterDao.getAdministradorDao().findById(obj.getId()));
+        if(MasterDao.getAdministradorDao().findById(Integer.parseInt(obj.getId())) != null) {
+            throw new AdministradorException(createExistUser, MasterDao.getAdministradorDao().findById(Integer.parseInt(obj.getId())));
         }
         else {
             Administrador administrador = new Administrador(obj.getSenha(), obj.getNome(), "Administrador", obj.getId());
-            administradores.put(administrador.getId(), administrador);
+            administradores.put(Integer.parseInt(administrador.getId()), administrador);
         }
 
     }
@@ -48,9 +48,9 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void Update(Administrador administrador, Administrador old) throws AdministradorException{
-        if (!this.administradores.isEmpty() && this.administradores.get(old.getId()) != null) {
-            administradores.remove(old.getId());
-            administradores.put(administrador.getId(), administrador);
+        if (!this.administradores.isEmpty() && this.administradores.get(Integer.parseInt(old.getId())) != null) {
+            administradores.remove(Integer.parseInt(old.getId()));
+            administradores.put(Integer.parseInt(administrador.getId()), administrador);
         } else if (this.administradores.isEmpty()) {
             throw new AdministradorException(updateWhenNotHaveObj, null);
         } else {
@@ -67,7 +67,7 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     public Administrador findLogin(Integer id, String senha) throws AdministradorException {
         for (Administrador administrador: administradores.values()
         ) {
-            if (administrador.getId() == id){
+            if (Integer.parseInt(administrador.getId())== id){
                 if (administrador.getSenha() == senha){
                     return administrador;
                 }

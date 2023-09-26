@@ -13,7 +13,7 @@ public class Bibliotecario extends Pessoa{
      * @param id
      * @param nome
      * @param senha */
-    public Bibliotecario(String nome, String senha, Integer id, String cargo) throws BibliotecarioException {
+    public Bibliotecario(String nome, String senha, String id, String cargo) throws BibliotecarioException {
         try {
             this.cargo = cargo;
             super.setId(id);

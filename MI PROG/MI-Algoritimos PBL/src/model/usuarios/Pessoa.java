@@ -14,8 +14,8 @@ public abstract class Pessoa extends Object{
      * @param id
      * @return void
      * Metodo responvavel por setar o id do usuario*/
-    public void setId(Integer id) throws Exception{
-           this.cpf.setCpf(new String(id.toString()));
+    public void setId(String id) throws Exception{
+           this.cpf.setCpf(id);
 
     }
 
@@ -38,8 +38,8 @@ public abstract class Pessoa extends Object{
     /**
      * @return id do usuario
      * Metodo responsavel por retornar o id do usuario*/
-    public Integer getId() {
-        return Integer.parseInt(this.cpf.getCpf());
+    public String getId() {
+        return this.cpf.toString();
     }
 
     /**
