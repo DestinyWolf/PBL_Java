@@ -21,10 +21,10 @@ public class Sistema {
             }
             for (Leitor leitor: MasterDao.getLeitorDAO().findAll()
                  ) {
-                if (MasterDao.getEmprestimoDao().findEmprestimosAtivosPorUsuario(leitor.getId()) == null) {
+                if (MasterDao.getEmprestimoDao().findEmprestimosAtivosPorUsuario(Integer.parseInt(leitor.getId())) == null) {
                     if (leitor.getDiasRestantesMulta() >= 1) {
                         Emprestimo ultimoEmprestimo = null;
-                        for (Emprestimo emprestimo: MasterDao.getEmprestimoDao().findByUser(leitor.getId())
+                        for (Emprestimo emprestimo: MasterDao.getEmprestimoDao().findByUser(Integer.parseInt(leitor.getId()))
                              ) {
 
                             if (ultimoEmprestimo == null) {

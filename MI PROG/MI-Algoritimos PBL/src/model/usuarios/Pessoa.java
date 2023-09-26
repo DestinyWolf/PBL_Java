@@ -1,7 +1,5 @@
 package model.usuarios;
 
-import util.Cpf;
-
 /**
  * classe abstrata usada como base para as classes leitor, administrador e bibliotecario
  * */
