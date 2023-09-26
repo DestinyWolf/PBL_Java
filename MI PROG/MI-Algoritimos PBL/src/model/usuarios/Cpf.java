@@ -1,4 +1,4 @@
-package util;
+package model.usuarios;
 
 import static util.Constantes.cpfInvalido;
 public class Cpf {
