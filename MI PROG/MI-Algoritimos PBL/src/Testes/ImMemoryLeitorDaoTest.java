@@ -13,6 +13,10 @@ import java.util.LinkedList;
 
 class ImMemoryLeitorDaoTest {
     Leitor leitor = new Leitor("Armando","123",1,"UEFS","0000");
+
+    ImMemoryLeitorDaoTest() throws LeitorException {
+    }
+
     @Test
     void save() throws LeitorException {
         ImMemoryLeitorDao dao = new ImMemoryLeitorDao();
