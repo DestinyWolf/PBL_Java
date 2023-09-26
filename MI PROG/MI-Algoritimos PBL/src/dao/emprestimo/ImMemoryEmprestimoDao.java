@@ -83,7 +83,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
        List<Emprestimo> emprestimosUser = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
              ) {
-            if(emprestimo.getLeitor().getId() == id) {
+            if(Integer.parseInt(emprestimo.getLeitor().getId()) == id) {
                 emprestimosUser.add(emprestimo);
             }
         }
