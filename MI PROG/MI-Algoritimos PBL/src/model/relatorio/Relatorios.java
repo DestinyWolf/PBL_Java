@@ -22,7 +22,7 @@ public class Relatorios {
             this.qntLivrosEmprestados = MasterDao.getEmprestimoDao().findEmprestimosAtivos().size();
             this.isbnLivrosMaisBuscados = new LinkedList<>();
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }
