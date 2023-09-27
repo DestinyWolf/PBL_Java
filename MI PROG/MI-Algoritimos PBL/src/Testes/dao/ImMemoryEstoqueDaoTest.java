@@ -1,22 +1,18 @@
-package Testes;
+package Testes.dao;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import dao.MasterDao;
-import dao.usuarios.ImMemoryAdministradorDao;
 
-class ImMemoryAdministradorDaoTest {
+class ImMemoryEstoqueDaoTest {
+    @
 
     @Test
     void findById() {
-
     }
 
     @Test
     void save() {
-        ImMemoryAdministradorDao A = new ImMemoryAdministradorDao();
-        //A.save();
     }
 
     @Test
@@ -29,9 +25,5 @@ class ImMemoryAdministradorDaoTest {
 
     @Test
     void findAll() {
-    }
-
-    @Test
-    void findLogin() {
     }
 }

@@ -1,6 +1,7 @@
-package Testes;
+package Testes.emprestimo;
 
 import LibraryExceptions.emprestimoexception.ReservarException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import model.emprestimo.FilaDeReserva;
 import model.usuarios.Leitor;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,9 @@ class FilaDeReservaTest {
     private Leitor l = new Leitor("Armando","123",1,"Uefs","0000");
     private FilaDeReserva f = new FilaDeReserva(2);
     private Queue<Leitor> reservas = new LinkedList<>();
+
+    FilaDeReservaTest() throws LeitorException {
+    }
 
     @Test
     void getIsbn() {

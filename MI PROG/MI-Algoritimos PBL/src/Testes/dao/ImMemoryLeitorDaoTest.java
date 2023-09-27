@@ -1,8 +1,9 @@
-package Testes;
+package Testes.dao;
 
 import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import dao.usuarios.ImMemoryLeitorDao;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,10 +13,14 @@ import dao.usuarios.LeitorDao;
 import java.util.LinkedList;
 
 class ImMemoryLeitorDaoTest {
-    Leitor leitor = new Leitor("Armando","123",1,"UEFS","0000");
-
-    ImMemoryLeitorDaoTest() throws LeitorException {
+    private Leitor leitor;
+    @BeforeEach
+    void criar () throws LeitorException{
+        leitor = new Leitor("Joao","123","57130521090","UEFS","0000");
     }
+
+
+
 
     @Test
     void save() throws LeitorException {

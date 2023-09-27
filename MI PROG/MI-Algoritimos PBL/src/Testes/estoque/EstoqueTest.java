@@ -1,4 +1,4 @@
-package Testes;
+package Testes.estoque;
 
 import LibraryExceptions.estoqueExceptions.LivroException;
 import org.junit.jupiter.api.Test;
