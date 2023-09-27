@@ -25,7 +25,7 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void save(Administrador obj) throws AdministradorException{
-        if(MasterDao.getAdministradorDao().findById(Integer.parseInt(obj.getId())) != null) {
+        if(administradores.containsKey(obj.getId())) {
             throw new AdministradorException(createExistUser, MasterDao.getAdministradorDao().findById(Integer.parseInt(obj.getId())));
         }
         else {
