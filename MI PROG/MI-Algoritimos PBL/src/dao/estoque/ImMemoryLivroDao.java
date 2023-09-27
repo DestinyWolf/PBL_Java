@@ -146,16 +146,6 @@ public class ImMemoryLivroDao implements LivroDao{
     }
 
     @Override
-    public Livro findByIsbn(Integer isbn) throws LivroException{
-        if(this.livros.get(isbn) == null) {
-            throw new LivroException(findLivro, null);
-        }
-        else {
-            return this.livros.get(isbn);
-        }
-    }
-
-    @Override
     public void deleteOnlyOne(Livro obj) throws LivroException{
         if (livros.get(obj.getIsbn()) != null){
             Livro livros = this.livros.get(obj.getIsbn());
