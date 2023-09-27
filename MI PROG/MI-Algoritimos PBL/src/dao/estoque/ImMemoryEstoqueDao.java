@@ -2,10 +2,12 @@ package dao.estoque;
 
 
 import model.estoque.Estoque;
+
 import java.util.LinkedList;
 
 public class ImMemoryEstoqueDao implements EstoqueDao {
-    Estoque estoque;
+    private Estoque estoque;
+    private LinkedList<Estoque> Armazenamento = new LinkedList<>();
 
     public ImMemoryEstoqueDao() {
         this.estoque = new Estoque();
@@ -17,22 +19,41 @@ public class ImMemoryEstoqueDao implements EstoqueDao {
 
     @Override
     public void save(Estoque obj) throws Exception {
-        this.estoque = obj;
+        if(Armazenamento.contains(obj)){
+            throw new Exception();
+        }
+        Armazenamento.add(obj);
     }
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        this.estoque = new Estoque();
+
+    }
+
+    @Override
+    public void deleteById(Estoque obj) throws Exception {
+        if(Armazenamento.contains(obj)){
+            Armazenamento.remove(obj);
+        }
+        else{
+            throw new Exception();
+        }
     }
 
     @Override
     public void Update(Estoque estoque, Estoque old) throws Exception {
-        this.estoque = estoque;
+        if(Armazenamento.contains(old)){
+            Armazenamento.remove(old);
+            Armazenamento.add(estoque);
+        }
+        else{
+            throw new Exception();
+        }
     }
 
     @Override
     public LinkedList<Estoque> findAll() {
-        return null;
+        return Armazenamento;
     }
 
     /*
