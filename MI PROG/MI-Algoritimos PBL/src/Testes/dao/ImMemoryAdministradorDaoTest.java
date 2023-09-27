@@ -9,7 +9,7 @@ import dao.usuarios.ImMemoryAdministradorDao;
 import model.usuarios.Administrador;
 
 class ImMemoryAdministradorDaoTest {
-    Administrador adm = new Administrador("123","Armando","Ditador",2);
+    Administrador adm = new Administrador("123","Armando","Ditador","57130521090");
 
     ImMemoryAdministradorDaoTest() throws AdministradorException {
     }
@@ -24,7 +24,7 @@ class ImMemoryAdministradorDaoTest {
     void save() throws AdministradorException{
         ImMemoryAdministradorDao A = new ImMemoryAdministradorDao();
         A.save(adm);
-        assertEquals(adm.getId(),A.findById(adm.getId()));
+        assertEquals(adm.getId(),A.findById(Integer.parseInt(adm.getId())));
 
     }
 

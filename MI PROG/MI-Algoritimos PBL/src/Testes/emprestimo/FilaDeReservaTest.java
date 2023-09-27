@@ -12,7 +12,7 @@ import java.util.Queue;
 import static org.junit.jupiter.api.Assertions.*;
 import model.usuarios.Leitor;
 class FilaDeReservaTest {
-    private Leitor l = new Leitor("Armando","123",1,"Uefs","0000");
+    private Leitor l = new Leitor("Armando","123","57130521090","Uefs","0000");
     private FilaDeReserva f = new FilaDeReserva(2);
     private Queue<Leitor> reservas = new LinkedList<>();
 

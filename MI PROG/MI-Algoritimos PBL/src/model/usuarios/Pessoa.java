@@ -35,7 +35,8 @@ public abstract class Pessoa extends Object{
 
     /**
      * @return id do usuario
-     * Metodo responsavel por retornar o id do usuario*/
+     * Metodo responsavel por retornar o id do usuario
+     */
     public String getId() {
         return this.cpf.toString();
     }
