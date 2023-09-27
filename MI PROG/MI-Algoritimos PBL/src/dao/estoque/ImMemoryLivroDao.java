@@ -147,10 +147,11 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public void deleteOnlyOne(Livro obj) throws LivroException{
-        if (livros.get(obj.getIsbn()) != null){
+        if (livros.containsKey(obj.getIsbn())){
             Livro lyvros = this.livros.get(obj.getIsbn());
             lyvros.setQuantidade(lyvros.getQuantidade()-1);
-            this.livros.put(obj.getIsbn(), lyvros);
+            this.livros.remove(obj.getIsbn());
+            this.livros.put(lyvros.getIsbn(), lyvros);
         } else if (livros.isEmpty()) {
             throw new LivroException(deleteWhenNotHaveObj, null);
         } else {

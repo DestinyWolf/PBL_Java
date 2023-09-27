@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import model.estoque.Livro;
 import dao.estoque.ImMemoryLivroDao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class ImMemoryLivroDaoTest {
     private Livro livro;
     private ImMemoryLivroDao dao;
@@ -21,22 +24,21 @@ class ImMemoryLivroDaoTest {
     @Test
     void findById() throws LivroException{
         dao.save(livro);
-        assertEquals(livro.getIsbn(),dao.findByIsbn(livro.getIsbn()).getIsbn());
+        assertEquals(livro.getIsbn(),dao.findById(livro.getIsbn()).getIsbn());
 
     }
 
     @Test
     void save() throws LivroException {
         dao.save(livro);
-        assertEquals(livro.getIsbn(),dao.findByIsbn(livro.getIsbn()).getIsbn());
+        assertEquals(livro.getIsbn(),dao.findById(livro.getIsbn()).getIsbn());
 
     }
 
     @Test
     void deleteById() throws LivroException{
         dao.save(livro);
-      //  dao.deleteById(livro.getIsbn());
-       // assertNotEquals(livro.getIsbn(),dao.findByIsbn(livro.getIsbn()).getIsbn());
+        //dao.deleteById(livro.getIsbn());
 
     }
 
@@ -45,8 +47,6 @@ class ImMemoryLivroDaoTest {
         dao.save(livro);
         Livro livroNovo = new Livro(11,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         dao.Update(livroNovo,livro);
-        //assertEquals(livroNovo.getIsbn(),dao.findByIsbn(livroNovo.getIsbn()).getIsbn());
-
     }
 
     @Test
@@ -74,16 +74,21 @@ class ImMemoryLivroDaoTest {
     @Test
     void findByIsbn() throws LivroException{
         dao.save(livro);
-        assertEquals(livro.getIsbn(),dao.findByIsbn(livro.getIsbn()).getIsbn());
+        assertEquals(livro.getIsbn(),dao.findById(livro.getIsbn()).getIsbn());
 
     }
 
     @Test
     void deleteOnlyOne() throws LivroException{
-
+        dao.save(livro);
+        dao.deleteOnlyOne(livro);
     }
 
     @Test
-    void findLivrosMaisPesquisados() {
+    void findLivrosMaisPesquisados() throws LivroException{
+        List<Livro> lista = new ArrayList<>();
+        dao.save(livro);
+        lista = dao.findLivrosMaisPesquisados();
+        assertEquals(livro,lista.get(0));
     }
 }
