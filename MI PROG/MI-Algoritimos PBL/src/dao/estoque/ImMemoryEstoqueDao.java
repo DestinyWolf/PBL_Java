@@ -56,6 +56,11 @@ public class ImMemoryEstoqueDao implements EstoqueDao {
         return Armazenamento;
     }
 
+
+    public Estoque Find(Estoque obj) throws Exception{
+        if(Armazenamento.contains(obj)) return obj;
+        else throw new Exception();
+    }
     /*
     //create
     @Override
