@@ -37,7 +37,7 @@ public class Leitor extends Pessoa{
             this.telefone = telefone;
             this.maximoDeLivros = 2;
         } catch (Exception e) {
-            throw new LeitorException(createUser, null);
+           throw new LeitorException(createUser, null);
         }
 
 

@@ -1,5 +1,6 @@
-package Testes;
+package Testes.usuario;
 
+import LibraryExceptions.userexcepitions.LeitorException;
 import model.usuarios.Leitor;
 import model.emprestimo.Emprestimo;
 
@@ -7,8 +8,11 @@ import model.emprestimo.Emprestimo;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LeitorTest {
-    private Leitor l = new Leitor("Maike","123",1,"UEFS",
+    private Leitor l = new Leitor("Maike","123","57130521090","UEFS",
             "75 9 88888888");
+
+    LeitorTest() throws LeitorException {
+    }
 
     @org.junit.jupiter.api.Test
     void getDiasRestantesMulta() {

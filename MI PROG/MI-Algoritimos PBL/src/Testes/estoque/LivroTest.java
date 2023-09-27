@@ -1,4 +1,4 @@
-package Testes;
+package Testes.estoque;
 
 import org.junit.jupiter.api.Test;
 

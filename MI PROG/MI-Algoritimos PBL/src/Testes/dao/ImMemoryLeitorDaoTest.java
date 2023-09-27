@@ -1,8 +1,9 @@
-package Testes;
+package Testes.dao;
 
 import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import dao.usuarios.ImMemoryLeitorDao;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,16 +13,20 @@ import dao.usuarios.LeitorDao;
 import java.util.LinkedList;
 
 class ImMemoryLeitorDaoTest {
-    Leitor leitor = new Leitor("Armando","123",1,"UEFS","0000");
-
-    ImMemoryLeitorDaoTest() throws LeitorException {
+    private Leitor leitor;
+    @BeforeEach
+    void criar () throws LeitorException{
+        leitor = new Leitor("Joao","123","57130521090","UEFS","0000");
     }
+
+
+
 
     @Test
     void save() throws LeitorException {
         ImMemoryLeitorDao dao = new ImMemoryLeitorDao();
         dao.save(leitor);
-        assertEquals(leitor,dao.findById(leitor.getId()));
+        assertEquals(leitor,dao.findById(Integer.parseInt(leitor.getId())));
     }
 
     @Test
@@ -29,7 +34,7 @@ class ImMemoryLeitorDaoTest {
 
         ImMemoryLeitorDao dao = new ImMemoryLeitorDao();
         dao.save(leitor);
-        dao.deleteById(leitor.getId());
+        dao.deleteById(Integer.parseInt(leitor.getId()));
 
 
     }
@@ -38,16 +43,16 @@ class ImMemoryLeitorDaoTest {
     void update() throws LeitorException{
         ImMemoryLeitorDao dao = new ImMemoryLeitorDao();
         dao.save(leitor);
-        Leitor leitor2 = new Leitor("Pedro","222",5,"SAP","000");
+        Leitor leitor2 = new Leitor("Pedro","222","57130521091","SAP","000");
         dao.Update(leitor2,leitor);
-        dao.findById(leitor2.getId());
+        dao.findById(Integer.parseInt(leitor2.getId()));
     }
 
     @Test
     void findById() throws LeitorException{
         ImMemoryLeitorDao dao = new ImMemoryLeitorDao();
         dao.save(leitor);
-        assertEquals(leitor,dao.findById(leitor.getId()));
+        assertEquals(leitor,dao.findById(Integer.parseInt(leitor.getId())));
     }
 
     @Test
@@ -61,7 +66,7 @@ class ImMemoryLeitorDaoTest {
     void testFindLogin() throws LeitorException {
         ImMemoryLeitorDao dao = new ImMemoryLeitorDao();
         dao.save(leitor);
-        Leitor f = dao.findLogin(leitor.getId(), leitor.getSenha());
+        Leitor f = dao.findLogin(Integer.parseInt(leitor.getId()), leitor.getSenha());
         assertNotNull(f);
     }
 

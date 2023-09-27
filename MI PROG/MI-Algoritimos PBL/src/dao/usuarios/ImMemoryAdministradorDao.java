@@ -48,8 +48,8 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void Update(Administrador administrador, Administrador old) throws AdministradorException{
-        if (!this.administradores.isEmpty() && this.administradores.get(Integer.parseInt(old.getId())) != null) {
-            administradores.remove(Integer.parseInt(old.getId()));
+        if (!this.administradores.isEmpty() && this.administradores.get(old.getId()) != null) {
+            administradores.remove(old.getId());
             administradores.put(Integer.parseInt(administrador.getId()), administrador);
         } else if (this.administradores.isEmpty()) {
             throw new AdministradorException(updateWhenNotHaveObj, null);
@@ -67,7 +67,8 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     public Administrador findLogin(Integer id, String senha) throws AdministradorException {
         for (Administrador administrador: administradores.values()
         ) {
-            if (Integer.parseInt(administrador.getId())== id){
+            Integer a = Integer.parseInt(administrador.getId());
+            if (a == id){
                 if (administrador.getSenha() == senha){
                     return administrador;
                 }
