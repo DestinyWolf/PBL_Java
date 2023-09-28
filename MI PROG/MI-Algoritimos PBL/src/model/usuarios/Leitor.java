@@ -28,8 +28,8 @@ public class Leitor extends Pessoa{
     public Leitor (String nome, String senha, String id, String endereco, String telefone) throws LeitorException {
         try {
             super.setNome(nome);
-            super.setSenha(senha);
             super.setId(id);
+            super.setSenha(senha);
             this.bloqueio = false;
             this.numEmprestimos = 2;
             this.diasRestantesMulta = 0;
@@ -42,6 +42,11 @@ public class Leitor extends Pessoa{
 
 
 
+    }
+
+    @Override
+    public String getId() {
+        return super.getId();
     }
 
     public boolean isBloqueio() {
