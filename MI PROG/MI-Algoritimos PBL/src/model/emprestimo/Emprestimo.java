@@ -2,6 +2,7 @@ package model.emprestimo;
 
 
 import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.estoqueExceptions.LivroException;
 import dao.MasterDao;
 import model.usuarios.Leitor;
 import model.estoque.Livro;
@@ -31,12 +32,12 @@ public class Emprestimo {
             this.dataEmprestimo = new Data();
             this.prazoFinal = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
             this.devolvido = false;
-            this.id = livro.getIsbn() + Integer.parseInt(leitor.getId()) % 100109;
+            this.id = livro.getIsbn()+ dataEmprestimo.getDia() % 100109;
             this.renovacoes = 0;
             this.leitor.setNumEmprestimos(leitor.getNumEmprestimos()-1);
             this.dataDevolucao = new Data(0,0,0);
             MasterDao.getLivroDao().deleteOnlyOne(livro);
-        } catch (Exception e) {
+        } catch (LivroException le) {
             throw new EmprestimoException(createEmprestimo, null);
         }
     }
@@ -105,10 +106,10 @@ public class Emprestimo {
         try {
             if (devolvido) {
                 MasterDao.getLivroDao().save(this.livro);
-                Leitor leitor1 = MasterDao.getLeitorDAO().findById(Integer.parseInt(leitor.getId()));
+                Leitor leitor1 = MasterDao.getLeitorDAO().findByCpf(leitor.getId());
 
                 leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
-                MasterDao.getLeitorDAO().deleteById(Integer.parseInt(leitor1.getId()));
+                MasterDao.getLeitorDAO().delete(leitor1);
                 MasterDao.getLeitorDAO().save(leitor1);
                 dataDevolucao = new Data();
             }
