@@ -10,7 +10,7 @@ public interface EmprestimoDao extends Dao<Emprestimo, EmprestimoException> {
     /**Metodo responsavel por retornar uma lista de emprestimos de um mesmo usuario
      * @param id
      * @return Lista de Emprestimos*/
-    public List<Emprestimo> findByUser(Integer id) throws EmprestimoException;
+    public List<Emprestimo> findByUser(String id) throws EmprestimoException;
 
     /**Metodo resposanvel por retornar uma lista de emprestimos de um mesmo livro
      * @param id
@@ -21,8 +21,8 @@ public interface EmprestimoDao extends Dao<Emprestimo, EmprestimoException> {
      * @param isbn
      * @param id
      * @return  Emprestimo*/
-    public Emprestimo findByUserAndLivro(Integer isbn, Integer id) throws EmprestimoException;
-    public List<Emprestimo> findEmprestimosAtivosPorUsuario(Integer id) throws EmprestimoException;
+    public Emprestimo findByUserAndLivro(Integer isbn, String id) throws EmprestimoException;
+    public List<Emprestimo> findEmprestimosAtivosPorUsuario(String id) throws EmprestimoException;
 
     public List<Emprestimo> findEmprestimosAtivos() throws EmprestimoException;
     public List<Emprestimo> findEmprestimosEncerrados() throws EmprestimoException;
