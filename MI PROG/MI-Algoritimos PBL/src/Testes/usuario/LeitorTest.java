@@ -1,16 +1,26 @@
 package Testes.usuario;
 
+import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.estoqueExceptions.LivroException;
 import LibraryExceptions.userexcepitions.LeitorException;
+import dao.MasterDao;
+import dao.emprestimo.ImMemoryEmprestimoDao;
+import model.estoque.Livro;
 import model.usuarios.Leitor;
 import model.emprestimo.Emprestimo;
+import org.junit.jupiter.api.BeforeEach;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class LeitorTest {
-    private Leitor l = new Leitor("Maike","123","57130521090","UEFS",
-            "75 9 88888888");
+    private Leitor l;
 
+    @BeforeEach
+    void criar() throws Exception {
+        l = new Leitor("Maike","123","62909475085","UEFS",
+                "75 9 88888888");
+    }
     LeitorTest() throws LeitorException {
     }
 
@@ -63,7 +73,7 @@ class LeitorTest {
     @org.junit.jupiter.api.Test
     void setBloqueio() {
         l.setBloqueio(true);
-        assertEquals(true,l.isBloqueio());
+        assertTrue(l.isBloqueio());
     }
 
     @org.junit.jupiter.api.Test
