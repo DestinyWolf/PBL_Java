@@ -14,7 +14,9 @@ public class Relatorios {
     private Integer qntLivros;
     private List<Livro> isbnLivrosMaisBuscados;
 
-
+    /**
+     * construtor da classe relatorio
+     */
     public Relatorios() {
         try {
             this.qntLivros = MasterDao.getLivroDao().findAll().size();
@@ -27,15 +29,23 @@ public class Relatorios {
         }
     }
 
+    /**
+     * metodo que retonrar a quantidade de livros
+     * @return a quantidade de livros
+     */
     public String getQntLivros(){
         if (qntLivros != null) {
-            return this.qntLivros.toString();
+            return "O total de livros é:" + this.qntLivros.toString();
         }
         else {
-            return "0";
+            return "O total de livros é: 0";
         }
     }
 
+    /**
+     * Metodo responsavel por retornar a quantidade total de atrasos
+     * @return a quantidade de livros atrasados
+     */
     public String getQntLivrosAtrasados(){
         try {
             List<Emprestimo> emprestimoList = new LinkedList<>();
@@ -46,16 +56,24 @@ public class Relatorios {
                 }
                 else if(emprestimo.getPrazoFinal().getDia() > data.getDia() && emprestimo.getPrazoFinal().getMes() < data.getMes());
             }
-            return this.qntLivrosAtrasados.toString();
+            return "Total de livros atrasados: "+this.qntLivrosAtrasados.toString();
         } catch (Exception e) {
             return ("Não há valores para retorno");
         }
     }
 
+    /**
+     * metodo responsavel por retonar a quantidade de livros que foram emprestados
+     * @return a quantidade de livros emprestados
+     */
     public String getQntLivroEmprestados(){
-        return qntLivrosEmprestados.toString();
+        return "Total de livros emprestados: "+qntLivrosEmprestados.toString();
     }
 
+    /**
+     * a lista com os livros mais buscados
+     * @return List de livro, com os livros mais buscados
+     */
     public List<Livro> getIsbnLivrosMaisBuscados() {
 
         return isbnLivrosMaisBuscados = MasterDao.getLivroDao().findLivrosMaisPesquisados();

@@ -46,8 +46,11 @@ public class FilaDeReserva {
         this.reservas = reservas;
     }
 
-    /**Metodo responsavel por adicionar um leitor a fila de reserva
-     * @param leitor */
+    /**
+     * Metodo responsavel por adicionar um leitor a fila de reserva
+     * @param leitor
+     * @throws ReservarException
+     */
     public void addOnReservas(Leitor leitor) throws ReservarException{
         if (!leitor.isBloqueio() && leitor.getDiasRestantesMulta() == 0) {
             this.reservas.add(leitor);
@@ -60,8 +63,11 @@ public class FilaDeReserva {
         }
     }
 
-    /**Metodo responsavel por remover o leitor que esta no topo da fila de reserva
-     * @return leitor que estava no topo da fila */
+    /**
+     * Metodo responsavel por remover o leitor que esta no topo da fila de reserva
+     * @return o leitor que é o proximo a poder pegar o livro
+     * @throws ReservarException
+     */
     public Leitor removeOnReservas() throws ReservarException{
 
         for (Leitor leitor: reservas) {

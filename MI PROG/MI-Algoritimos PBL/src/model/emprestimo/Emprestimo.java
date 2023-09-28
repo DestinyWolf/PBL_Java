@@ -84,6 +84,10 @@ public class Emprestimo {
         return renovacoes;
     }
 
+    /**
+     * Metodo retorna a data que o emprestimo foi efetivamente devolvido
+     * @return Data que o livro foi devolvido
+     */
     public Data getDataDevolucao() {
         return dataDevolucao;
     }
@@ -100,8 +104,11 @@ public class Emprestimo {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    /**Metodo responsavel por settar se o livro foi devolvido
-     * @param devolvido */
+    /**
+     * Metodo responsavel por settar se o livro foi devolvido
+     * @param devolvido
+     * @throws EmprestimoException
+     */
     public void setDevolvido(boolean devolvido) throws EmprestimoException{
         try {
             if (devolvido) {
@@ -144,13 +151,20 @@ public class Emprestimo {
     }
 
 
+    /**
+     * metodo responsavel por settar data livro devolvido
+     * @param dataDevolucao
+     */
     public void setDataDevolucao(Data dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
-    /**Metodo responsavel por renovar o emprestimo do livro
+    /**
+     * Metodo responsavel por renovar o emprestimo do livro
      * @param isbn
-     * @param id*/
+     * @param id
+     * @throws EmprestimoException
+     */
     public void renovacaoEmprestimo(Integer isbn, String id) throws EmprestimoException {
 
         try {

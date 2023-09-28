@@ -7,11 +7,14 @@ import static util.Constantes.createUser;
 public class Administrador extends Pessoa{
     private String cargo;
 
-    /**Construtor da classe Administrador
+    /**
+     * Construtor da classe Administrador
      * @param senha
      * @param nome
+     * @param cargo
      * @param id
-     * @param cargo */
+     * @throws AdministradorException
+     */
     public Administrador(String senha, String nome, String cargo, String id) throws AdministradorException {
         try {
             super.setNome(nome);
@@ -19,7 +22,7 @@ public class Administrador extends Pessoa{
             super.setSenha(senha);
             this.cargo = cargo;
         } catch (Exception e){
-            //throw new AdministradorException(createUser, null);
+            throw new AdministradorException(createUser, null);
         }
     }
     /**Metodo responsavel por retornar o cargo do Usuario

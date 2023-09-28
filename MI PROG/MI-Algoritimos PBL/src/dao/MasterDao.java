@@ -32,6 +32,7 @@ public class MasterDao {
         return estoqueDao;
     }
 
+
     public static LeitorDao getLeitorDAO(){
         if(leitorDao == null){
             leitorDao = new ImMemoryLeitorDao();

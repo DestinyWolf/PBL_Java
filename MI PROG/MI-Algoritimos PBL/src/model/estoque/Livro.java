@@ -17,14 +17,16 @@ public class Livro {
     private Integer quantidade;
     private Integer qntDeBuscas;
 
-    /**Construtor da classe Livro
+    /**
+     * Construtor da classe Livro
      * @param isbn
      * @param autor
      * @param categoria
      * @param enderecoLivro
      * @param editora
      * @param anoDePublicacao
-     * @param nome*/
+     * @param nome
+     */
     public Livro (Integer isbn, String autor, String categoria,String enderecoLivro, String editora, Integer anoDePublicacao, String nome) {
         this.isbn = isbn;
         this.autor = autor;
@@ -79,10 +81,18 @@ public class Livro {
         return nome;
     }
 
+    /**
+     * Metodo responsavel por retornar a quantidade de determinado livro
+     * @return quantidade de livros
+     */
     public Integer getQuantidade() {
         return quantidade;
     }
 
+    /**
+     * Metodo responsavel por retonar a quantidade de buscas
+     * @return quantidade de buscas
+     */
     public Integer getQntDeBuscas() {
         return qntDeBuscas;
     }
@@ -129,14 +139,26 @@ public class Livro {
         this.nome = nome;
     }
 
+    /**
+     * metodo responsavel por settar a quantidade de livros
+     * @param quantidade
+     */
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
+    /**
+     * metodo responsavel por settar a quantidade de buscas
+     * @param qntDeBuscas
+     */
     public void setQntDeBuscas(Integer qntDeBuscas) {
         this.qntDeBuscas = qntDeBuscas;
     }
 
+    /**
+     * metodo responsavel por retornar a quantidade de emprestimos
+     * @return a quantidade de emprestimos
+     */
     public Integer getQntDeEmprestimos() {
         try {
             return MasterDao.getEmprestimoDao().findByLivro(this.isbn).size();

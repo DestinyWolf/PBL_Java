@@ -24,7 +24,8 @@ public class Leitor extends Pessoa{
      * @param senha senha do usuario
      * @param id numero de identificação do usuario
      * @param endereco endereco do usuario
-     * @param telefone telefone do usuario*/
+     * @param telefone telefone do usuario
+     * @exception LeitorException*/
     public Leitor (String nome, String senha, String id, String endereco, String telefone) throws LeitorException {
         try {
             super.setNome(nome);
@@ -44,11 +45,17 @@ public class Leitor extends Pessoa{
 
     }
 
+    /**
+     *
+     * @return id do usuario
+     */
     @Override
     public String getId() {
         return super.getId();
     }
 
+    /**
+     * @return true se usuario bloqueado, false caso contrario*/
     public boolean isBloqueio() {
         return bloqueio;
     }

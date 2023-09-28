@@ -8,11 +8,14 @@ public class Bibliotecario extends Pessoa{
     private String cargo;
 
 
-    /**Construtor da classe
-     * @param cargo
-     * @param id
+    /**
+     * Construtor da classe
      * @param nome
-     * @param senha */
+     * @param senha
+     * @param id
+     * @param cargo
+     * @throws BibliotecarioException
+     */
     public Bibliotecario(String nome, String senha, String id, String cargo) throws BibliotecarioException {
         try {
             this.cargo = cargo;

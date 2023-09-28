@@ -15,8 +15,12 @@ public class Estoque {
 
     }
 
-    /**metodo de adição de um livro novo ao estoque
-     * @param livro */
+    /**
+     * metodo de adição de um livro novo ao estoque
+     * @param livro
+     * @return
+     * @throws LivroException
+     */
     public Livro novoLivro(Livro livro) throws LivroException {
         try {
             MasterDao.getLivroDao().save(livro);
@@ -26,8 +30,11 @@ public class Estoque {
         }
     }
 
-    /**Metodo responsavel por remover um livro do estoque
-     * @param livro */
+    /**
+     * Metodo responsavel por remover um livro do estoque
+     * @param livro
+     * @throws LivroException
+     */
     public void RemoveLivro(Livro livro) throws LivroException {
         try {
             MasterDao.getLivroDao().delete(livro);

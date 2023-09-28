@@ -4,14 +4,26 @@ import static util.Constantes.cpfInvalido;
 public class Cpf {
     private String cpf;
 
+    /**
+     * construtor da classe cpf
+     */
     public Cpf(){
         this.cpf = "";
     }
 
+    /**
+     *
+     * @return o cpf
+     */
     public String getCpf() {
         return cpf;
     }
 
+    /**
+     * setta o cpf do usuario e faz a validação
+     * @param cpf
+     * @throws Exception
+     */
     public void setCpf(String cpf) throws Exception{
         int digt1 = 0;
         int digt2 = 0;

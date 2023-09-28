@@ -4,6 +4,7 @@ import LibraryExceptions.emprestimoexception.ReservarException;
 import LibraryExceptions.userexcepitions.LeitorException;
 import model.emprestimo.FilaDeReserva;
 import model.usuarios.Leitor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -12,11 +13,18 @@ import java.util.Queue;
 import static org.junit.jupiter.api.Assertions.*;
 import model.usuarios.Leitor;
 class FilaDeReservaTest {
-    private Leitor l = new Leitor("Armando","123","57130521090","Uefs","0000");
-    private FilaDeReserva f = new FilaDeReserva(2);
-    private Queue<Leitor> reservas = new LinkedList<>();
+    private Leitor l;
+    private FilaDeReserva f;
+    private Queue<Leitor> reservas;
 
     FilaDeReservaTest() throws LeitorException {
+    }
+
+    @BeforeEach
+    void criar() throws Exception {
+        l = new Leitor("Armando","123","57130521090","Uefs","0000");
+        f =  new FilaDeReserva(2);
+        reservas = new LinkedList<>();
     }
 
     @Test
