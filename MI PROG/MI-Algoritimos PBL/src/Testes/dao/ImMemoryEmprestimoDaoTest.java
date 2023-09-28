@@ -14,19 +14,18 @@ import model.emprestimo.Emprestimo;
 import model.estoque.Livro;
 
 class ImMemoryEmprestimoDaoTest {
-    private Livro livro;
-    private ImMemoryEmprestimoDao dao;
-    private Leitor leitor;
-    private Emprestimo emp;
+    Emprestimo emprestimo;
+    Leitor leitor;
+    Livro livro;
+    ImMemoryEmprestimoDao emprestimoDao;
     @BeforeEach
     void criar() throws LeitorException, EmprestimoException, LivroException, Exception {
-
+        leitor = new Leitor("Maike","123","62909475085","UEFS",
+                "75 9 88888888");
         livro = new Livro(12,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
-
         MasterDao.getLivroDao().save(livro);
-        MasterDao.getLivroDao().save(livro);leitor = new Leitor("Marcus","123","97805775052","Uefs","2222");
-        dao = new ImMemoryEmprestimoDao();
-        emp = new Emprestimo(leitor,livro);
+        emprestimo = new Emprestimo(leitor, livro);
+        emprestimoDao = new ImMemoryEmprestimoDao();
 
     }
 
@@ -36,7 +35,7 @@ class ImMemoryEmprestimoDaoTest {
 
     @Test
     void save() throws EmprestimoException{
-        dao.save(emp);
+        emprestimoDao.save(emprestimo);
     }
 
     @Test
