@@ -28,7 +28,12 @@ public class Relatorios {
     }
 
     public String getQntLivros(){
-        return this.qntLivros.toString();
+        if (qntLivros != null) {
+            return this.qntLivros.toString();
+        }
+        else {
+            return "0";
+        }
     }
 
     public String getQntLivrosAtrasados(){
