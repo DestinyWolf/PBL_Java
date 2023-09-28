@@ -20,7 +20,7 @@ public class ImMemoryLeitorDao implements LeitorDao{
     public void save(Leitor obj) throws LeitorException {
 
         if (this.leitores.get(obj.getId()) != null) {
-            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(Integer.parseInt(obj.getId())));
+            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findByCpf(obj.getId()));
         }
 
         Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
@@ -32,7 +32,7 @@ public class ImMemoryLeitorDao implements LeitorDao{
     @Override
     public void delete(Leitor leitor) throws LeitorException{
         try {
-            if (findByCpf(leitor.getId()) != null && MasterDao.getEmprestimoDao().findByUser(leitor.getId()) == null) {
+            if (findByCpf(leitor.getId()) != null /*&& MasterDao.getEmprestimoDao().findByUser(leitor.getId()) == null*/) {
                 leitores.remove(leitor.getId());
             } else if (MasterDao.getEmprestimoDao().findByUser(leitor.getId()) != null) {
                 throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findByCpf(leitor.getId()));
