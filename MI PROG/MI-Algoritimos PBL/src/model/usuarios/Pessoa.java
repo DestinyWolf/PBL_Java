@@ -40,7 +40,7 @@ public abstract class Pessoa {
      * Metodo responsavel por retornar o id do usuario
      */
     public String getId() {
-        return this.cpf.toString();
+        return this.cpf.getCpf();
     }
 
     /**
