@@ -27,7 +27,7 @@ public class Emprestimo {
     public Emprestimo(Leitor leitor, Livro livro) throws EmprestimoException {
         try {
             this.leitor = leitor;
-            this.livro = MasterDao.getLivroDao().findById(livro.getIsbn());
+            this.livro = livro;
             MasterDao.getLivroDao().deleteOnlyOne(this.livro);
             this.dataEmprestimo = new Data();
             this.prazoFinal = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
