@@ -106,11 +106,10 @@ public class Emprestimo {
         try {
             if (devolvido) {
                 MasterDao.getLivroDao().save(this.livro);
-                Leitor leitor1 = MasterDao.getLeitorDAO().findByCpf(leitor.getId());
 
-                leitor1.setNumEmprestimos(leitor.getNumEmprestimos()+1);
-                MasterDao.getLeitorDAO().delete(leitor1);
-                MasterDao.getLeitorDAO().save(leitor1);
+
+                leitor.setNumEmprestimos(leitor.getNumEmprestimos()+1);
+                MasterDao.getLeitorDAO().Update(leitor, leitor);
                 dataDevolucao = new Data();
             }
             this.devolvido = devolvido;
@@ -152,10 +151,10 @@ public class Emprestimo {
     /**Metodo responsavel por renovar o emprestimo do livro
      * @param isbn
      * @param id*/
-    public void renovacaoEmprestimo(Integer isbn, Integer id) throws EmprestimoException {
+    public void renovacaoEmprestimo(Integer isbn, String id) throws EmprestimoException {
 
         try {
-            if (Integer.parseInt(this.leitor.getId()) == id && this.livro.getIsbn() == isbn) {
+            if (this.leitor.getId() == id && this.livro.getIsbn() == isbn) {
                 if (!this.leitor.isBloqueio() && this.leitor.getDiasRestantesMulta() == 0) {
                     if (MasterDao.getFiladeReservaDao().findById(isbn).getReservas().isEmpty() && this.renovacoes < 2) {
                         this.prazoFinal.addDia(7);
