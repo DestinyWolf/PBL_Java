@@ -15,8 +15,8 @@ public interface Dao<T, E extends Exception> {
     public void save(T obj) throws E;
 
     /**Metodo responsavel por deletar um objeto do CRUD
-     * @param id */
-    public void deleteById(Integer id) throws E;
+     * @param obj */
+    public void delete(T t) throws E;
 
     /**Metodo responsavel pelo update dos dados de um objeto
      * @param old
