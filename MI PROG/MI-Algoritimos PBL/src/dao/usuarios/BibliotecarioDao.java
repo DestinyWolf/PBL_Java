@@ -8,5 +8,6 @@ import dao.Dao;
 /**
  * Interface das operações CRUD do Bibliotecario*/
 public interface BibliotecarioDao extends Dao<Bibliotecario, BibliotecarioException>{
-    public Bibliotecario findLogin(Integer id, String senha) throws BibliotecarioException;
+    public Bibliotecario findLogin(String id, String senha) throws BibliotecarioException;
+    public Bibliotecario findByCpf(String id) throws BibliotecarioException;
 }
