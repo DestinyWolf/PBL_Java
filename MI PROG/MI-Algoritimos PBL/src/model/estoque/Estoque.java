@@ -30,7 +30,7 @@ public class Estoque {
      * @param livro */
     public void RemoveLivro(Livro livro) throws LivroException {
         try {
-            MasterDao.getLivroDao().deleteById(livro.getIsbn());
+            MasterDao.getLivroDao().delete(livro);
         } catch (Exception lde) {
             throw new LivroException(deleteLivro, null);
         }
