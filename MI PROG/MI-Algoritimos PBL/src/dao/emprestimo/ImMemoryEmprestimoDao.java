@@ -13,6 +13,10 @@ import java.util.Objects;
 /**Classe que impelmenta a interface EmprestimoDao*/
 public class ImMemoryEmprestimoDao implements EmprestimoDao{
     private HashMap<Integer, Emprestimo> emprestimos;
+
+    public ImMemoryEmprestimoDao() {
+        emprestimos = new HashMap<>();
+    }
     @Override
     public Emprestimo findById(Integer id) {
 
@@ -51,13 +55,13 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
 
 
     @Override
-    public void delete(Integer id) throws EmprestimoException{
-        if (!emprestimos.containsKey(id)) {
+    public void delete(Emprestimo emprestimo) throws EmprestimoException{
+        if (!emprestimos.containsKey(emprestimo.getId())) {
             throw new EmprestimoException(deleteEmprestimo, null);
-        } else if (!MasterDao.getEmprestimoDao().findById(id).isDevolvido()) {
-            throw new EmprestimoException(deleteEmprestimoWhenIsNotDevolvido, this.emprestimos.get(id));
-        }else if (emprestimos.containsKey(id)) {
-            emprestimos.remove(id);
+        } else if (!MasterDao.getEmprestimoDao().findById(emprestimo.getId()).isDevolvido()) {
+            throw new EmprestimoException(deleteEmprestimoWhenIsNotDevolvido, this.emprestimos.get(emprestimo.getId()));
+        }else if (emprestimos.containsKey(emprestimo.getId())) {
+            emprestimos.remove(emprestimo.getId());
         }
     }
 
@@ -79,11 +83,11 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public List<Emprestimo> findByUser(Integer id) throws EmprestimoException{
+    public List<Emprestimo> findByUser(String id) throws EmprestimoException{
        List<Emprestimo> emprestimosUser = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
              ) {
-            if(Integer.parseInt(emprestimo.getLeitor().getId()) == id) {
+            if(emprestimo.getLeitor().getId() == id) {
                 emprestimosUser.add(emprestimo);
             }
         }
@@ -111,7 +115,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public Emprestimo findByUserAndLivro(Integer isbn, Integer id) throws EmprestimoException{
+    public Emprestimo findByUserAndLivro(Integer isbn, String id) throws EmprestimoException{
         for(Emprestimo emprestimo: this.findByUser(id)) {
             if (emprestimo.getLivro().getIsbn() == isbn) {
                 return emprestimo;
@@ -122,7 +126,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public List<Emprestimo> findEmprestimosAtivosPorUsuario(Integer id) throws EmprestimoException {
+    public List<Emprestimo> findEmprestimosAtivosPorUsuario(String id) throws EmprestimoException {
         List<Emprestimo> emprestimosList = new LinkedList<>();
 
         for(Emprestimo emprestimo: this.findByUser(id)) {
