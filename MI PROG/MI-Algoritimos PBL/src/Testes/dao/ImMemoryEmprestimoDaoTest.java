@@ -24,6 +24,7 @@ class ImMemoryEmprestimoDaoTest {
                 "75 9 88888888");
         livro = new Livro(12,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         MasterDao.getLivroDao().save(livro);
+        MasterDao.getLeitorDAO().save(leitor);
         emprestimo = new Emprestimo(leitor, livro);
         emprestimoDao = new ImMemoryEmprestimoDao();
 
