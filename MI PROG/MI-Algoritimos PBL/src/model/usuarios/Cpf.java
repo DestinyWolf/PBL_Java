@@ -38,4 +38,11 @@ public class Cpf {
             throw new Exception(cpfInvalido);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Cpf{" +
+                "cpf='" + cpf + '\'' +
+                '}';
+    }
 }
