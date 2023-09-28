@@ -1,4 +1,4 @@
-package Testes;
+package Testes.emprestimo;
 
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
