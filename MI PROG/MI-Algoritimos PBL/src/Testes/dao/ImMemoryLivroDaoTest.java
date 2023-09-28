@@ -1,6 +1,7 @@
 package Testes.dao;
 
 import LibraryExceptions.estoqueExceptions.LivroException;
+import dao.MasterDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +16,13 @@ class ImMemoryLivroDaoTest {
     private Livro livro;
     private ImMemoryLivroDao dao;
 
+
     @BeforeEach
-    void criar(){
+    void criar() throws Exception{
         livro = new Livro(39,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         dao = new ImMemoryLivroDao();
+
+        MasterDao.getLivroDao().save(livro);
     }
 
     @Test
@@ -36,9 +40,9 @@ class ImMemoryLivroDaoTest {
     }
 
     @Test
-    void deleteById() throws LivroException{
+    void delete() throws LivroException{
         dao.save(livro);
-        //dao.deleteById(livro.getIsbn());
+        dao.delete(livro);
 
     }
 
