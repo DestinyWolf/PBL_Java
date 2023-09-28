@@ -25,30 +25,24 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
 
     @Override
     public void save(Emprestimo obj) throws EmprestimoException{
-        try {
-            if (MasterDao.getLivroDao().findById(obj.getLivro().getIsbn()) != null) {
-                if (obj.getLeitor().getNumEmprestimos() > 0 && !obj.getLeitor().isBloqueio() && obj.getLeitor().getDiasRestantesMulta() == 0) {
 
-                    if (!emprestimos.containsKey(obj.getId())) {
-                        Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro());
-                        emprestimos.put(emprestimo.getId(), emprestimo);
-                    }
-                    else{
-                        throw new EmprestimoException(createEmprestimo, null);
-                    }
-                } else if (obj.getLeitor().getNumEmprestimos() <= 0) {
-                    throw new EmprestimoException(createEmprestimoWithLimiteEmprestimo, null);
-                } else if (obj.getLeitor().isBloqueio()) {
-                    throw new EmprestimoException(createReservaWithBlock, null);
-                } else if (obj.getLeitor().getDiasRestantesMulta() > 0) {
-                    throw new EmprestimoException(createEmprestimoWithMulta, null);
-                }
-            } else {
+        if (obj.getLeitor().getNumEmprestimos() > 0 && !obj.getLeitor().isBloqueio() && obj.getLeitor().getDiasRestantesMulta() == 0) {
+
+            if (!emprestimos.containsKey(obj.getId())) {
+                Emprestimo emprestimo = new Emprestimo(obj.getLeitor(), obj.getLivro());
+                emprestimos.put(emprestimo.getId(), emprestimo);
+            }
+            else{
                 throw new EmprestimoException(createEmprestimo, null);
             }
-        } catch (LivroException le) {
-            throw new EmprestimoException(createEmprestimo, null);
+        } else if (obj.getLeitor().getNumEmprestimos() <= 0) {
+            throw new EmprestimoException(createEmprestimoWithLimiteEmprestimo, null);
+        } else if (obj.getLeitor().isBloqueio()) {
+            throw new EmprestimoException(createReservaWithBlock, null);
+        } else if (obj.getLeitor().getDiasRestantesMulta() > 0) {
+            throw new EmprestimoException(createEmprestimoWithMulta, null);
         }
+
     }
 
 
