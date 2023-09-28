@@ -32,7 +32,7 @@ public class Cpf {
             digt2 = 0;
         }
 
-        if(digt1 == Integer.parseInt(vetor[9]) && digt1 == Integer.parseInt(vetor[10]))
+        if(digt1 == Integer.parseInt(vetor[9]) && digt2 == Integer.parseInt(vetor[10]))
             this.cpf = cpf;
         else {
             throw new Exception(cpfInvalido);
