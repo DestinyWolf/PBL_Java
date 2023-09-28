@@ -26,7 +26,7 @@ public class ImMemoryEstoqueDao implements EstoqueDao {
     }
 
     @Override
-    public void deleteById(Integer id) throws Exception {
+    public void delete(Estoque estoque) throws Exception {
 
     }
 

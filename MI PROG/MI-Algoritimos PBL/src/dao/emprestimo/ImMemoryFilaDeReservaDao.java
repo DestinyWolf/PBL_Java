@@ -34,9 +34,9 @@ public class ImMemoryFilaDeReservaDao implements FilaDeReservaDao {
     }
 
     @Override
-    public void deleteById(Integer id) throws ReservarException{
-        if(this.filasDeReserva.containsKey(id)) {
-            this.filasDeReserva.remove(id);
+    public void delete(FilaDeReserva filaDeReserva) throws ReservarException{
+        if(this.filasDeReserva.containsKey(filaDeReserva.getIsbn())) {
+            this.filasDeReserva.remove(filaDeReserva.getIsbn());
         } else {
             throw new ReservarException(deleteReserva, null);
         }

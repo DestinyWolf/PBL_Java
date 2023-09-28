@@ -49,12 +49,12 @@ public class ImMemoryLivroDao implements LivroDao{
 
 
     @Override
-    public void deleteById(Integer id) throws LivroException {
+    public void delete(Livro livro) throws LivroException {
         try {
-            if (livros.get(id) != null && MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
-                this.livros.remove(id);
-            } else if (!MasterDao.getEmprestimoDao().findByLivro(id).isEmpty()) {
-                throw new LivroException(deleteLivroWithEmprestimo, livros.get(id));
+            if (livros.get(livro.getIsbn()) != null && MasterDao.getEmprestimoDao().findByLivro(livro.getIsbn()).isEmpty()) {
+                this.livros.remove(livro.getIsbn());
+            } else if (!MasterDao.getEmprestimoDao().findByLivro(livro.getIsbn()).isEmpty()) {
+                throw new LivroException(deleteLivroWithEmprestimo, livros.get(livro.getIsbn()));
             } else {
                 throw new LivroException(deleteLivro, null);
             }

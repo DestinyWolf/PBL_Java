@@ -11,16 +11,12 @@ import java.util.LinkedList;
 
 /**Classe que implementar a interface AdministradorDao*/
 public class ImMemoryAdministradorDao implements AdministradorDao{
-    private HashMap<Integer, Administrador> administradores;
+    private HashMap<String, Administrador> administradores;
 
     @Override
     public Administrador findById(Integer id) throws AdministradorException {
-        if (MasterDao.getAdministradorDao().findById(id) != null){
-            return administradores.get(id);
-        }
-        else {
             throw new AdministradorException(findUser, null);
-        }
+
     }
 
     @Override
@@ -30,19 +26,19 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
         }
         else {
             Administrador administrador = new Administrador(obj.getSenha(), obj.getNome(), "Administrador", obj.getId());
-            administradores.put(Integer.parseInt(administrador.getId()), administrador);
+            administradores.put(administrador.getId(), administrador);
         }
 
     }
 
     @Override
-    public void deleteById(Integer id) throws AdministradorException{
-        if (!this.administradores.isEmpty() && MasterDao.getAdministradorDao().findById(id) != null) {
-            administradores.remove(id);
+    public void delete(Administrador administrador) throws AdministradorException{
+        if (!this.administradores.isEmpty() && MasterDao.getAdministradorDao().findByCpf(administrador.getId()) != null) {
+            administradores.remove(administrador.getId());
         } else if (this.administradores.isEmpty()) {
             throw new AdministradorException(deleteWhenNotHaveObj, null);
         } else{
-            throw new AdministradorException(deleteUser, MasterDao.getAdministradorDao().findById(id));
+            throw new AdministradorException(deleteUser, MasterDao.getAdministradorDao().findByCpf(administrador.getId()));
         }
     }
 
@@ -50,7 +46,7 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     public void Update(Administrador administrador, Administrador old) throws AdministradorException{
         if (!this.administradores.isEmpty() && this.administradores.get(old.getId()) != null) {
             administradores.remove(old.getId());
-            administradores.put(Integer.parseInt(administrador.getId()), administrador);
+            administradores.put(administrador.getId(), administrador);
         } else if (this.administradores.isEmpty()) {
             throw new AdministradorException(updateWhenNotHaveObj, null);
         } else {
@@ -64,16 +60,25 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     }
 
     @Override
-    public Administrador findLogin(Integer id, String senha) throws AdministradorException {
+    public Administrador findLogin(String id, String senha) throws AdministradorException {
         for (Administrador administrador: administradores.values()
         ) {
-            Integer a = Integer.parseInt(administrador.getId());
-            if (a == id){
+            if (administrador.getId() == id){
                 if (administrador.getSenha() == senha){
                     return administrador;
                 }
             }
         }
         throw new AdministradorException(loguinUser, null);
+    }
+
+    @Override
+    public Administrador findByCpf(String id) throws AdministradorException {
+        if (administradores.get(id) != null){
+            return administradores.get(id);
+        }
+        else {
+            throw new AdministradorException(findUser, null);
+        }
     }
 }

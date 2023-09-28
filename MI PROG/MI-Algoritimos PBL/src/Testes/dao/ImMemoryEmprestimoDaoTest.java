@@ -1,7 +1,9 @@
 package Testes.dao;
 
 import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.estoqueExceptions.LivroException;
 import LibraryExceptions.userexcepitions.LeitorException;
+import dao.MasterDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +19,15 @@ class ImMemoryEmprestimoDaoTest {
     private Leitor leitor;
     private Emprestimo emp;
     @BeforeEach
-    void criar() throws LeitorException, EmprestimoException {
+    void criar() throws LeitorException, EmprestimoException, LivroException, Exception {
+
         livro = new Livro(12,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+
+        MasterDao.getLivroDao().save(livro);
+        MasterDao.getLivroDao().save(livro);leitor = new Leitor("Marcus","123","97805775052","Uefs","2222");
         dao = new ImMemoryEmprestimoDao();
         emp = new Emprestimo(leitor,livro);
-        leitor = new Leitor("Marcus","123","97805775052","Uefs","2222");
+
     }
 
     @Test

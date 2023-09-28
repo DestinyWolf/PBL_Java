@@ -51,7 +51,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
 
 
     @Override
-    public void deleteById(Integer id) throws EmprestimoException{
+    public void delete(Integer id) throws EmprestimoException{
         if (!emprestimos.containsKey(id)) {
             throw new EmprestimoException(deleteEmprestimo, null);
         } else if (!MasterDao.getEmprestimoDao().findById(id).isDevolvido()) {
