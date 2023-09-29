@@ -20,6 +20,8 @@ class ImMemoryFilaDeReservaDaoTest {
 
     @Test
     void findById() {
+        dao.save(fila);
+        dao.findById(fila.getIsbn());
     }
 
     @Test
