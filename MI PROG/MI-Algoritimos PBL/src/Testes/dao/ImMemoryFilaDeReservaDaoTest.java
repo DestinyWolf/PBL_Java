@@ -36,11 +36,12 @@ class ImMemoryFilaDeReservaDaoTest {
     @Test
     void update() throws ReservarException{
         dao.save(fila);
-
-
+        FilaDeReserva NovaFila = new FilaDeReserva("778");
+        dao.Update(NovaFila,fila);
     }
 
     @Test
     void findAll() {
+
     }
 }
