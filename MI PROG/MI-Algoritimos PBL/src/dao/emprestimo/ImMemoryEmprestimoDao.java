@@ -72,8 +72,8 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public LinkedList<Emprestimo> findAll() {
-        return (LinkedList<Emprestimo>) emprestimos.values();
+    public List<Emprestimo> findAll() {
+        return (List<Emprestimo>) emprestimos.values();
     }
 
     @Override

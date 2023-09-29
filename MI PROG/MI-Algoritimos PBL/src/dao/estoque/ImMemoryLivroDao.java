@@ -84,13 +84,13 @@ public class ImMemoryLivroDao implements LivroDao{
     }
 
     @Override
-    public LinkedList<Livro> findAll() {
-        return (LinkedList<Livro>)  this.livros.values();
+    public List<Livro> findAll() {
+        return (List<Livro>)  this.livros.values();
     }
 
     @Override
-    public LinkedList<Livro> findByAutor(String autor) throws LivroException {
-        LinkedList<Livro> livrosList = new LinkedList<>();
+    public List<Livro> findByAutor(String autor) throws LivroException {
+        List<Livro> livrosList = new LinkedList<>();
 
         for (Livro livro:
              livros.values()) {
@@ -108,8 +108,8 @@ public class ImMemoryLivroDao implements LivroDao{
     }
 
     @Override
-    public LinkedList<Livro> findByCategoria(String categoria) throws LivroException{
-        LinkedList<Livro> livrosList = new LinkedList<>();
+    public List<Livro> findByCategoria(String categoria) throws LivroException{
+        List<Livro> livrosList = new LinkedList<>();
 
         for (Livro livro:
                 livros.values()) {
@@ -127,8 +127,8 @@ public class ImMemoryLivroDao implements LivroDao{
     }
 
     @Override
-    public LinkedList<Livro> findByNome(String nome)  throws LivroException {
-        LinkedList<Livro> livrosList = new LinkedList<>();
+    public List<Livro> findByNome(String nome)  throws LivroException {
+        List<Livro> livrosList = new LinkedList<>();
 
         for (Livro livro:
                 livros.values()) {

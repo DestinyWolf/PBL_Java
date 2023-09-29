@@ -4,6 +4,7 @@ package dao.estoque;
 import model.estoque.Estoque;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ImMemoryEstoqueDao implements EstoqueDao {
     private Estoque estoque;
@@ -47,7 +48,7 @@ public class ImMemoryEstoqueDao implements EstoqueDao {
     }
 
     @Override
-    public LinkedList<Estoque> findAll() {
+    public List<Estoque> findAll() {
         return null;
     }
 

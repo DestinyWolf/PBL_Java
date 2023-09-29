@@ -6,6 +6,8 @@ import dao.MasterDao;
 import model.usuarios.Leitor;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+
 import static util.Constantes.*;
 
 /**Classe de implementação ta interface LeitorDao*/
@@ -78,8 +80,8 @@ public class ImMemoryLeitorDao implements LeitorDao{
 
 
     @Override
-    public LinkedList<Leitor> findAll() {
-        LinkedList<Leitor> lista = new LinkedList<>();
+    public List<Leitor> findAll() {
+        List<Leitor> lista = new LinkedList<>();
         for(Leitor leitor : leitores.values()){
             lista.add(leitor);
         }

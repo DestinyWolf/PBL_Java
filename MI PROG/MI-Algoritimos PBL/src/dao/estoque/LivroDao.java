@@ -16,7 +16,7 @@ public interface LivroDao extends Dao<Livro, LivroException> {
      * @return LinkedList de livros
      * @throws LivroException
      */
-    public LinkedList<Livro> findByAutor(String autor) throws LivroException;
+    public List<Livro> findByAutor(String autor) throws LivroException;
 
     /**
      * Metodo responsavel por retornar uma lista de livros de uma determinada categoria
@@ -24,7 +24,7 @@ public interface LivroDao extends Dao<Livro, LivroException> {
      * @return LinkedList de livros
      * @throws LivroException
      */
-    public LinkedList<Livro> findByCategoria(String categoria) throws LivroException;
+    public List<Livro> findByCategoria(String categoria) throws LivroException;
 
     /**
      * Metodo responsavel por retornar uma lista de livros com o mesmo nome
@@ -32,7 +32,7 @@ public interface LivroDao extends Dao<Livro, LivroException> {
      * @return LinkedList de livros
      * @throws LivroException
      */
-    public LinkedList<Livro> findByNome(String nome) throws LivroException;
+    public List<Livro> findByNome(String nome) throws LivroException;
 
     /**
      * Metodo responsavel por remover um livro da quantidae total de livros

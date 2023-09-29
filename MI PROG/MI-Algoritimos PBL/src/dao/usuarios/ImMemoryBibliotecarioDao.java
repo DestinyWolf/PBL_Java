@@ -10,6 +10,7 @@ import model.usuarios.Leitor;
 import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**Classe que impelementa a interface BibliotecarioDao*/
 public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
@@ -69,8 +70,8 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
     }
 
     @Override
-    public LinkedList<Bibliotecario> findAll() {
-        LinkedList<Bibliotecario> values = (LinkedList<Bibliotecario>) this.bibliotecarios.values();
+    public List<Bibliotecario> findAll() {
+        List<Bibliotecario> values = (List<Bibliotecario>) this.bibliotecarios.values();
         return values;
     }
 

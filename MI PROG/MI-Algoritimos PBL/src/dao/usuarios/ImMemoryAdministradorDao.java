@@ -10,6 +10,7 @@ import model.usuarios.Leitor;
 import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**Classe que implementar a interface AdministradorDao*/
 public class ImMemoryAdministradorDao implements AdministradorDao{
@@ -67,8 +68,8 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     }
 
     @Override
-    public LinkedList<Administrador> findAll() {
-        LinkedList<Administrador> lista = new LinkedList<>();
+    public List<Administrador> findAll() {
+        List<Administrador> lista = new LinkedList<>();
         for(Administrador adm : this.administradores.values()){
             lista.add(adm);
         }

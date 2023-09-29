@@ -6,6 +6,7 @@ import model.emprestimo.FilaDeReserva;
 import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**Classe que implementa a interface FilaDeReservaDao*/
 public class ImMemoryFilaDeReservaDao implements FilaDeReservaDao {
@@ -54,7 +55,7 @@ public class ImMemoryFilaDeReservaDao implements FilaDeReservaDao {
     }
 
     @Override
-    public LinkedList<FilaDeReserva> findAll() {
-        return (LinkedList<FilaDeReserva>) this.filasDeReserva.values();
+    public List<FilaDeReserva> findAll() {
+        return (List<FilaDeReserva>) this.filasDeReserva.values();
     }
 }
