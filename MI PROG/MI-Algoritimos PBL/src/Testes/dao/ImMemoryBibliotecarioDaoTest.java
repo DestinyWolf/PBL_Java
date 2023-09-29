@@ -39,6 +39,7 @@ class ImMemoryBibliotecarioDaoTest {
 
     @Test
     void update() {
+        dao.save(bibi);
 
     }
 
@@ -51,5 +52,6 @@ class ImMemoryBibliotecarioDaoTest {
     @Test
     void findLogin() throws BibliotecarioException{
         dao.save(bibi);
+        dao.findLogin(bibi.getId(),bibi.getSenha());
     }
 }
