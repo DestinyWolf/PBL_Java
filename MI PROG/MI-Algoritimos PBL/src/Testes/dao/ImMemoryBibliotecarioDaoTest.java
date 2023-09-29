@@ -25,7 +25,8 @@ class ImMemoryBibliotecarioDaoTest {
     }
 
     @Test
-    void save() {
+    void save() throws BibliotecarioException{
+        dao.save(bibi);
 
     }
 
