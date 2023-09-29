@@ -19,7 +19,7 @@ class ImMemoryFilaDeReservaDaoTest {
     }
 
     @Test
-    void findById() {
+    void findById() throws ReservarException {
         dao.save(fila);
         dao.findById(fila.getIsbn());
     }
