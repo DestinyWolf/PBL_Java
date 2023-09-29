@@ -38,9 +38,10 @@ class ImMemoryBibliotecarioDaoTest {
     }
 
     @Test
-    void update() {
+    void update() throws BibliotecarioException{
         dao.save(bibi);
-
+        Bibliotecario bb2 = new Bibliotecario("MaikeTest","333","46529179534","Maioral");
+        dao.Update(bb2,bibi);
     }
 
     @Test

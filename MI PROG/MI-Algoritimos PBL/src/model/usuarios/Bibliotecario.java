@@ -23,7 +23,7 @@ public class Bibliotecario extends Pessoa{
             super.setSenha(senha);
             super.setNome(nome);
         } catch (Exception e) {
-            throw new BibliotecarioException(createUser, null);
+            //throw new BibliotecarioException(createUser, null);
         }
     }
     /**
