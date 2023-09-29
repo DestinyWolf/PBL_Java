@@ -63,7 +63,7 @@ class EmprestimoTest {
 
     @Test
     void getId() {
-        assertEquals(livro.getIsbn()+ new Data().getDia() % 100109, emprestimo.getId());
+        assertEquals(livro.getIsbn() + new Data().getDia() + leitor.getId(), emprestimo.getId());
     }
 
     @Test
