@@ -17,7 +17,7 @@ class RelatoriosTest {
     @BeforeEach
     void criar() throws LivroException {
         rela = new Relatorios();
-        livro = new Livro("","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+        livro = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         dao = new ImMemoryLivroDao();
         dao.save(livro);
 
@@ -28,7 +28,6 @@ class RelatoriosTest {
     @Test
     void getQntLivros() {
         rela.getQntLivros();
-        System.out.println(rela.getQntLivros());
     }
 
     @Test
