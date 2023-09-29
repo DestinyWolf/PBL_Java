@@ -24,23 +24,16 @@ class ImMemoryLeitorDaoTest {
                 "75 9 88888888");
         dao = new ImMemoryLeitorDao();
         MasterDao.getLivroDao().save(new Livro("1","bla", "horror", "pat", "saraiva",2000,"as aventuras de creitin"));
-
-
-
     }
 
-
-
-    /*
     @Test
     void save() throws LeitorException, Exception {
         dao.save(leitor);
-        assertEquals(leitor,dao.findByCpf(leitor.getId()));
+        assertEquals(leitor,dao.findById(leitor.getId()));
     }
 
     @Test
     void delete() throws LeitorException, Exception{
-
         dao.save(leitor);
         dao.delete(leitor);
 
@@ -49,21 +42,19 @@ class ImMemoryLeitorDaoTest {
 
     @Test
     void update() throws LeitorException, Exception{
-
         dao.save(leitor);
         Leitor leitor2 = new Leitor("Pedro","222","21780640005","SAP","000");
         dao.Update(leitor2,leitor);
-        dao.findByCpf(leitor2.getId());
+        dao.findById(leitor2.getId());
     }
 
     @Test
     void findById() throws LeitorException, Exception{
-
         dao.save(leitor);
-        assertEquals(leitor,dao.findByCpf(leitor.getId()));
+        assertEquals(leitor,dao.findById(leitor.getId()));
     }
 
-    */
+
     @Test
     void findAll() throws LeitorException, Exception{
 
