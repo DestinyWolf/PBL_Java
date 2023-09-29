@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**Interface CRUD do DAO*/
 public interface Dao<T, E extends Exception> {
@@ -39,5 +40,5 @@ public interface Dao<T, E extends Exception> {
      * Metodo responsavel por retornar dos os objetos de determinado tipo em uma lista
      * @return List dos objetos
      */
-    public LinkedList<T> findAll();
+    public List<T> findAll();
 }
