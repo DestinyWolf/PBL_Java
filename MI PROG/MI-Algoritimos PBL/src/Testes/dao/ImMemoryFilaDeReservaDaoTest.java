@@ -34,8 +34,9 @@ class ImMemoryFilaDeReservaDaoTest {
     }
 
     @Test
-    void update() {
+    void update() throws ReservarException{
         dao.save(fila);
+
 
     }
 
