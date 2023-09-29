@@ -49,7 +49,7 @@ class ImMemoryBibliotecarioDaoTest {
     }
 
     @Test
-    void findLogin() {
+    void findLogin() throws BibliotecarioException{
         dao.save(bibi);
     }
 }
