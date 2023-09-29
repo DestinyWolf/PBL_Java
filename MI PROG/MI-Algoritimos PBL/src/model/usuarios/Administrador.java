@@ -22,7 +22,7 @@ public class Administrador extends Pessoa{
             super.setSenha(senha);
             this.cargo = cargo;
         } catch (Exception e){
-            throw new AdministradorException(createUser, null);
+            //throw new AdministradorException(createUser, null);
         }
     }
     /**Metodo responsavel por retornar o cargo do Usuario

@@ -1,6 +1,7 @@
 package Testes.dao;
 
 import LibraryExceptions.userexcepitions.AdministradorException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,38 +10,52 @@ import dao.usuarios.ImMemoryAdministradorDao;
 import model.usuarios.Administrador;
 
 class ImMemoryAdministradorDaoTest {
-    Administrador adm = new Administrador("123","Armando","Ditador","57130521090");
+    private Administrador adm;
+    private Administrador Novoadm;
+    private ImMemoryAdministradorDao dao;
 
-    ImMemoryAdministradorDaoTest() throws AdministradorException {
+    @BeforeEach
+    void criar() throws AdministradorException {
+        adm = new Administrador("123","Armando","Ditador","57130521090");
+        dao = new ImMemoryAdministradorDao();
+        Novoadm = new Administrador("222","MaikeTest","Adm","11130521333");
     }
 
-
     @Test
-    void findById() {
-
+    void findById() throws AdministradorException{
+        dao.save(adm);
+        assertEquals(adm.getId(),dao.findById(adm.getId()).getId());
     }
 
     @Test
     void save() throws AdministradorException{
-        ImMemoryAdministradorDao A = new ImMemoryAdministradorDao();
-        A.save(adm);
-        assertEquals(adm.getId(),A.findById(adm.getId()));
-
+        dao.save(adm);
+        assertEquals(adm.getId(),dao.findById(adm.getId()).getId());
     }
 
     @Test
-    void deleteById() {
+    void update() throws AdministradorException{
+        dao.save(adm);
+        dao.Update(Novoadm,adm);
+        dao.findById(Novoadm.getId());
     }
 
     @Test
-    void update() {
+    void findAll() throws AdministradorException{
+        dao.save(adm);
+        assertEquals(1, dao.findAll().size());
     }
 
     @Test
-    void findAll() {
+    void delete() throws AdministradorException{
+        dao.save(adm);
+        dao.delete(adm);
+        assertEquals(0, dao.findAll().size());
     }
 
     @Test
-    void findLogin() {
+    void findLogin() throws AdministradorException{
+        dao.save(adm);
+        dao.findLogin(adm.getId(),adm.getSenha());
     }
 }

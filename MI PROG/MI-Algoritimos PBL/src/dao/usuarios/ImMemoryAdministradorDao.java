@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 /**Classe que implementar a interface AdministradorDao*/
 public class ImMemoryAdministradorDao implements AdministradorDao{
-    private HashMap<String, Administrador> administradores;
+    private HashMap<String, Administrador> administradores = new HashMap<>();
 
     @Override
     public Administrador findById(String id) throws AdministradorException {
@@ -45,7 +45,7 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void delete(Administrador administrador) throws AdministradorException{
-        if (!this.administradores.isEmpty() && MasterDao.getAdministradorDao().findById(administrador.getId()) != null) {
+        if (!this.administradores.isEmpty() && this.administradores.containsKey(administrador.getId())) {
             administradores.remove(administrador.getId());
         } else if (this.administradores.isEmpty()) {
             throw new AdministradorException(deleteWhenNotHaveObj, null);
@@ -56,7 +56,7 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public void Update(Administrador administrador, Administrador old) throws AdministradorException{
-        if (!this.administradores.isEmpty() && this.administradores.get(old.getId()) != null) {
+        if (this.administradores.containsKey(old.getId())) {
             administradores.remove(old.getId());
             administradores.put(administrador.getId(), administrador);
         } else if (this.administradores.isEmpty()) {
@@ -68,7 +68,11 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
 
     @Override
     public LinkedList<Administrador> findAll() {
-        return (LinkedList<Administrador>) administradores.values();
+        LinkedList<Administrador> lista = new LinkedList<>();
+        for(Administrador adm : this.administradores.values()){
+            lista.add(adm);
+        }
+        return lista;
     }
 
     @Override
