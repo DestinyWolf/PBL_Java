@@ -13,6 +13,7 @@ class ImMemoryBibliotecarioDaoTest {
 
     @BeforeEach
     void criar(){
+        dao = new ImMemoryBibliotecarioDao();
 
     }
 
