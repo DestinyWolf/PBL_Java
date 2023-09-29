@@ -29,7 +29,7 @@ class FilaDeReservaTest {
 
     @Test
     void getIsbn() {
-        assertEquals(2,f.getIsbn());
+        assertEquals("2",f.getIsbn());
     }
 
     @Test
