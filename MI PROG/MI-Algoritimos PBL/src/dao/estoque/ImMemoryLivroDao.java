@@ -51,7 +51,7 @@ public class ImMemoryLivroDao implements LivroDao{
     @Override
     public void delete(Livro livro) throws LivroException {
         try {
-            if (livros.get(livro.getIsbn()) != null && MasterDao.getEmprestimoDao().findByLivro(livro.getIsbn()).isEmpty()) {
+            if (this.livros.containsKey(livro.getIsbn())) {
                 this.livros.remove(livro.getIsbn());
             } else if (!MasterDao.getEmprestimoDao().findByLivro(livro.getIsbn()).isEmpty()) {
                 throw new LivroException(deleteLivroWithEmprestimo, livros.get(livro.getIsbn()));
