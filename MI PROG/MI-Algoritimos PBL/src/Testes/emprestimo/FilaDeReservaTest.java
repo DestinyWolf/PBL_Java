@@ -23,7 +23,7 @@ class FilaDeReservaTest {
     @BeforeEach
     void criar() throws Exception {
         l = new Leitor("Armando","123","57130521090","Uefs","0000");
-        f =  new FilaDeReserva(2);
+        f =  new FilaDeReserva("2");
         reservas = new LinkedList<>();
     }
 
@@ -41,8 +41,8 @@ class FilaDeReservaTest {
 
     @Test
     void setIsbn() {
-        f.setIsbn(3);
-        assertEquals(3,f.getIsbn());
+        f.setIsbn("3");
+        assertEquals("3",f.getIsbn());
     }
 
     @Test
@@ -68,8 +68,8 @@ class FilaDeReservaTest {
 
     @Test
     void testEquals() {
-        FilaDeReserva f1 = new FilaDeReserva(23);
-        FilaDeReserva f2 = new FilaDeReserva(24);
+        FilaDeReserva f1 = new FilaDeReserva("23");
+        FilaDeReserva f2 = new FilaDeReserva("24");
         assertFalse(f1.equals(f2));
 
     }

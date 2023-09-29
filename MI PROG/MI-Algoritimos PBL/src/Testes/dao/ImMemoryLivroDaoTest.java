@@ -19,7 +19,7 @@ class ImMemoryLivroDaoTest {
 
     @BeforeEach
     void criar() throws Exception{
-        livro = new Livro(39,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+        livro = new Livro("39","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         dao = new ImMemoryLivroDao();
 
         MasterDao.getLivroDao().save(livro);
@@ -49,7 +49,7 @@ class ImMemoryLivroDaoTest {
     @Test
     void update() throws LivroException{
         dao.save(livro);
-        Livro livroNovo = new Livro(11,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+        Livro livroNovo = new Livro("11","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         dao.Update(livroNovo,livro);
     }
 
