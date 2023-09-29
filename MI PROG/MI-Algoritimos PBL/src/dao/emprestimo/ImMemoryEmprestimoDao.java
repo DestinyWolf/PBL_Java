@@ -5,6 +5,8 @@ import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.estoqueExceptions.LivroException;
 import dao.MasterDao;
 import model.emprestimo.Emprestimo;
+import model.usuarios.Leitor;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,7 +75,11 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
 
     @Override
     public List<Emprestimo> findAll() {
-        return (List<Emprestimo>) emprestimos.values();
+        List<Emprestimo> lista = new LinkedList<>();
+        for(Emprestimo emprestimo : emprestimos.values()){
+            lista.add(emprestimo);
+        }
+        return  lista;
     }
 
     @Override

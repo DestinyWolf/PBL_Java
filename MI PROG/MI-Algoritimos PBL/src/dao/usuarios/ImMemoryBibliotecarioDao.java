@@ -71,8 +71,11 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
 
     @Override
     public List<Bibliotecario> findAll() {
-        List<Bibliotecario> values = (List<Bibliotecario>) this.bibliotecarios.values();
-        return values;
+        List<Bibliotecario> lista = new LinkedList<>();
+        for(Bibliotecario bibliotecario : bibliotecarios.values()){
+            lista.add(bibliotecario);
+        }
+        return  lista;
     }
 
     @Override

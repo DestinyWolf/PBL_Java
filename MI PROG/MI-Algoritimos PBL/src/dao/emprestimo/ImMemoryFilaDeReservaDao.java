@@ -3,6 +3,8 @@ package dao.emprestimo;
 
 import LibraryExceptions.emprestimoexception.ReservarException;
 import model.emprestimo.FilaDeReserva;
+import model.usuarios.Leitor;
+
 import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -56,6 +58,10 @@ public class ImMemoryFilaDeReservaDao implements FilaDeReservaDao {
 
     @Override
     public List<FilaDeReserva> findAll() {
-        return (List<FilaDeReserva>) this.filasDeReserva.values();
+        List<FilaDeReserva> lista = new LinkedList<>();
+        for(FilaDeReserva filaDeReserva : filasDeReserva.values()){
+            lista.add(filaDeReserva);
+        }
+        return  lista;
     }
 }

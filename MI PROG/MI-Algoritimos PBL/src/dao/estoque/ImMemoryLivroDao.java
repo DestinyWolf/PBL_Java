@@ -4,6 +4,8 @@ import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.estoqueExceptions.*;
 import dao.MasterDao;
 import model.estoque.Livro;
+import model.usuarios.Leitor;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,7 +87,11 @@ public class ImMemoryLivroDao implements LivroDao{
 
     @Override
     public List<Livro> findAll() {
-        return (List<Livro>)  this.livros.values();
+        List<Livro> lista = new LinkedList<>();
+        for(Livro livro : livros.values()){
+            lista.add(livro);
+        }
+        return  lista;
     }
 
     @Override
