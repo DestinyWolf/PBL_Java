@@ -41,7 +41,7 @@ class ImMemoryFilaDeReservaDaoTest {
     }
 
     @Test
-    void findAll() {
+    void findAll() throws ReservarException{
         dao.save(fila);
         assertEquals(1,dao.findAll().size());
     }
