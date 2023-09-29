@@ -50,5 +50,6 @@ class ImMemoryBibliotecarioDaoTest {
 
     @Test
     void findLogin() {
+        dao.save(bibi);
     }
 }
