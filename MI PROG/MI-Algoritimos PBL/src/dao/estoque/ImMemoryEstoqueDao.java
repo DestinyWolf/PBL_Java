@@ -19,7 +19,7 @@ public class ImMemoryEstoqueDao implements EstoqueDao {
 
     @Override
     public void save(Estoque obj) throws Exception {
-        if(estoque != null){
+        if(estoque == null){
             throw new Exception();
         }
         estoque = obj;

@@ -24,7 +24,7 @@ class ImMemoryAdministradorDaoTest {
     void save() throws AdministradorException{
         ImMemoryAdministradorDao A = new ImMemoryAdministradorDao();
         A.save(adm);
-        assertEquals(adm.getId(),A.findById(Integer.parseInt(adm.getId())));
+        assertEquals(adm.getId(),A.findById(adm.getId()));
 
     }
 

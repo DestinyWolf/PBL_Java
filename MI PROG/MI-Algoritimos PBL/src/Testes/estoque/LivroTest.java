@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import model.estoque.Livro;
 
 class LivroTest {
-    Livro l = new Livro(12,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+    Livro l = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
 
 
     @Test
@@ -16,7 +16,7 @@ class LivroTest {
 
     @Test
     void getIsbn() {
-        assertEquals(12,l.getIsbn());
+        assertEquals("12",l.getIsbn());
     }
 
     @Test
@@ -76,8 +76,8 @@ class LivroTest {
 
     @Test
     void setIsbn() {
-        l.setIsbn(11);
-        assertEquals(11,l.getIsbn());
+        l.setIsbn("11");
+        assertEquals("11",l.getIsbn());
     }
 
     @Test

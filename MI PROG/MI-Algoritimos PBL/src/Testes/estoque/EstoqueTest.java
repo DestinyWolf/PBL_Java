@@ -9,7 +9,7 @@ import model.estoque.Livro;
 
 class EstoqueTest {
     Estoque e = new Estoque();
-    Livro l = new Livro(12,"Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+    Livro l = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
     @Test
     void novoLivro() throws LivroException {
         e.novoLivro(l);
