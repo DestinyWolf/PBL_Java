@@ -7,7 +7,7 @@ import model.usuarios.Bibliotecario;
 
 /**Classe model para livro*/
 public class Livro {
-    private Integer isbn;
+    private String isbn;
     private String autor;
     private String categoria;
     private String enderecoLivro;
@@ -27,7 +27,7 @@ public class Livro {
      * @param anoDePublicacao
      * @param nome
      */
-    public Livro (Integer isbn, String autor, String categoria,String enderecoLivro, String editora, Integer anoDePublicacao, String nome) {
+    public Livro (String isbn, String autor, String categoria,String enderecoLivro, String editora, Integer anoDePublicacao, String nome) {
         this.isbn = isbn;
         this.autor = autor;
         this.categoria = categoria;
@@ -47,7 +47,7 @@ public class Livro {
 
     /**Metodo responsavel por retornar o codigo isbn do livro
      * @return  isbn do livro*/
-    public Integer getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
@@ -129,7 +129,7 @@ public class Livro {
 
     /**Metodo responsavel por settar o codigo isbn do livro
      *@param isbn  */
-    public void setIsbn(Integer isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -180,7 +180,7 @@ public class Livro {
     @Override
     public String toString() {
         return "Livro{" +
-                "isbn=" + isbn.toString() +
+                "isbn=" + isbn +
                 ", autor='" + autor + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", enderecoLivro='" + enderecoLivro + '\'' +

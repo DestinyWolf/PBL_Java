@@ -12,13 +12,13 @@ import java.util.Objects;
 
 /**Classe que impelmenta a interface EmprestimoDao*/
 public class ImMemoryEmprestimoDao implements EmprestimoDao{
-    private HashMap<Integer, Emprestimo> emprestimos;
+    private HashMap<String, Emprestimo> emprestimos;
 
     public ImMemoryEmprestimoDao() {
         emprestimos = new HashMap<>();
     }
     @Override
-    public Emprestimo findById(Integer id) {
+    public Emprestimo findById(String id) {
 
         return this.emprestimos.get(id);
     }
@@ -93,7 +93,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public List<Emprestimo> findByLivro(Integer id) throws EmprestimoException{
+    public List<Emprestimo> findByLivro(String id) throws EmprestimoException{
         List<Emprestimo> emprestimosLivros = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()
         ) {
@@ -109,7 +109,7 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
-    public Emprestimo findByUserAndLivro(Integer isbn, String id) throws EmprestimoException{
+    public Emprestimo findByUserAndLivro(String isbn, String id) throws EmprestimoException{
         for(Emprestimo emprestimo: this.findByUser(id)) {
             if (emprestimo.getLivro().getIsbn() == isbn) {
                 return emprestimo;

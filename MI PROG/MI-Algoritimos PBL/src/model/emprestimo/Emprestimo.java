@@ -18,7 +18,7 @@ public class Emprestimo {
     private Data prazoFinal;
     private Data dataDevolucao;
     private boolean devolvido;
-    private Integer id;
+    private String id;
     private Integer renovacoes;
 
     /**Construtor da classe emprestimo
@@ -32,7 +32,7 @@ public class Emprestimo {
             this.dataEmprestimo = new Data();
             this.prazoFinal = new Data(dataEmprestimo.getDia()+7, dataEmprestimo.getMes(), dataEmprestimo.getAno());
             this.devolvido = false;
-            this.id = livro.getIsbn()+ dataEmprestimo.getDia() % 100109;
+            this.id = livro.getIsbn() + dataEmprestimo.getDia() + leitor.getId();
             this.renovacoes = 0;
             this.leitor.setNumEmprestimos(leitor.getNumEmprestimos()-1);
             this.dataDevolucao = new Data(0,0,0);
@@ -74,7 +74,7 @@ public class Emprestimo {
 
     /**Metodo responsavel por retornar o Id do emprestimo
      * @return Id do emprestimo*/
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -140,7 +140,7 @@ public class Emprestimo {
 
     /**Metodo responsavel por settar o id do emprestimo
      * @param id */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -165,7 +165,7 @@ public class Emprestimo {
      * @param id
      * @throws EmprestimoException
      */
-    public void renovacaoEmprestimo(Integer isbn, String id) throws EmprestimoException {
+    public void renovacaoEmprestimo(String isbn, String id) throws EmprestimoException {
 
         try {
             if (this.leitor.getId() == id && this.livro.getIsbn() == isbn) {

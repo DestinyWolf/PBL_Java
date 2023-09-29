@@ -21,7 +21,7 @@ public interface EmprestimoDao extends Dao<Emprestimo, EmprestimoException> {
      * @return List de emprestimos
      * @throws EmprestimoException
      */
-    public List<Emprestimo> findByLivro(Integer id) throws EmprestimoException;
+    public List<Emprestimo> findByLivro(String id) throws EmprestimoException;
 
     /**
      * Metodo responsavel por retornar um emprestimo especifico
@@ -30,7 +30,7 @@ public interface EmprestimoDao extends Dao<Emprestimo, EmprestimoException> {
      * @return Emprestimo
      * @throws EmprestimoException
      */
-    public Emprestimo findByUserAndLivro(Integer isbn, String id) throws EmprestimoException;
+    public Emprestimo findByUserAndLivro(String isbn, String id) throws EmprestimoException;
 
     /**
      * Metodo responsavel por retonar os emprestimos ativos de um determinado usuario

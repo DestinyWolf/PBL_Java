@@ -9,13 +9,13 @@ import java.util.LinkedList;
 
 /**Classe que implementa a interface FilaDeReservaDao*/
 public class ImMemoryFilaDeReservaDao implements FilaDeReservaDao {
-    private HashMap<Integer, FilaDeReserva> filasDeReserva;
+    private HashMap<String, FilaDeReserva> filasDeReserva;
 
     public ImMemoryFilaDeReservaDao() {
         this.filasDeReserva = new HashMap<>();
     }
     @Override
-    public FilaDeReserva findById(Integer id) throws ReservarException {
+    public FilaDeReserva findById(String id) throws ReservarException {
         if(filasDeReserva.containsKey(id))
             return filasDeReserva.get(id);
         else {

@@ -11,7 +11,7 @@ public interface Dao<T, E extends Exception> {
      * @return retorna um objeto do tipo definido
      * @throws E
      */
-    public T findById(Integer id) throws E;
+    public T findById(String id) throws E;
 
     /**
      * Metodo responsavel por savar/Adicionar um novo objeto ao CRUD

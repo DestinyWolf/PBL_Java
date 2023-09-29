@@ -17,11 +17,4 @@ public interface AdministradorDao extends Dao<Administrador, AdministradorExcept
      */
     public Administrador findLogin(String id, String senha) throws AdministradorException;
 
-    /**
-     * Metodo responsavel por retornar um usuario pelo cpf, devido a busca ser feita via String
-     * @param id
-     * @return Administrador
-     * @throws AdministradorException
-     */
-    public Administrador findByCpf(String id) throws AdministradorException;
 }

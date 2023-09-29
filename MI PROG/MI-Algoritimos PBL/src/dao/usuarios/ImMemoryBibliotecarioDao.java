@@ -2,8 +2,11 @@ package dao.usuarios;
 
 
 import LibraryExceptions.userexcepitions.BibliotecarioException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
 import model.usuarios.Bibliotecario;
+import model.usuarios.Leitor;
+
 import static util.Constantes.*;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,14 +19,24 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
         this.bibliotecarios = new HashMap<>();
     }
     @Override
-    public Bibliotecario findById(Integer id) throws BibliotecarioException {
-        throw new BibliotecarioException(findUser, null);
+    public Bibliotecario findById(String id) throws BibliotecarioException {
+        if(this.bibliotecarios.isEmpty()){
+            throw new BibliotecarioException(findWhenNotHaveObj, null);
+        }
+        else{
+            for(Bibliotecario bibliotecario : this.bibliotecarios.values()){
+                if(bibliotecario.getId() == id){
+                    return bibliotecario;
+                }
+            }
+            throw new BibliotecarioException(findUser, null);
+        }
     }
 
     @Override
     public void save(Bibliotecario obj) throws BibliotecarioException {
-        if (MasterDao.getBibliotecarioDao().findById(Integer.parseInt(obj.getId())) != null) {
-            throw new BibliotecarioException(createExistUser, MasterDao.getBibliotecarioDao().findById(Integer.parseInt(obj.getId())));
+        if (MasterDao.getBibliotecarioDao().findById(obj.getId()) != null) {
+            throw new BibliotecarioException(createExistUser, MasterDao.getBibliotecarioDao().findById(obj.getId()));
         }
         else {
             Bibliotecario bibliotecario = new Bibliotecario(obj.getNome(), obj.getSenha(), obj.getId(), "Bibliotecario");
@@ -34,12 +47,12 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
 
     @Override
     public void delete(Bibliotecario bibliotecario) throws BibliotecarioException{
-        if (!this.bibliotecarios.isEmpty() && MasterDao.getBibliotecarioDao().findByCpf(bibliotecario.getId()) != null) {
+        if (!this.bibliotecarios.isEmpty() && MasterDao.getBibliotecarioDao().findById(bibliotecario.getId()) != null) {
             this.bibliotecarios.remove(bibliotecario.getId());
         } else if (this.bibliotecarios.isEmpty()) {
             throw new BibliotecarioException(deleteWhenNotHaveObj,null);
         } else {
-            throw new BibliotecarioException(deleteUser, MasterDao.getBibliotecarioDao().findByCpf(bibliotecario.getId()));
+            throw new BibliotecarioException(deleteUser, MasterDao.getBibliotecarioDao().findById(bibliotecario.getId()));
         }
     }
 
@@ -72,15 +85,5 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
             }
         }
         throw new BibliotecarioException(loguinUser, null);
-    }
-
-    @Override
-    public Bibliotecario findByCpf(String id) throws BibliotecarioException {
-        if (bibliotecarios.get(id) != null) {
-            return this.bibliotecarios.get(id);
-        }
-        else {
-            throw new BibliotecarioException(findUser,null);
-        }
     }
 }

@@ -20,7 +20,7 @@ public class ImMemoryLeitorDao implements LeitorDao{
     public void save(Leitor obj) throws LeitorException {
 
         if (this.leitores.get(obj.getId()) != null) {
-            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findByCpf(obj.getId()));
+            throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(obj.getId()));
         }
 
         Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
@@ -32,10 +32,10 @@ public class ImMemoryLeitorDao implements LeitorDao{
     @Override
     public void delete(Leitor leitor) throws LeitorException{
         try {
-            if (findByCpf(leitor.getId()) != null /*&& MasterDao.getEmprestimoDao().findByUser(leitor.getId()) == null*/) {
+            if (findById(leitor.getId()) != null /*&& MasterDao.getEmprestimoDao().findByUser(leitor.getId()) == null*/) {
                 leitores.remove(leitor.getId());
             } else if (MasterDao.getEmprestimoDao().findByUser(leitor.getId()) != null) {
-                throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findByCpf(leitor.getId()));
+                throw new LeitorException(deleteUsuarioWithEmprestimo, MasterDao.getLeitorDAO().findById(leitor.getId()));
             } else {
                 throw new LeitorException(deleteUser, null);
             }
@@ -61,13 +61,13 @@ public class ImMemoryLeitorDao implements LeitorDao{
 
 
     @Override
-    public Leitor findById(Integer id) throws LeitorException{
+    public Leitor findById(String id) throws LeitorException{
         if(this.leitores.isEmpty()){
             throw new LeitorException(findWhenNotHaveObj, null);
         }
         else{
             for(Leitor leitor : this.leitores.values()){
-                if(Integer.parseInt(leitor.getId()) == id){
+                if(leitor.getId() == id){
                     return leitor;
                 }
             }
@@ -96,20 +96,4 @@ public class ImMemoryLeitorDao implements LeitorDao{
         }
         throw new LeitorException(loguinUser, null);
     }
-
-    @Override
-    public Leitor findByCpf(String id) throws LeitorException {
-        if(this.leitores.isEmpty()){
-            throw new LeitorException(findWhenNotHaveObj, null);
-        }
-        else{
-            for(Leitor leitor : this.leitores.values()){
-                if(leitor.getId() == id){
-                    return leitor;
-                }
-            }
-            throw new LeitorException(findUser, null);
-        }
-    }
-
 }

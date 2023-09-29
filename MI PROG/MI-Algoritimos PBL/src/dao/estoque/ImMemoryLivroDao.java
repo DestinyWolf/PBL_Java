@@ -12,7 +12,7 @@ import static util.Constantes.*;
 
 /**Classe que implementa a interface LivroDao*/
 public class ImMemoryLivroDao implements LivroDao{
-    private HashMap<Integer, Livro> livros;
+    private HashMap<String, Livro> livros;
 
     public ImMemoryLivroDao() {
         this.livros = new HashMap<>();
@@ -20,7 +20,7 @@ public class ImMemoryLivroDao implements LivroDao{
 
 
     @Override
-    public Livro findById(Integer id) throws LivroException {
+    public Livro findById(String id) throws LivroException {
         if(this.livros.get(id) != null) {
             Livro livroEcontrado = livros.get(id);
             livroEcontrado.setQntDeBuscas(livroEcontrado.getQntDeBuscas()+1);

@@ -12,18 +12,18 @@ import static util.Constantes.*;
 /**Classe model para a fila de reserva*/
 public class FilaDeReserva {
     private Queue<Leitor> reservas;
-    private Integer isbn;
+    private String isbn;
 
     /**Construtor da classe Fila de reserva
      * @param isbn*/
-    public FilaDeReserva(Integer isbn) {
+    public FilaDeReserva(String isbn) {
         this.reservas = new LinkedList<>();
         this.isbn = isbn;
     }
 
     /**Metodo responsavel por retornar o isbn do livro daquela fila de reserva
      * @return  isbn do livro*/
-    public Integer getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
@@ -36,7 +36,7 @@ public class FilaDeReserva {
 
     /**Metodo responsavel por settar o isbn do livro
      * @param isbn*/
-    public void setIsbn(Integer isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
