@@ -35,6 +35,8 @@ class ImMemoryFilaDeReservaDaoTest {
 
     @Test
     void update() {
+        dao.save(fila);
+
     }
 
     @Test
