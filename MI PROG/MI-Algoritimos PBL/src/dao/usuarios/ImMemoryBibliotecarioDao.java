@@ -36,7 +36,7 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
 
     @Override
     public void save(Bibliotecario obj) throws BibliotecarioException {
-        if (MasterDao.getBibliotecarioDao().findById(obj.getId()) != null) {
+        if (this.bibliotecarios.containsKey(obj.getId())) {
             throw new BibliotecarioException(createExistUser, MasterDao.getBibliotecarioDao().findById(obj.getId()));
         }
         else {
@@ -48,7 +48,7 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
 
     @Override
     public void delete(Bibliotecario bibliotecario) throws BibliotecarioException{
-        if (!this.bibliotecarios.isEmpty() && MasterDao.getBibliotecarioDao().findById(bibliotecario.getId()) != null) {
+        if (this.bibliotecarios.containsKey(bibliotecario.getId())) {
             this.bibliotecarios.remove(bibliotecario.getId());
         } else if (this.bibliotecarios.isEmpty()) {
             throw new BibliotecarioException(deleteWhenNotHaveObj,null);

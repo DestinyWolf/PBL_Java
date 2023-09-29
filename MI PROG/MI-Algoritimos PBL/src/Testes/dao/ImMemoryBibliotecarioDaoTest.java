@@ -21,25 +21,31 @@ class ImMemoryBibliotecarioDaoTest {
     }
 
     @Test
-    void findById() {
+    void findById() throws BibliotecarioException{
+        dao.save(bibi);
+        dao.findById(bibi.getId());
     }
 
     @Test
     void save() throws BibliotecarioException{
         dao.save(bibi);
-
     }
 
     @Test
-    void delete() {
+    void delete() throws BibliotecarioException{
+        dao.save(bibi);
+        dao.delete(bibi);
     }
 
     @Test
     void update() {
+
     }
 
     @Test
-    void findAll() {
+    void findAll() throws BibliotecarioException{
+        dao.save(bibi);
+        assertEquals(1,dao.findAll().size());
     }
 
     @Test
