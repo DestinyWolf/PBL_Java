@@ -1,6 +1,8 @@
 package Testes.estoque;
 
 import LibraryExceptions.estoqueExceptions.LivroException;
+import dao.MasterDao;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,8 +10,15 @@ import model.estoque.Estoque;
 import model.estoque.Livro;
 
 class EstoqueTest {
-    Estoque e = new Estoque();
-    Livro l = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+    Estoque e;
+    Livro l;
+    @BeforeEach
+    void setUp() throws Exception{
+        e = new Estoque();
+        l = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+
+        MasterDao.getLivroDao().save(l);
+    }
     @Test
     void novoLivro() throws LivroException {
         e.novoLivro(l);
