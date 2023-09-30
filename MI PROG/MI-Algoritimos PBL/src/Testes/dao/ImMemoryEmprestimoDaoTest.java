@@ -12,6 +12,7 @@ import model.usuarios.Leitor;
 import dao.emprestimo.ImMemoryEmprestimoDao;
 import model.emprestimo.Emprestimo;
 import model.estoque.Livro;
+import util.Data;
 
 class ImMemoryEmprestimoDaoTest {
     Emprestimo emprestimo;
@@ -27,11 +28,14 @@ class ImMemoryEmprestimoDaoTest {
         MasterDao.getLeitorDAO().save(leitor);
         emprestimo = new Emprestimo(leitor, livro);
         emprestimoDao = new ImMemoryEmprestimoDao();
+        emprestimo.setDevolvido(true);
 
     }
 
     @Test
-    void findById() {
+    void findById() throws Exception {
+        emprestimoDao.save(emprestimo);
+        assertEquals(emprestimo, emprestimoDao.findById(livro.getIsbn() + new Data().getDia() + leitor.getId()));
     }
 
     @Test
@@ -40,38 +44,94 @@ class ImMemoryEmprestimoDaoTest {
     }
 
     @Test
-    void deleteById() {
+    void deleteById() throws Exception{
+
+        emprestimoDao.save(emprestimo);
+        emprestimoDao.delete(emprestimo);
+        assertEquals(0, emprestimoDao.findAll().size());
+
     }
 
     @Test
-    void update() {
+    void update() throws Exception {
+        emprestimoDao.save(emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.Update(emprestimo2, emprestimo);
+        assertEquals(emprestimo2, emprestimoDao.findById(emprestimo2.getId()));
     }
 
     @Test
-    void findAll() {
+    void findAll() throws Exception{
+        emprestimoDao.save(emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        assertEquals(2, emprestimoDao.findAll().size());
+
     }
 
     @Test
-    void findByUser() {
+    void findByUser() throws Exception{
+        emprestimoDao.save(emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        assertEquals(1,  emprestimoDao.findByUser(leitor.getId()).size());
     }
 
     @Test
-    void findByLivro() {
+    void findByLivro() throws Exception{
+        emprestimoDao.save(emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        assertEquals(2,  emprestimoDao.findByLivro(livro.getIsbn()).size());
+
     }
 
     @Test
-    void findByUserAndLivro() {
+    void findByUserAndLivro() throws Exception{
+        emprestimoDao.save(emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        assertEquals(emprestimo, emprestimoDao.findByUserAndLivro(livro.getIsbn(), leitor.getId()));
     }
 
     @Test
-    void findEmprestimosAtivosPorUsuario() {
+    void findEmprestimosAtivosPorUsuario() throws Exception {
+        emprestimoDao.save(emprestimo);
+        emprestimo.setDevolvido(false);
+        emprestimoDao.Update(emprestimo, emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        assertEquals(1, emprestimoDao.findEmprestimosAtivosPorUsuario(leitor.getId()).size());
     }
 
     @Test
-    void findEmprestimosAtivos() {
+    void findEmprestimosAtivos() throws Exception {
+        emprestimoDao.save(emprestimo);
+        emprestimo.setDevolvido(false);
+        emprestimoDao.Update(emprestimo, emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        assertEquals(2, emprestimoDao.findEmprestimosAtivos().size());
     }
 
     @Test
-    void findEmprestimosEncerrados() {
+    void findEmprestimosEncerrados() throws Exception{
+        emprestimoDao.save(emprestimo);
+        emprestimo.setDevolvido(true);
+        emprestimoDao.Update(emprestimo, emprestimo);
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        MasterDao.getLeitorDAO().save(leitor2);
+        Emprestimo emprestimo2 = new Emprestimo(leitor2, livro);
+        emprestimoDao.save(emprestimo2);
+        emprestimo2.setDevolvido(true);
+        emprestimoDao.Update(emprestimo2, emprestimo2);
+        assertEquals(2, emprestimoDao.findEmprestimosEncerrados().size());
     }
 }
