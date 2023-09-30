@@ -54,9 +54,9 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     public void delete(Emprestimo emprestimo) throws EmprestimoException{
         if (!emprestimos.containsKey(emprestimo.getId())) {
             throw new EmprestimoException(deleteEmprestimo, null);
-        } else if (!MasterDao.getEmprestimoDao().findById(emprestimo.getId()).isDevolvido()) {
+        } else if (!emprestimo.isDevolvido()) {
             throw new EmprestimoException(deleteEmprestimoWhenIsNotDevolvido, this.emprestimos.get(emprestimo.getId()));
-        }else if (emprestimos.containsKey(emprestimo.getId())) {
+        }else {
             emprestimos.remove(emprestimo.getId());
         }
     }
