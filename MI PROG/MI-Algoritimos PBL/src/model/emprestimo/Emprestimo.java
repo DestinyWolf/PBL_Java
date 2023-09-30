@@ -8,6 +8,8 @@ import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
 
+import java.util.Objects;
+
 import static util.Constantes.*;
 
 /**Classe model para emprestimos*/
@@ -113,13 +115,13 @@ public class Emprestimo {
         try {
             if (devolvido) {
                 MasterDao.getLivroDao().save(this.livro);
-
-
                 leitor.setNumEmprestimos(leitor.getNumEmprestimos()+1);
                 MasterDao.getLeitorDAO().Update(leitor, leitor);
                 dataDevolucao = new Data();
+                this.devolvido = true;
+            } else {
+                this.devolvido = false;
             }
-            this.devolvido = devolvido;
 
         } catch (Exception e) {
             throw new EmprestimoException(devolucaoError, null);
@@ -195,8 +197,8 @@ public class Emprestimo {
     }
     @Override
     public boolean equals(Object obj){
-        if (obj != null && obj instanceof Emprestimo) {
-            return ((this.getId() == ((Emprestimo) obj).getId()));
+        if (obj instanceof Emprestimo) {
+            return ((Objects.equals(this.getId(), ((Emprestimo) obj).getId())));
         } else {
             return false;
         }
