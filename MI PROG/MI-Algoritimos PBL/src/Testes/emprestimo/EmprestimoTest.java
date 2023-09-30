@@ -32,7 +32,9 @@ class EmprestimoTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws Exception {
+        MasterDao.getLeitorDAO().delete(leitor);
+        MasterDao.getLivroDao().delete(livro);
     }
 
     @Test
@@ -97,7 +99,6 @@ class EmprestimoTest {
 
     @Test
     void setDevolvido() throws Exception{
-        MasterDao.getLeitorDAO().save(leitor);
         emprestimo.setDevolvido(true);
         assertTrue(emprestimo.isDevolvido());
         assertEquals(2,emprestimo.getLeitor().getNumEmprestimos());
