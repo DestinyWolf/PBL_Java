@@ -25,6 +25,7 @@ class EmprestimoTest {
                 "75 9 88888888");
         livro = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
         MasterDao.getLivroDao().save(livro);
+        MasterDao.getLeitorDAO().save(leitor);
         emprestimo = new Emprestimo(leitor, livro);
 
 
@@ -68,18 +69,30 @@ class EmprestimoTest {
 
     @Test
     void getRenovacoes() {
+        assertEquals(0, emprestimo.getRenovacoes());
     }
 
     @Test
-    void getDataDevolucao() {
+    void getDataDevolucao() throws Exception{
+        Data data = new Data();
+        emprestimo.setDevolvido(true);
+        assertEquals(0, emprestimo.getDataDevolucao().compareData(data));
     }
 
     @Test
     void setPrazoFinal() {
+        Data data = new Data( new Data().getDia()+1, new Data().getMes(), new Data().getAno());
+        emprestimo.setPrazoFinal(new Data( new Data().getDia()+1, new Data().getMes(), new Data().getAno()));
+        assertEquals(0, data.compareData(emprestimo.getPrazoFinal()));
+
     }
 
     @Test
     void setDataEmprestimo() {
+        Data data = new Data( new Data().getDia()+1, new Data().getMes(), new Data().getAno());
+        emprestimo.setDataEmprestimo(new Data( new Data().getDia()+1, new Data().getMes(), new Data().getAno()));
+        assertEquals(0, data.compareData(emprestimo.getDataEmprestimo()));
+
     }
 
     @Test
@@ -92,23 +105,36 @@ class EmprestimoTest {
     }
 
     @Test
-    void setLeitor() {
+    void setLeitor() throws Exception{
+        Leitor leitor2 = new Leitor("Armando","123","57130521090","Uefs","0000");
+        emprestimo.setLeitor(leitor2);
+        assertEquals(leitor2, emprestimo.getLeitor());
     }
 
     @Test
     void setLivro() {
+        Livro livro2 = new Livro("11","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+        emprestimo.setLivro(livro2);
+        assertEquals(livro2, emprestimo.getLivro());
+
     }
 
     @Test
     void setId() {
+        emprestimo.setId("abrobinha");
+        assertEquals("abrobinha", emprestimo.getId());
     }
 
     @Test
     void setRenovacoes() {
+        emprestimo.setRenovacoes(2);
+        assertEquals(2, emprestimo.getRenovacoes());
     }
 
     @Test
     void setDataDevolucao() {
+        emprestimo.setDataDevolucao(new Data());
+        assertEquals(0, new Data().compareData(emprestimo.getDataDevolucao()));
     }
 
     @Test
