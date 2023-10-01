@@ -1,13 +1,17 @@
 package Testes.estoque;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import model.estoque.Livro;
 
 class LivroTest {
-    Livro l = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
-
+    private Livro l;
+    @BeforeEach
+    void criar(){
+        l = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+    }
 
     @Test
     void getAnoDePublicacao() {
