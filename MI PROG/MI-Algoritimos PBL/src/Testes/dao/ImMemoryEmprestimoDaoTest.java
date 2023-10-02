@@ -4,6 +4,7 @@ import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.estoqueExceptions.LivroException;
 import LibraryExceptions.userexcepitions.LeitorException;
 import dao.MasterDao;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,13 @@ class ImMemoryEmprestimoDaoTest {
         emprestimoDao = new ImMemoryEmprestimoDao();
         emprestimo.setDevolvido(true);
 
+    }
+
+    @AfterEach
+    void limpar() throws Exception{
+        MasterDao.getLeitorDAO().delete(leitor);
+        emprestimoDao = new ImMemoryEmprestimoDao();
+        MasterDao.getLivroDao().delete(livro);
     }
 
     @Test
