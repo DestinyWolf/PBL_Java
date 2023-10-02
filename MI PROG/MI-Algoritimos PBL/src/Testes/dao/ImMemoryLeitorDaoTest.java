@@ -69,9 +69,4 @@ class ImMemoryLeitorDaoTest {
         assertNotNull(f);
     }
 
-    @Test
-    void findByCpfTest() throws LeitorException{
-
-    }
-
 }
