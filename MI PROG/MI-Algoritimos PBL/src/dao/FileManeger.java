@@ -1,4 +1,10 @@
 package dao;
+import LibraryExceptions.emprestimoexception.EmprestimoException;
+import LibraryExceptions.emprestimoexception.ReservarException;
+import LibraryExceptions.estoqueExceptions.LivroException;
+import LibraryExceptions.userexcepitions.AdministradorException;
+import LibraryExceptions.userexcepitions.BibliotecarioException;
+import LibraryExceptions.userexcepitions.LeitorException;
 import model.emprestimo.Emprestimo;
 import model.emprestimo.FilaDeReserva;
 import model.estoque.Livro;
@@ -15,10 +21,7 @@ import java.util.List;
  */
 public class FileManeger {
 
-    public static void generateCache() {
-
-    }
-    public FileManeger() throws Exception{
+    public static void generateCache() throws Exception{
         if(!(new File("cache")).exists()){
             File file = new File("cache");
             if (!file.exists()) {
@@ -45,10 +48,9 @@ public class FileManeger {
         if (!(new File("cache\\filaDeReserva.dat")).exists()){
             FileManeger.saveFilaDeReserva(new HashMap<String, FilaDeReserva>());
         }
-
     }
 
-    public static void saveFilaDeReserva(HashMap<String, FilaDeReserva> filasDeReserva) throws Exception{
+    public static void saveFilaDeReserva(HashMap<String, FilaDeReserva> filasDeReserva) throws ReservarException {
         try{
             File path = new File("cache\\filaDeReserva.dat");
             FileOutputStream teste = new FileOutputStream(path);
@@ -56,11 +58,11 @@ public class FileManeger {
             gravador.writeObject(filasDeReserva);
             gravador.close();
         } catch (IOException exception){
-            throw new Exception("Impossivel realizar o salvamento");
+            throw new ReservarException("Impossivel realizar o salvamento", null);
         }
     }
 
-    public static void saveEmprestimo(HashMap<String, Emprestimo> emprestimos) throws Exception {
+    public static void saveEmprestimo(HashMap<String, Emprestimo> emprestimos) throws EmprestimoException {
         try{
             File path = new File("cache\\emprestimo.dat");
             FileOutputStream teste = new FileOutputStream(path);
@@ -68,11 +70,11 @@ public class FileManeger {
             gravador.writeObject(emprestimos);
             gravador.close();
         } catch (IOException exception){
-            throw new Exception("Impossivel realizar o salvamento");
+            throw new EmprestimoException("Impossivel realizar o salvamento", null);
         }
     }
 
-    public static void saveLivro(HashMap<String, Livro> livros) throws Exception{
+    public static void saveLivro(HashMap<String, Livro> livros) throws LivroException {
         try{
             File path = new File("cache\\livro.dat");
             FileOutputStream teste = new FileOutputStream(path);
@@ -80,11 +82,11 @@ public class FileManeger {
             gravador.writeObject(livros);
             gravador.close();
         } catch (IOException exception){
-            throw new Exception("Impossivel realizar o salvamento");
+            throw new LivroException("Impossivel realizar o salvamento", null);
         }
     }
 
-    public static void saveBibliotecario(HashMap<String, Bibliotecario> bibliotecarios) throws Exception{
+    public static void saveBibliotecario(HashMap<String, Bibliotecario> bibliotecarios) throws BibliotecarioException {
         try{
             File path = new File("cache\\bibliotecario.dat");
             FileOutputStream teste = new FileOutputStream(path);
@@ -92,11 +94,11 @@ public class FileManeger {
             gravador.writeObject(bibliotecarios);
             gravador.close();
         } catch (IOException exception){
-            throw new Exception("Impossivel realizar o salvamento");
+            throw new BibliotecarioException("Impossivel realizar o salvamento", null);
         }
     }
 
-    public static void saveAdministrador(HashMap<String, Administrador> administradores) throws Exception{
+    public static void saveAdministrador(HashMap<String, Administrador> administradores) throws AdministradorException {
         try{
             File path = new File("cache\\administrador.dat");
             FileOutputStream teste = new FileOutputStream(path);
@@ -104,11 +106,11 @@ public class FileManeger {
             gravador.writeObject(administradores);
             gravador.close();
         } catch (IOException exception){
-            throw new Exception("Impossivel realizar o salvamento");
+            throw new AdministradorException("Impossivel realizar o salvamento", null);
         }
     }
 
-    public static void saveLeitor(HashMap<String, Leitor> leitores) throws Exception {
+    public static void saveLeitor(HashMap<String, Leitor> leitores) throws LeitorException {
         try{
             File path = new File("cache\\leitor.dat");
             FileOutputStream teste = new FileOutputStream(path);
@@ -116,11 +118,11 @@ public class FileManeger {
             gravador.writeObject(leitores);
             gravador.close();
         } catch (IOException exception){
-            throw new Exception("Impossivel realizar o salvamento");
+            throw new LeitorException("Impossivel realizar o salvamento", null);
         }
     }
 
-    public static HashMap<String, Leitor> openLeitor() throws Exception {
+    public static HashMap<String, Leitor> openLeitor() throws LeitorException {
             try {
                 FileInputStream path = new FileInputStream("cache\\leitor.dat");
                 ObjectInputStream recebedor = new ObjectInputStream(path);
@@ -131,16 +133,16 @@ public class FileManeger {
                 }
                 return leitores;
             } catch (FileNotFoundException excep) {
-                throw new Exception("O arquivo não foi encontrado no sistema.", excep);
+                throw new LeitorException("O arquivo não foi encontrado no sistema.", null);
             } catch (ClassNotFoundException excep) {
-                throw new Exception("Classe não encontrada.", excep);
+                throw new LeitorException("Classe não encontrada.", null);
             } catch (IOException excep) {
-                throw new Exception("Problemas na leitura do arquivo.", excep);
+                throw new LeitorException("Problemas na leitura do arquivo.", null);
             }
 
     }
 
-    public static HashMap<String, Administrador> openAdministrador() throws Exception {
+    public static HashMap<String, Administrador> openAdministrador() throws AdministradorException {
         try {
             FileInputStream path = new FileInputStream("cache\\administrador.dat");
             ObjectInputStream recebedor = new ObjectInputStream(path);
@@ -151,16 +153,16 @@ public class FileManeger {
             }
             return administradores;
         } catch (FileNotFoundException excep) {
-            throw new Exception("O arquivo não foi encontrado no sistema.", excep);
+            throw new AdministradorException("O arquivo não foi encontrado no sistema.", null);
         } catch (ClassNotFoundException excep) {
-            throw new Exception("Classe não encontrada.", excep);
+            throw new AdministradorException("Classe não encontrada.", null);
         } catch (IOException excep) {
-            throw new Exception("Problemas na leitura do arquivo.", excep);
+            throw new AdministradorException("Problemas na leitura do arquivo.", null);
         }
 
     }
 
-    public static HashMap<String, Bibliotecario> openBibliotecario() throws Exception {
+    public static HashMap<String, Bibliotecario> openBibliotecario() throws BibliotecarioException {
         try {
             FileInputStream path = new FileInputStream("cache\\bibliotecario.dat");
             ObjectInputStream recebedor = new ObjectInputStream(path);
@@ -171,16 +173,16 @@ public class FileManeger {
             }
             return bibliotecarios;
         } catch (FileNotFoundException excep) {
-            throw new Exception("O arquivo não foi encontrado no sistema.", excep);
+            throw new BibliotecarioException("O arquivo não foi encontrado no sistema.", null);
         } catch (ClassNotFoundException excep) {
-            throw new Exception("Classe não encontrada.", excep);
+            throw new BibliotecarioException("Classe não encontrada.", null);
         } catch (IOException excep) {
-            throw new Exception("Problemas na leitura do arquivo.", excep);
+            throw new BibliotecarioException("Problemas na leitura do arquivo.", null);
         }
 
     }
 
-    public static HashMap<String, Livro> openLivro() throws Exception {
+    public static HashMap<String, Livro> openLivro() throws LivroException {
         try {
             FileInputStream path = new FileInputStream("cache\\livro.dat");
             ObjectInputStream recebedor = new ObjectInputStream(path);
@@ -191,16 +193,16 @@ public class FileManeger {
             }
             return livros;
         } catch (FileNotFoundException excep) {
-            throw new Exception("O arquivo não foi encontrado no sistema.", excep);
+            throw new LivroException("O arquivo não foi encontrado no sistema.", null);
         } catch (ClassNotFoundException excep) {
-            throw new Exception("Classe não encontrada.", excep);
+            throw new LivroException("Classe não encontrada.", null);
         } catch (IOException excep) {
-            throw new Exception("Problemas na leitura do arquivo.", excep);
+            throw new LivroException("Problemas na leitura do arquivo.", null);
         }
 
     }
 
-    public static HashMap<String, Emprestimo> openEmprestimo() throws Exception {
+    public static HashMap<String, Emprestimo> openEmprestimo() throws EmprestimoException {
         try {
             FileInputStream path = new FileInputStream("cache\\emprestimo.dat");
             ObjectInputStream recebedor = new ObjectInputStream(path);
@@ -211,16 +213,16 @@ public class FileManeger {
             }
             return emprestimos;
         } catch (FileNotFoundException excep) {
-            throw new Exception("O arquivo não foi encontrado no sistema.", excep);
+            throw new EmprestimoException("O arquivo não foi encontrado no sistema.", null);
         } catch (ClassNotFoundException excep) {
-            throw new Exception("Classe não encontrada.", excep);
+            throw new EmprestimoException("Classe não encontrada.", null);
         } catch (IOException excep) {
-            throw new Exception("Problemas na leitura do arquivo.", excep);
+            throw new EmprestimoException("Problemas na leitura do arquivo.", null);
         }
 
     }
 
-    public static HashMap<String, FilaDeReserva> openFilaDeReserva() throws Exception {
+    public static HashMap<String, FilaDeReserva> openFilaDeReserva() throws ReservarException {
         try {
             FileInputStream path = new FileInputStream("cache\\filaDeReserva.dat");
             ObjectInputStream recebedor = new ObjectInputStream(path);
@@ -231,11 +233,11 @@ public class FileManeger {
             }
             return filasDeReserva;
         } catch (FileNotFoundException excep) {
-            throw new Exception("O arquivo não foi encontrado no sistema.", excep);
+            throw new ReservarException("O arquivo não foi encontrado no sistema.", null);
         } catch (ClassNotFoundException excep) {
-            throw new Exception("Classe não encontrada.", excep);
+            throw new ReservarException("Classe não encontrada.", null);
         } catch (IOException excep) {
-            throw new Exception("Problemas na leitura do arquivo.", excep);
+            throw new ReservarException("Problemas na leitura do arquivo.", null);
         }
 
     }
