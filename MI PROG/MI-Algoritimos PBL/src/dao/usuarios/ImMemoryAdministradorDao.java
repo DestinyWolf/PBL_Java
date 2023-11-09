@@ -14,7 +14,11 @@ import java.util.List;
 
 /**Classe que implementar a interface AdministradorDao*/
 public class ImMemoryAdministradorDao implements AdministradorDao{
-    private HashMap<String, Administrador> administradores = new HashMap<>();
+    private HashMap<String, Administrador> administradores;
+
+    public ImMemoryAdministradorDao(){
+        this.administradores = new HashMap<>();
+    }
 
     @Override
     public Administrador findById(String id) throws AdministradorException {
