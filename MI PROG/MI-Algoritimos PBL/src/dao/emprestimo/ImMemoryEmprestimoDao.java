@@ -47,9 +47,6 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
 
     }
 
-
-
-
     @Override
     public void delete(Emprestimo emprestimo) throws EmprestimoException{
         if (!emprestimos.containsKey(emprestimo.getId())) {
