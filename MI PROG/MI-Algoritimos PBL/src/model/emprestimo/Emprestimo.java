@@ -8,12 +8,13 @@ import model.usuarios.Leitor;
 import model.estoque.Livro;
 import util.Data;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import static util.Constantes.*;
 
 /**Classe model para emprestimos*/
-public class Emprestimo {
+public class Emprestimo implements Serializable {
     private Leitor leitor;
     private Livro livro;
     private Data dataEmprestimo;

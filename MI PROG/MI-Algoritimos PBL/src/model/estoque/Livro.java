@@ -5,8 +5,10 @@ import LibraryExceptions.estoqueExceptions.LivroException;
 import dao.MasterDao;
 import model.usuarios.Bibliotecario;
 
+import java.io.Serializable;
+
 /**Classe model para livro*/
-public class Livro {
+public class Livro implements Serializable {
     private String isbn;
     private String autor;
     private String categoria;

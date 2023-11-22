@@ -1,10 +1,13 @@
 package model.usuarios;
 
 import LibraryExceptions.userexcepitions.BibliotecarioException;
+
+import java.io.Serializable;
+
 import static util.Constantes.createUser;
 /**
  * classe Model do usuario do tipo bibliotecario*/
-public class Bibliotecario extends Pessoa{
+public class Bibliotecario extends Pessoa implements Serializable {
     private String cargo;
 
 

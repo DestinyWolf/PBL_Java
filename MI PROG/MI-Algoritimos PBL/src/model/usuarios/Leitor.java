@@ -6,11 +6,12 @@ import model.emprestimo.Emprestimo;
 import static util.Constantes.createUser;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Classes modelo para usuarios do tipo leitor*/
-public class Leitor extends Pessoa{
+public class Leitor extends Pessoa implements Serializable {
     private boolean  bloqueio;
     private Integer numEmprestimos;
     private Integer diasRestantesMulta;

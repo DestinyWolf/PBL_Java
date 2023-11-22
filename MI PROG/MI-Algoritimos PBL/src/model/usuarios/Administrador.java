@@ -1,10 +1,13 @@
 package model.usuarios;
 
 import LibraryExceptions.userexcepitions.AdministradorException;
+
+import java.io.Serializable;
+
 import static util.Constantes.createUser;
 
 /**Classe model do Administrador*/
-public class Administrador extends Pessoa{
+public class Administrador extends Pessoa implements Serializable {
     private String cargo;
 
     /**

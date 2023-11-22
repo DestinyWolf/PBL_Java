@@ -4,13 +4,14 @@ import LibraryExceptions.emprestimoexception.ReservarException;
 import model.usuarios.Leitor;
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import static util.Constantes.*;
 
 /**Classe model para a fila de reserva*/
-public class FilaDeReserva {
+public class FilaDeReserva implements Serializable {
     private Queue<Leitor> reservas;
     private String isbn;
 
