@@ -77,10 +77,10 @@ public class FileManeger {
     public static void saveLivro(HashMap<String, Livro> livros) throws LivroException {
         try{
             File path = new File("cache\\livro.dat");
-            FileOutputStream teste = new FileOutputStream(path);
-            ObjectOutputStream gravador = new ObjectOutputStream(teste);
+            ObjectOutputStream gravador = new ObjectOutputStream(new FileOutputStream(path));
             gravador.writeObject(livros);
             gravador.close();
+
         } catch (IOException exception){
             throw new LivroException("Impossivel realizar o salvamento", null);
         }
@@ -184,9 +184,10 @@ public class FileManeger {
 
     public static HashMap<String, Livro> openLivro() throws LivroException {
         try {
+            HashMap<String, Livro> livros = new HashMap<>();
             FileInputStream path = new FileInputStream("cache\\livro.dat");
             ObjectInputStream recebedor = new ObjectInputStream(path);
-            HashMap<String, Livro> livros = (HashMap<String, Livro>) recebedor.readObject();
+            livros = (HashMap<String, Livro>) recebedor.readObject();
             recebedor.close();
             if (livros.isEmpty()) {
                 return new HashMap<String, Livro>();
