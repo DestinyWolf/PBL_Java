@@ -1,9 +1,7 @@
 package dao;
 
-import dao.emprestimo.EmprestimoDao;
-import dao.emprestimo.FilaDeReservaDao;
-import dao.emprestimo.ImMemoryEmprestimoDao;
-import dao.emprestimo.ImMemoryFilaDeReservaDao;
+import dao.emprestimo.*;
+import dao.estoque.ImDiskLivroDao;
 import dao.estoque.ImMemoryLivroDao;
 import dao.estoque.LivroDao;
 import dao.usuarios.*;
@@ -22,42 +20,42 @@ public class MasterDao {
 
     public static LeitorDao getLeitorDAO(){
         if(leitorDao == null){
-            leitorDao = new ImMemoryLeitorDao();
+            leitorDao = new ImDiskLeitorDao();
         }
         return leitorDao;
     }
 
     public static LivroDao getLivroDao(){
         if(livroDao == null) {
-            livroDao = new ImMemoryLivroDao();
+            livroDao = new ImDiskLivroDao();
         }
         return livroDao;
     }
 
     public static BibliotecarioDao getBibliotecarioDao() {
         if(bibliotecarioDao == null) {
-            bibliotecarioDao = new ImMemoryBibliotecarioDao();
+            bibliotecarioDao = new ImDiskBibliotecarioDao();
         }
         return bibliotecarioDao;
     }
 
     public static FilaDeReservaDao getFiladeReservaDao() {
         if (filadeReservaDao == null) {
-            filadeReservaDao = new ImMemoryFilaDeReservaDao();
+            filadeReservaDao = new ImDiskFilaDeReservaDao();
         }
         return filadeReservaDao;
     }
 
     public static EmprestimoDao getEmprestimoDao() {
         if (emprestimoDao == null) {
-            emprestimoDao = new ImMemoryEmprestimoDao();
+            emprestimoDao = new ImDiskEmprestimoDao();
         }
         return emprestimoDao;
     }
 
     public static AdministradorDao getAdministradorDao() {
         if (administradorDao == null) {
-            administradorDao = new ImMemoryAdministradorDao();
+            administradorDao = new ImDiskAdministradorDao();
         }
 
         return administradorDao;
