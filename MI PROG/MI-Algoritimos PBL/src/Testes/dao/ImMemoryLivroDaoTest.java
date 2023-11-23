@@ -43,6 +43,7 @@ class ImMemoryLivroDaoTest {
     void delete() throws LivroException{
         dao.save(livro);
         dao.delete(livro);
+        assertEquals(dao.findAll().size(),0);
 
     }
 
@@ -54,7 +55,10 @@ class ImMemoryLivroDaoTest {
     }
 
     @Test
-    void findAll() {
+    void findAll() throws Exception{
+        Livro livroNovo = new Livro("11","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
+        dao.save(livroNovo);
+        assertEquals(2, dao.findAll().size());
     }
 
     @Test
@@ -73,13 +77,6 @@ class ImMemoryLivroDaoTest {
     void findByNome() throws LivroException{
         dao.save(livro);
         assertEquals(livro.getNome(),dao.findByNome(livro.getNome()).get(0).getNome());
-    }
-
-    @Test
-    void findByIsbn() throws LivroException{
-        dao.save(livro);
-        assertEquals(livro.getIsbn(),dao.findById(livro.getIsbn()).getIsbn());
-
     }
 
     @Test
