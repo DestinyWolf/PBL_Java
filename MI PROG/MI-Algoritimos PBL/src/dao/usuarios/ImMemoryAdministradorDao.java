@@ -2,6 +2,7 @@ package dao.usuarios;
 
 import LibraryExceptions.userexcepitions.AdministradorException;
 import LibraryExceptions.userexcepitions.LeitorException;
+import dao.FileManeger;
 import dao.MasterDao;
 import model.usuarios.Administrador;
 import model.usuarios.Leitor;
