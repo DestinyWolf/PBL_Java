@@ -1,7 +1,9 @@
 package model.usuarios;
 
+import java.io.Serializable;
+
 import static util.Constantes.cpfInvalido;
-public class Cpf {
+public class Cpf implements Serializable {
     private String cpf;
 
     /**

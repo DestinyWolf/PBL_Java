@@ -1,9 +1,11 @@
 package model.usuarios;
 
+import java.io.Serializable;
+
 /**
  * classe abstrata usada como base para as classes leitor, administrador e bibliotecario
  * */
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
     private String nome;
     private String senha;
     private Cpf cpf;
