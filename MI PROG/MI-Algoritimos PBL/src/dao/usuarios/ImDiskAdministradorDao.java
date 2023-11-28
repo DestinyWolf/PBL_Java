@@ -30,10 +30,8 @@ public class ImDiskAdministradorDao implements AdministradorDao{
             throw new AdministradorException(findWhenNotHaveObj, null);
         }
         else{
-            for(Administrador administrador : this.administradores.values()){
-                if(administrador.getId() == id){
-                    return administrador;
-                }
+            if(this.administradores.containsKey(id)){
+                return this.administradores.get(id);
             }
             throw new AdministradorException(findUser, null);
         }
