@@ -28,11 +28,10 @@ public class ImDiskBibliotecarioDao implements BibliotecarioDao{
             throw new BibliotecarioException(findWhenNotHaveObj, null);
         }
         else{
-            for(Bibliotecario bibliotecario : this.bibliotecarios.values()){
-                if(bibliotecario.getId() == id){
-                    return bibliotecario;
-                }
+            if(this.bibliotecarios.containsKey(id)){
+                return this.bibliotecarios.get(id);
             }
+
             throw new BibliotecarioException(findUser, null);
         }
     }
