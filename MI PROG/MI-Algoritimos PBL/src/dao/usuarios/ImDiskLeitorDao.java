@@ -6,10 +6,10 @@ import dao.FileManeger;
 import dao.MasterDao;
 import model.usuarios.Leitor;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import static util.Constantes.*;
 
@@ -26,13 +26,14 @@ public class ImDiskLeitorDao implements LeitorDao{
     @Override
     public void save(Leitor obj) throws LeitorException {
 
-        if (this.leitores.get(obj.getId()) != null) {
+        if (this.leitores.containsKey(obj.getId())) {
             throw new LeitorException(createExistUser, MasterDao.getLeitorDAO().findById(obj.getId()));
-        }
+        }else {
 
-        Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
-        leitores.put(leitor.getId(), leitor);
-        FileManeger.saveLeitor(leitores);
+            Leitor leitor = new Leitor(obj.getNome(), obj.getSenha(), obj.getId(), obj.getEndereco(), obj.getTelefone());
+            leitores.put(leitor.getId(), leitor);
+            FileManeger.saveLeitor(leitores);
+        }
     }
 
 
@@ -40,7 +41,7 @@ public class ImDiskLeitorDao implements LeitorDao{
     @Override
     public void delete(Leitor leitor) throws LeitorException{
         try {
-            if (findById(leitor.getId()) != null /*&& MasterDao.getEmprestimoDao().findByUser(leitor.getId()) == null*/) {
+            if (this.leitores.containsKey(leitor.getId())   /*&& MasterDao.getEmprestimoDao().findByUser(leitor.getId()) == null*/) {
                 leitores.remove(leitor.getId());
                 FileManeger.saveLeitor(leitores);
             } else if (MasterDao.getEmprestimoDao().findByUser(leitor.getId()) != null) {
@@ -76,10 +77,8 @@ public class ImDiskLeitorDao implements LeitorDao{
             throw new LeitorException(findWhenNotHaveObj, null);
         }
         else{
-            for(Leitor leitor : this.leitores.values()){
-                if(leitor.getId() == id){
-                    return leitor;
-                }
+            if(this.leitores.containsKey(id)){
+                return leitores.get(id);
             }
             throw new LeitorException(findUser, null);
         }
