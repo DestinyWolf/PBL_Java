@@ -2,6 +2,7 @@ package Testes.dao;
 
 import LibraryExceptions.emprestimoexception.ReservarException;
 import dao.FileManeger;
+import dao.MasterDao;
 import dao.emprestimo.ImDiskFilaDeReservaDao;
 import dao.emprestimo.ImMemoryFilaDeReservaDao;
 import model.emprestimo.FilaDeReserva;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ImDIskFilaDeReservaDaoTest {
     private ImDiskFilaDeReservaDao dao;
@@ -16,7 +18,9 @@ class ImDIskFilaDeReservaDaoTest {
 
     @BeforeEach
     void criar() throws Exception {
-        FileManeger.generateCache();
+        while(!MasterDao.getFiladeReservaDao().findAll().isEmpty()) {
+            MasterDao.getFiladeReservaDao().delete(MasterDao.getFiladeReservaDao().findAll().get(0));
+        }
         dao = new ImDiskFilaDeReservaDao();
         fila = new FilaDeReserva("12");
     }
@@ -24,25 +28,29 @@ class ImDIskFilaDeReservaDaoTest {
     @Test
     void findById() throws ReservarException {
         dao.save(fila);
-        dao.findById(fila.getIsbn());
+        assertEquals(fila, dao.findById(fila.getIsbn()));
+
     }
 
     @Test
     void save() throws ReservarException {
         dao.save(fila);
+        assertEquals(1, dao.findAll().size());
     }
 
     @Test
     void delete() throws ReservarException{
         dao.save(fila);
         dao.delete(fila);
+        assertEquals(0,dao.findAll().size() );
     }
 
     @Test
     void update() throws ReservarException{
         dao.save(fila);
-        FilaDeReserva NovaFila = new FilaDeReserva("778");
-        dao.Update(NovaFila,fila);
+        FilaDeReserva novaFila = new FilaDeReserva("778");
+        dao.Update(novaFila,fila);
+        assertNotEquals(fila, dao.findById(novaFila.getIsbn()));
     }
 
     @Test
