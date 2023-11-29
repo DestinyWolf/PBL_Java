@@ -14,7 +14,7 @@ public class MasterDao {
     private static LeitorDao leitorDao;
     private static LivroDao livroDao;
     private static BibliotecarioDao bibliotecarioDao;
-    public static FilaDeReservaDao filadeReservaDao;
+    private static FilaDeReservaDao filadeReservaDao;
     private static EmprestimoDao emprestimoDao;
     private static AdministradorDao administradorDao;
 
