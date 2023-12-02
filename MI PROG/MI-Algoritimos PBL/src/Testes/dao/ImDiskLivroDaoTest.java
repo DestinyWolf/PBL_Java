@@ -17,81 +17,79 @@ import static org.junit.jupiter.api.Assertions.*;
 class ImDiskLivroDaoTest {
 
     private Livro livro;
-    private ImDiskLivroDao dao;
     @BeforeEach
     void setUp() throws Exception{
 
         FileManeger.generateCache();
         livro = new Livro("39","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
-        dao = new ImDiskLivroDao();
-        dao.save(livro);
+        MasterDao.getLivroDao().save(livro);
 
     }
 
     @AfterEach
     void setDown() throws Exception{
-        dao = new ImDiskLivroDao();
+        MasterDao.getLivroDao().clearAll();
     }
 
     @Test
     void findById() throws Exception{
-        assertEquals(livro.getIsbn(),dao.findById(livro.getIsbn()).getIsbn());
+        assertEquals(livro.getIsbn(),MasterDao.getLivroDao().findById(livro.getIsbn()).getIsbn());
     }
 
     @Test
     void save() throws Exception{
 
-        assertEquals(livro.getIsbn(),dao.findById(livro.getIsbn()).getIsbn());
+        assertEquals(livro.getIsbn(),MasterDao.getLivroDao().findById(livro.getIsbn()).getIsbn());
     }
 
     @Test
     void delete() throws Exception{
-        dao.delete(livro);
-        assertEquals(0,dao.findAll().size());
+        MasterDao.getLivroDao().delete(livro);
+        assertEquals(0,MasterDao.getLivroDao().findAll().size());
     }
 
     @Test
     void update() throws Exception{
 
-        Livro livroNovo = new Livro("11","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
-        dao.Update(livroNovo,livro);
+        Livro livroNovo = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Lula");
+        MasterDao.getLivroDao().Update(livroNovo,livro);
+        assertNotSame(livro, MasterDao.getLivroDao().findById(livroNovo.getIsbn()));
     }
 
     @Test
     void findAll() throws Exception{
         Livro livroNovo = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Algum Livro de Java");
-        dao.save(livroNovo);
-        assertEquals(1, dao.findAll().size());
+        MasterDao.getLivroDao().save(livroNovo);
+        assertEquals(2, MasterDao.getLivroDao().findAll().size());
     }
 
     @Test
     void findByAutor() throws Exception{
-        assertEquals(livro.getAutor(),dao.findByAutor(livro.getAutor()).get(0).getAutor());
+        assertEquals(livro.getAutor(),MasterDao.getLivroDao().findByAutor(livro.getAutor()).get(0).getAutor());
     }
 
     @Test
     void findByCategoria() throws Exception{
-        assertEquals(livro.getCategoria(),dao.findByCategoria(livro.getCategoria()).get(0).getCategoria());
+        assertEquals(livro.getCategoria(),MasterDao.getLivroDao().findByCategoria(livro.getCategoria()).get(0).getCategoria());
     }
 
     @Test
     void findByNome() throws Exception{
-        assertEquals(livro.getNome(),dao.findByNome(livro.getNome()).get(0).getNome());
+        assertEquals(livro.getNome(),MasterDao.getLivroDao().findByNome(livro.getNome()).get(0).getNome());
     }
 
     @Test
     void deleteOnlyOne() throws Exception{
-        dao.deleteOnlyOne(livro);
-        assertEquals(1, dao.findAll().get(0).getQuantidade());
+        MasterDao.getLivroDao().save(livro);
+        MasterDao.getLivroDao().deleteOnlyOne(livro);
+        assertEquals(1, MasterDao.getLivroDao().findAll().get(0).getQuantidade());
 
     }
 
     @Test
     void findLivrosMaisPesquisados() throws Exception{
         List<Livro> lista = new ArrayList<>();
-        lista = dao.findLivrosMaisPesquisados();
-        livro.setQntDeBuscas(2);
-        livro.setQuantidade(2);
-        assertSame(livro,lista.get(0));
+        lista = MasterDao.getLivroDao().findLivrosMaisPesquisados();
+        assertEquals(livro,lista.get(0));
     }
 }
