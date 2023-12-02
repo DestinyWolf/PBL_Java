@@ -6,6 +6,7 @@ import dao.MasterDao;
 import dao.emprestimo.ImDiskFilaDeReservaDao;
 import dao.emprestimo.ImMemoryFilaDeReservaDao;
 import model.emprestimo.FilaDeReserva;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,49 +14,48 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ImDIskFilaDeReservaDaoTest {
-    private ImDiskFilaDeReservaDao dao;
     private FilaDeReserva fila;
 
     @BeforeEach
-    void criar() throws Exception {
-        while(!MasterDao.getFiladeReservaDao().findAll().isEmpty()) {
-            MasterDao.getFiladeReservaDao().delete(MasterDao.getFiladeReservaDao().findAll().get(0));
-        }
-        dao = new ImDiskFilaDeReservaDao();
+    void setUp() throws Exception {
+
         fila = new FilaDeReserva("12");
+        MasterDao.getFiladeReservaDao().save(fila);
+    }
+
+    @AfterEach
+    void setDown() throws Exception{
+        MasterDao.getFiladeReservaDao().clearAll();
     }
 
     @Test
     void findById() throws ReservarException {
-        dao.save(fila);
-        assertEquals(fila, dao.findById(fila.getIsbn()));
+
+        assertEquals(fila, MasterDao.getFiladeReservaDao().findById(fila.getIsbn()));
 
     }
 
     @Test
     void save() throws ReservarException {
-        dao.save(fila);
-        assertEquals(1, dao.findAll().size());
+
+        assertEquals(1, MasterDao.getFiladeReservaDao().findAll().size());
     }
 
     @Test
     void delete() throws ReservarException{
-        dao.save(fila);
-        dao.delete(fila);
-        assertEquals(0,dao.findAll().size() );
+        MasterDao.getFiladeReservaDao().delete(fila);
+        assertEquals(0,MasterDao.getFiladeReservaDao().findAll().size() );
     }
 
     @Test
     void update() throws ReservarException{
-        dao.save(fila);
         FilaDeReserva novaFila = new FilaDeReserva("778");
-        dao.Update(novaFila,fila);
-        assertNotEquals(fila, dao.findById(novaFila.getIsbn()));
+        MasterDao.getFiladeReservaDao().Update(novaFila,fila);
+        assertNotEquals(fila, MasterDao.getFiladeReservaDao().findById(novaFila.getIsbn()));
     }
 
     @Test
     void findAll() throws ReservarException{
-        dao.save(fila);
-        assertEquals(1,dao.findAll().size());
+        assertEquals(1,MasterDao.getFiladeReservaDao().findAll().size());
     }
 }
