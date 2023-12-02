@@ -6,6 +6,7 @@ import dao.MasterDao;
 import dao.usuarios.ImDiskBibliotecarioDao;
 import dao.usuarios.ImMemoryBibliotecarioDao;
 import model.usuarios.Bibliotecario;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,54 +16,55 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ImDiskBibliotecarioDaoTest {
 
-    private ImDiskBibliotecarioDao dao;
-    private Bibliotecario bibi;
+
+    private Bibliotecario bibliotecario;
 
     @BeforeEach
     void criar() throws Exception {
-        while(MasterDao.getBibliotecarioDao().findAll().size() > 0) {
-            MasterDao.getBibliotecarioDao().delete(MasterDao.getBibliotecarioDao().findAll().get(0));
-        }
+
         FileManeger.generateCache();
-        dao = new ImDiskBibliotecarioDao();
-        bibi = new Bibliotecario("ArmandoTest","123","64299259513","Brabo");
+        bibliotecario = new Bibliotecario("ArmandoTest","123","64299259513","Brabo");
+        MasterDao.getBibliotecarioDao().save(bibliotecario);
+    }
+
+    @AfterEach
+    void setDown() throws Exception{
+        MasterDao.getBibliotecarioDao().clearAll();
     }
 
     @Test
     void findById() throws BibliotecarioException{
-        dao.save(bibi);
-        dao.findById(bibi.getId());
+        assertEquals(bibliotecario, MasterDao.getBibliotecarioDao().findById(bibliotecario.getId()));
     }
 
     @Test
     void save() throws BibliotecarioException{
-        dao.save(bibi);
+        assertEquals(bibliotecario, MasterDao.getBibliotecarioDao().findById(bibliotecario.getId()));
     }
 
     @Test
     void delete() throws BibliotecarioException{
-        dao.save(bibi);
-        dao.delete(bibi);
+
+        MasterDao.getBibliotecarioDao().delete(bibliotecario);
+        assertEquals(0,MasterDao.getBibliotecarioDao().findAll().size());
     }
 
     @Test
     void update() throws BibliotecarioException{
-        dao.save(bibi);
-        Bibliotecario bb2 = new Bibliotecario("MaikeTest","333","53327195072","Maioral");
-        dao.Update(bb2,bibi);
-        assertNotEquals(bibi, dao.findById(bb2.getId()));
+        Bibliotecario bibliotecario1 = new Bibliotecario("MaikeTest","333","53327195072","Maioral");
+        MasterDao.getBibliotecarioDao().Update(bibliotecario1,bibliotecario);
+        assertNotEquals(bibliotecario, MasterDao.getBibliotecarioDao().findById(bibliotecario1.getId()));
     }
 
     @Test
     void findAll() throws BibliotecarioException{
-        dao.save(bibi);
-        assertEquals(1,dao.findAll().size());
+
+        assertEquals(1,MasterDao.getBibliotecarioDao().findAll().size());
     }
 
     @Test
     void findLogin() throws BibliotecarioException{
-        dao.save(bibi);
-        Bibliotecario sessao = dao.findLogin(bibi.getId(),bibi.getSenha());
-        assertEquals(bibi, sessao);
+        Bibliotecario sessao = MasterDao.getBibliotecarioDao().findLogin(bibliotecario.getId(),bibliotecario.getSenha());
+        assertEquals(bibliotecario, sessao);
     }
 }
