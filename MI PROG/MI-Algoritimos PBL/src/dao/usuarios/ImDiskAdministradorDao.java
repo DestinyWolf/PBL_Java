@@ -4,8 +4,6 @@ import LibraryExceptions.userexcepitions.AdministradorException;
 import dao.FileManeger;
 import dao.MasterDao;
 import model.usuarios.Administrador;
-
-import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -83,6 +81,13 @@ public class ImDiskAdministradorDao implements AdministradorDao{
             lista.add(adm);
         }
         return lista;
+    }
+
+    @Override
+    public void clearAll() throws AdministradorException {
+        if(!this.administradores.isEmpty())
+            this.administradores.clear();
+        FileManeger.saveAdministrador(this.administradores);
     }
 
     @Override

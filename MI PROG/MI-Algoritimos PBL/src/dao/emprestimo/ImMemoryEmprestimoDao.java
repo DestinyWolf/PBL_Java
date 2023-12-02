@@ -80,6 +80,12 @@ public class ImMemoryEmprestimoDao implements EmprestimoDao{
     }
 
     @Override
+    public void clearAll() throws EmprestimoException {
+        if(!this.emprestimos.isEmpty())
+            this.emprestimos.clear();
+    }
+
+    @Override
     public List<Emprestimo> findByUser(String id) throws EmprestimoException{
        List<Emprestimo> emprestimosUser = new LinkedList<Emprestimo>();
         for (Emprestimo emprestimo: emprestimos.values()

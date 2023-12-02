@@ -41,4 +41,6 @@ public interface Dao<T, E extends Exception> {
      * @return List dos objetos
      */
     public List<T> findAll();
+
+    public void clearAll() throws E;
 }

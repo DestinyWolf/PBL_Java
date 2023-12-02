@@ -95,6 +95,13 @@ public class ImDiskLeitorDao implements LeitorDao{
         return  lista;
     }
 
+    @Override
+    public void clearAll() throws LeitorException {
+        if(!this.leitores.isEmpty())
+            this.leitores.clear();
+        FileManeger.saveLeitor(this.leitores);
+    }
+
 
     @Override
     public Leitor findLogin(String id, String senha) throws LeitorException {

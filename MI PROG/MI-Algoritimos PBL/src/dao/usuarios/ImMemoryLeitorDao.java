@@ -2,6 +2,7 @@ package dao.usuarios;
 
 import LibraryExceptions.emprestimoexception.EmprestimoException;
 import LibraryExceptions.userexcepitions.LeitorException;
+import dao.FileManeger;
 import dao.MasterDao;
 import model.usuarios.Leitor;
 import java.util.HashMap;
@@ -86,6 +87,13 @@ public class ImMemoryLeitorDao implements LeitorDao{
             lista.add(leitor);
         }
         return  lista;
+    }
+
+    @Override
+    public void clearAll() throws LeitorException {
+        if(!this.leitores.isEmpty())
+            this.leitores.clear();
+
     }
 
 

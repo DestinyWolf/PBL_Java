@@ -82,6 +82,12 @@ public class ImMemoryAdministradorDao implements AdministradorDao{
     }
 
     @Override
+    public void clearAll() throws AdministradorException {
+        if(!this.administradores.isEmpty())
+            this.administradores.clear();
+    }
+
+    @Override
     public Administrador findLogin(String id, String senha) throws AdministradorException {
         for (Administrador administrador: administradores.values()
         ) {

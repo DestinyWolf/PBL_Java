@@ -3,6 +3,7 @@ package dao.usuarios;
 
 import LibraryExceptions.userexcepitions.BibliotecarioException;
 import LibraryExceptions.userexcepitions.LeitorException;
+import dao.FileManeger;
 import dao.MasterDao;
 import model.usuarios.Bibliotecario;
 import model.usuarios.Leitor;
@@ -76,6 +77,13 @@ public class ImMemoryBibliotecarioDao implements BibliotecarioDao{
             lista.add(bibliotecario);
         }
         return  lista;
+    }
+
+    @Override
+    public void clearAll() throws BibliotecarioException {
+        if(!this.bibliotecarios.isEmpty())
+            this.bibliotecarios.clear();
+
     }
 
     @Override

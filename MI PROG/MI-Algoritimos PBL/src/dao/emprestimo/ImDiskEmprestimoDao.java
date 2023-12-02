@@ -24,8 +24,10 @@ public class ImDiskEmprestimoDao implements EmprestimoDao{
     }
     @Override
     public Emprestimo findById(String id) {
-
-        return this.emprestimos.get(id);
+        if (this.emprestimos.containsKey(id)) {
+            return this.emprestimos.get(id);
+        }
+        return null;
     }
 
     @Override
@@ -83,6 +85,14 @@ public class ImDiskEmprestimoDao implements EmprestimoDao{
             lista.add(emprestimo);
         }
         return  lista;
+    }
+
+    @Override
+    public void clearAll() throws EmprestimoException{
+        if(!this.emprestimos.isEmpty())
+            this.emprestimos.clear();
+        FileManeger.saveEmprestimo(emprestimos);
+
     }
 
     @Override

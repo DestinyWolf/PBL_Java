@@ -95,6 +95,12 @@ public class ImMemoryLivroDao implements LivroDao{
     }
 
     @Override
+    public void clearAll() throws LivroException {
+        if(!this.livros.isEmpty())
+            this.livros.clear();
+    }
+
+    @Override
     public List<Livro> findByAutor(String autor) throws LivroException {
         List<Livro> livrosList = new LinkedList<>();
 

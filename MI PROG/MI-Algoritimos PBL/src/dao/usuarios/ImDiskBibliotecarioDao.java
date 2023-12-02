@@ -84,6 +84,13 @@ public class ImDiskBibliotecarioDao implements BibliotecarioDao{
     }
 
     @Override
+    public void clearAll() throws BibliotecarioException {
+        if(!this.bibliotecarios.isEmpty())
+            this.bibliotecarios.clear();
+        FileManeger.saveBibliotecario(this.bibliotecarios);
+    }
+
+    @Override
     public Bibliotecario findLogin(String id, String senha) throws BibliotecarioException {
         for (Bibliotecario bibliotecario: bibliotecarios.values()
         ) {

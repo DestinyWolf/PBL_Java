@@ -24,7 +24,15 @@ class ImDiskEmprestimoDaoTest {
     ImDiskEmprestimoDao emprestimoDao;
     @BeforeEach
     void criar() throws LeitorException, EmprestimoException, LivroException, Exception {
-        FileManeger.generateCache();
+       while(!MasterDao.getLeitorDAO().findAll().isEmpty()) {
+            MasterDao.getLeitorDAO().delete(MasterDao.getLeitorDAO().findAll().get(0));
+        }
+        while(!MasterDao.getLivroDao().findAll().isEmpty()) {
+            MasterDao.getLivroDao().delete(MasterDao.getLivroDao().findAll().get(0));
+        }
+        while(!MasterDao.getEmprestimoDao().findAll().isEmpty()) {
+            MasterDao.getEmprestimoDao().delete(MasterDao.getEmprestimoDao().findAll().get(0));
+        }
         leitor = new Leitor("Maike","123","62909475085","UEFS",
                 "75 9 88888888");
         livro = new Livro("12","Mikey","Diversao","endereco","Canaviais",2023,"Bolsonaro");
@@ -38,9 +46,17 @@ class ImDiskEmprestimoDaoTest {
 
     @AfterEach
     void limpar() throws Exception{
-        MasterDao.getLeitorDAO().delete(leitor);
+        while(!MasterDao.getLeitorDAO().findAll().isEmpty()) {
+            MasterDao.getLeitorDAO().delete(MasterDao.getLeitorDAO().findAll().get(0));
+        }
+        while(!MasterDao.getLivroDao().findAll().isEmpty()) {
+            MasterDao.getLivroDao().delete(MasterDao.getLivroDao().findAll().get(0));
+        }
+        while(!MasterDao.getEmprestimoDao().findAll().isEmpty()) {
+            MasterDao.getEmprestimoDao().delete(MasterDao.getEmprestimoDao().findAll().get(0));
+        };
         emprestimoDao = new ImDiskEmprestimoDao();
-        MasterDao.getLivroDao().delete(livro);
+
     }
 
     @Test

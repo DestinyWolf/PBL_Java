@@ -71,4 +71,11 @@ public class ImDiskFilaDeReservaDao implements FilaDeReservaDao{
         }
         return  lista;
     }
+
+    @Override
+    public void clearAll() throws ReservarException{
+        if(!this.filasDeReserva.isEmpty())
+            this.filasDeReserva.clear();
+        FileManeger.saveFilaDeReserva(this.filasDeReserva);
+    }
 }
