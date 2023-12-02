@@ -62,11 +62,10 @@ public class FileManeger {
         }
     }
 
-    public static void saveEmprestimo(HashMap<String, Emprestimo> emprestimos) throws EmprestimoException {
+    public static void saveEmprestimo(HashMap<String,Emprestimo> emprestimos) throws EmprestimoException {
         try{
             File path = new File("cache\\emprestimo.bin");
-            FileOutputStream teste = new FileOutputStream(path);
-            ObjectOutputStream gravador = new ObjectOutputStream(teste);
+            ObjectOutputStream gravador = new ObjectOutputStream(new FileOutputStream(path));
             gravador.writeObject(emprestimos);
             gravador.close();
         } catch (IOException exception){
