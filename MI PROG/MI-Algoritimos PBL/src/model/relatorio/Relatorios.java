@@ -5,10 +5,11 @@ import model.emprestimo.Emprestimo;
 import model.estoque.Livro;
 import util.Data;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Relatorios {
+public class Relatorios implements Serializable {
     private Integer qntLivrosEmprestados;
     private Integer qntLivrosAtrasados;
     private Integer qntLivros;
