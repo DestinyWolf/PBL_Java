@@ -173,7 +173,7 @@ public class Livro implements Serializable {
     @Override
     public boolean equals(Object obj){
         if (obj instanceof Livro) {
-            return ((this.getIsbn() == ((Livro) obj).getIsbn()) || this.getNome() == ((Livro) obj).getNome());
+            return ((this.getIsbn() == ((Livro) obj).getIsbn()) && this.getNome() == ((Livro) obj).getNome());
         } else {
             return false;
         }
