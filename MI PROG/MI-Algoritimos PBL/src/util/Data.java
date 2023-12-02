@@ -1,12 +1,13 @@
 package util;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
  * classe criada para facilitar a manipulação de datas*/
-public class Data {
+public class Data implements Serializable {
     private Integer dia;
     private Integer mes;
     private Integer ano;
