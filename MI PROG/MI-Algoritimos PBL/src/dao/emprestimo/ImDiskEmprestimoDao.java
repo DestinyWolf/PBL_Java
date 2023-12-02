@@ -1,14 +1,11 @@
 package dao.emprestimo;
-
 import LibraryExceptions.emprestimoexception.EmprestimoException;
 import dao.FileManeger;
 import model.emprestimo.Emprestimo;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-
 import static util.Constantes.*;
 import static util.Constantes.findEmprestimo;
 
@@ -19,7 +16,6 @@ public class ImDiskEmprestimoDao implements EmprestimoDao{
         try {
             emprestimos = FileManeger.openEmprestimo();
         } catch (Exception ignored) {
-
         }
     }
     @Override

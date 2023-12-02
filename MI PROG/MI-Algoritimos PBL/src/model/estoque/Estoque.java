@@ -4,11 +4,13 @@ package model.estoque;
 import LibraryExceptions.estoqueExceptions.LivroException;
 import dao.MasterDao;
 
+import java.io.Serializable;
+
 import static util.Constantes.createLivro;
 import static util.Constantes.deleteLivro;
 
 /**Classe model para o estoque*/
-public class Estoque { 
+public class Estoque implements Serializable {
 
     /**Construtor do Estoque*/
     public Estoque() {
