@@ -1,6 +1,8 @@
 package util;
 
-public class Constantes {
+import java.io.Serializable;
+
+public class Constantes implements Serializable {
 
     /**Mensagens customizadas para as exceções, para facilitar no momento da implementação*/
     public final static String deleteUser = "Impossivel deletar Usuario";
