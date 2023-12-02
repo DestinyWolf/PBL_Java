@@ -29,30 +29,30 @@ public class FileManeger {
             }
         }
 
-        if (!(new File("cache\\leitor.dat")).exists()){
+        if (!(new File("cache\\leitor.bin")).exists()){
             FileManeger.saveLeitor(new HashMap<String,Leitor>());
         }
-        if (!(new File("cache\\administrador.dat")).exists()){
+        if (!(new File("cache\\administrador.bin")).exists()){
             FileManeger.saveAdministrador(new HashMap<String, Administrador>());
         }
-        if (!(new File("cache\\bibliotecario.dat")).exists()){
+        if (!(new File("cache\\bibliotecario.bin")).exists()){
             FileManeger.saveBibliotecario(new HashMap<String, Bibliotecario>());
         }
-        if (!(new File("cache\\livro.dat")).exists()){
+        if (!(new File("cache\\livro.bin")).exists()){
             FileManeger.saveLivro(new HashMap<String, Livro>());
         }
 
-        if (!(new File("cache\\emprestimo.dat")).exists()){
+        if (!(new File("cache\\emprestimo.bin")).exists()){
             FileManeger.saveEmprestimo(new HashMap<String, Emprestimo>());
         }
-        if (!(new File("cache\\filaDeReserva.dat")).exists()){
+        if (!(new File("cache\\filaDeReserva.bin")).exists()){
             FileManeger.saveFilaDeReserva(new HashMap<String, FilaDeReserva>());
         }
     }
 
     public static void saveFilaDeReserva(HashMap<String, FilaDeReserva> filasDeReserva) throws ReservarException {
         try{
-            File path = new File("cache\\filaDeReserva.dat");
+            File path = new File("cache\\filaDeReserva.bin");
             FileOutputStream teste = new FileOutputStream(path);
             ObjectOutputStream gravador = new ObjectOutputStream(teste);
             gravador.writeObject(filasDeReserva);
@@ -64,7 +64,7 @@ public class FileManeger {
 
     public static void saveEmprestimo(HashMap<String, Emprestimo> emprestimos) throws EmprestimoException {
         try{
-            File path = new File("cache\\emprestimo.dat");
+            File path = new File("cache\\emprestimo.bin");
             FileOutputStream teste = new FileOutputStream(path);
             ObjectOutputStream gravador = new ObjectOutputStream(teste);
             gravador.writeObject(emprestimos);
@@ -76,7 +76,7 @@ public class FileManeger {
 
     public static void saveLivro(HashMap<String, Livro> livros) throws LivroException {
         try{
-            File path = new File("cache\\livro.dat");
+            File path = new File("cache\\livro.bin");
             ObjectOutputStream gravador = new ObjectOutputStream(new FileOutputStream(path));
             gravador.writeObject(livros);
             gravador.close();
@@ -88,7 +88,7 @@ public class FileManeger {
 
     public static void saveBibliotecario(HashMap<String, Bibliotecario> bibliotecarios) throws BibliotecarioException {
         try{
-            File path = new File("cache\\bibliotecario.dat");
+            File path = new File("cache\\bibliotecario.bin");
             FileOutputStream teste = new FileOutputStream(path);
             ObjectOutputStream gravador = new ObjectOutputStream(teste);
             gravador.writeObject(bibliotecarios);
@@ -100,7 +100,7 @@ public class FileManeger {
 
     public static void saveAdministrador(HashMap<String, Administrador> administradores) throws AdministradorException {
         try{
-            File path = new File("cache\\administrador.dat");
+            File path = new File("cache\\administrador.bin");
             FileOutputStream teste = new FileOutputStream(path);
             ObjectOutputStream gravador = new ObjectOutputStream(teste);
             gravador.writeObject(administradores);
@@ -112,7 +112,7 @@ public class FileManeger {
 
     public static void saveLeitor(HashMap<String, Leitor> leitores) throws LeitorException {
         try{
-            File path = new File("cache\\leitor.dat");
+            File path = new File("cache\\leitor.bin");
             FileOutputStream teste = new FileOutputStream(path);
             ObjectOutputStream gravador = new ObjectOutputStream(teste);
             gravador.writeObject(leitores);
@@ -124,12 +124,12 @@ public class FileManeger {
 
     public static HashMap<String, Leitor> openLeitor() throws LeitorException {
             try {
-                FileInputStream path = new FileInputStream("cache\\leitor.dat");
+                FileInputStream path = new FileInputStream("cache\\leitor.bin");
                 ObjectInputStream recebedor = new ObjectInputStream(path);
                 HashMap<String, Leitor> leitores = (HashMap<String, Leitor>) recebedor.readObject();
                 recebedor.close();
                 if (leitores.isEmpty()) {
-                    return new HashMap<String, Leitor>();
+                    leitores = new HashMap<>();
                 }
                 return leitores;
             } catch (FileNotFoundException excep) {
@@ -144,12 +144,12 @@ public class FileManeger {
 
     public static HashMap<String, Administrador> openAdministrador() throws AdministradorException {
         try {
-            FileInputStream path = new FileInputStream("cache\\administrador.dat");
+            FileInputStream path = new FileInputStream("cache\\administrador.bin");
             ObjectInputStream recebedor = new ObjectInputStream(path);
             HashMap<String, Administrador> administradores = (HashMap<String, Administrador>) recebedor.readObject();
             recebedor.close();
             if (administradores.isEmpty()) {
-                return new HashMap<String, Administrador>();
+                administradores = new HashMap<>();
             }
             return administradores;
         } catch (FileNotFoundException excep) {
@@ -164,12 +164,12 @@ public class FileManeger {
 
     public static HashMap<String, Bibliotecario> openBibliotecario() throws BibliotecarioException {
         try {
-            FileInputStream path = new FileInputStream("cache\\bibliotecario.dat");
+            FileInputStream path = new FileInputStream("cache\\bibliotecario.bin");
             ObjectInputStream recebedor = new ObjectInputStream(path);
             HashMap<String, Bibliotecario> bibliotecarios = (HashMap<String, Bibliotecario>) recebedor.readObject();
             recebedor.close();
             if (bibliotecarios.isEmpty()) {
-                return new HashMap<String, Bibliotecario>();
+                bibliotecarios =  new HashMap<>();
             }
             return bibliotecarios;
         } catch (FileNotFoundException excep) {
@@ -185,12 +185,12 @@ public class FileManeger {
     public static HashMap<String, Livro> openLivro() throws LivroException {
         try {
             HashMap<String, Livro> livros = new HashMap<>();
-            FileInputStream path = new FileInputStream("cache\\livro.dat");
+            FileInputStream path = new FileInputStream("cache\\livro.bin");
             ObjectInputStream recebedor = new ObjectInputStream(path);
             livros = (HashMap<String, Livro>) recebedor.readObject();
             recebedor.close();
             if (livros.isEmpty()) {
-                return new HashMap<String, Livro>();
+                return new HashMap<>();
             }
             return livros;
         } catch (FileNotFoundException excep) {
@@ -205,12 +205,13 @@ public class FileManeger {
 
     public static HashMap<String, Emprestimo> openEmprestimo() throws EmprestimoException {
         try {
-            FileInputStream path = new FileInputStream("cache\\emprestimo.dat");
+            HashMap<String, Emprestimo> emprestimos;
+            FileInputStream path = new FileInputStream("cache\\emprestimo.bin");
             ObjectInputStream recebedor = new ObjectInputStream(path);
-            HashMap<String, Emprestimo> emprestimos = (HashMap<String, Emprestimo>) recebedor.readObject();
+            emprestimos = (HashMap<String, Emprestimo>) recebedor.readObject();
             recebedor.close();
             if (emprestimos.isEmpty()) {
-                return new HashMap<String, Emprestimo>();
+                emprestimos = new HashMap<>();
             }
             return emprestimos;
         } catch (FileNotFoundException excep) {
@@ -225,12 +226,13 @@ public class FileManeger {
 
     public static HashMap<String, FilaDeReserva> openFilaDeReserva() throws ReservarException {
         try {
-            FileInputStream path = new FileInputStream("cache\\filaDeReserva.dat");
+            HashMap<String, FilaDeReserva> filasDeReserva;
+            FileInputStream path = new FileInputStream("cache\\filaDeReserva.bin");
             ObjectInputStream recebedor = new ObjectInputStream(path);
-            HashMap<String, FilaDeReserva> filasDeReserva = (HashMap<String, FilaDeReserva>) recebedor.readObject();
+            filasDeReserva = (HashMap<String, FilaDeReserva>) recebedor.readObject();
             recebedor.close();
             if (filasDeReserva.isEmpty()) {
-                return new HashMap<String, FilaDeReserva>();
+                filasDeReserva = new HashMap<>();
             }
             return filasDeReserva;
         } catch (FileNotFoundException excep) {
