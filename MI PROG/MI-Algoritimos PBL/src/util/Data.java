@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * classe criada para facilitar a manipulação de datas*/
+ * <p>classe criada para facilitar a manipulação de <b>datas</b></p>*/
 public class Data implements Serializable {
     private Integer dia;
     private Integer mes;
@@ -14,7 +14,7 @@ public class Data implements Serializable {
 
     private final ArrayList<Integer> meses31dias = new ArrayList<>();
 
-    /**Construtor da classe Data, atribui a data atual ao dia, mes e ano*/
+    /**<p>Construtor da classe Data, atribui a <b>data atual</b> aos atributos: <b>dia, mes , ano</b></p>*/
     public Data() {
         this.dia = LocalDate.now().getDayOfMonth();
         this.mes = LocalDate.now().getMonthValue();
@@ -32,10 +32,10 @@ public class Data implements Serializable {
     }
 
     /**
-     * Construtor da classe Data
-     * @param dia
-     * @param mes
-     * @param ano */
+     * <p>Construtor da classe Data, permite a criação de uma data <b>especifica</b></p>
+     * @param dia <b>Integer</b>
+     * @param mes <b>Integer</b>
+     * @param ano  <b>Integer</b>*/
     public Data(Integer dia, Integer mes, Integer ano) {
         this.dia = dia;
         this.mes = mes;
@@ -70,44 +70,44 @@ public class Data implements Serializable {
 
     }
 
-    /**Metodo resposavel por retornar o ano
-     * @return ano*/
+    /**<p>Metodo resposavel por retornar o ano</p>
+     * @return <b>Integer</b> - <i>ano</i>*/
     public Integer getAno() {
         return ano;
     }
 
-    /**Metodo resposavel por retornar o mes
-     * @return mes*/
+    /**<p>Metodo resposavel por retornar o mes</p>
+     * @return <b>Integer</b> - <i>mes</i>*/
     public Integer getMes() {
         return mes;
     }
 
-    /**Metodo resposavel por retornar o dia
-     * @return dia*/
+    /**<p>Metodo resposavel por retornar o dia</p>
+     * @return <b>Integer</b> - <i>dia</i> */
     public Integer getDia() {
         return dia;
     }
 
-    /**Metodo responsavel por settar o ano
-     * @param ano */
+    /**<p>Metodo responsavel por settar o ano</p>
+     * @param ano <b>Integer</b>*/
     public void setAno(Integer ano) {
         this.ano = ano;
     }
 
-    /**Metodo responsavel por settar o dia
-     * @param dia */
+    /**<p>Metodo responsavel por settar o dia</p>
+     * @param dia <b>Integer</b>*/
     public void setDia(Integer dia) {
         this.dia = dia;
     }
 
-    /**Metodo responsavel por settar o mes
-     * @param mes */
+    /**<p>Metodo responsavel por settar o mes</p>
+     * @param mes <b>Integer</b>*/
     public void setMes(Integer mes) {
             this.mes = mes;
     }
 
-    /**Metodo responsavel por adicionar dias a data e calcular a nova data
-     * @param qntDias */
+    /**<p>Metodo responsavel por <b>adicionar dias</b> a data e calcular a nova data</p>
+     * @param qntDias <b>Integer</b>*/
     public  void addDia(Integer qntDias) {
         this.dia += qntDias;
         if (this.dia > 31 && this.meses31dias.contains(this.mes)){
@@ -129,8 +129,8 @@ public class Data implements Serializable {
         }
     }
 
-    /**Metodo responsavel por adicionar meses a data e calcular a nova data
-     * @param qntMes */
+    /**<p>Metodo responsavel por <b>adicionar meses</b> a data e calcular a nova data</p>
+     * @param qntMes  <b>Integer</b>*/
     public void addMes(Integer qntMes) {
         this.mes += qntMes;
 
@@ -140,15 +140,15 @@ public class Data implements Serializable {
         }
     }
 
-    /**Metodo responsavel por adicionar anos a data e calcular a nova data
-     * @param qntAno */
+    /**<p>Metodo responsavel por <b>adicionar anos</b>a data e calcular a nova data</p>
+     * @param qntAno <b>Integer</b>*/
     public void addAno(Integer qntAno) {
         this.ano += ano;
     }
 
-    /**Metodo responsavel por fazer a comparação entre duas datas
-     * @param data
-     * @return 1 se a data do parametro é menor que esta data, 2 se esta for menor e 0 se são iguais
+    /**<p>Metodo responsavel por fazer a comparação entre duas datas</p>
+     * @param data <b>Data</b>
+     * @return <b>Integer</b> - <i><b>1</b> se a data do parametro é <b>menor</b> que esta data, <b>2</b> se for <b>maior</b>, <b>0  </b>se são <b>iguais</b></i>
      *  */
     public Integer compareData(Data data) {
         if(data.getDia() < this.getDia() || data.getMes() < this.getMes() || data.getAno() < this.getAno()){
