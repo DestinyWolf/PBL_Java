@@ -7,7 +7,7 @@ import dao.estoque.LivroDao;
 import dao.usuarios.*;
 
 
-/**Classe MasterDao, reune todos os outros DAOs menores e implementa o Padão singleton*/
+/**<p>Classe MasterDao, reune as <b>implementações DAO</b> e implementa o Padão <b>singleton</b></p>*/
 public class MasterDao {
 
 
