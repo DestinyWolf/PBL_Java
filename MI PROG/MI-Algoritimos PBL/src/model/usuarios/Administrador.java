@@ -6,17 +6,17 @@ import java.io.Serializable;
 
 import static util.Constantes.createUser;
 
-/**Classe model do Administrador*/
+/**<p>Classe model do Administrador</p>*/
 public class Administrador extends Pessoa implements Serializable {
     private String cargo;
 
     /**
-     * Construtor da classe Administrador
-     * @param senha
-     * @param nome
-     * @param cargo
-     * @param id
-     * @throws AdministradorException
+     * <p>Construtor da classe Administrador</p>
+     * @param senha <b>String</b>
+     * @param nome <b>String</b>
+     * @param cargo <b>String</b>
+     * @param id <b>String</b>
+     * @throws AdministradorException <i>Caso o id seja passado sera exibida uma mensagem que foi impossivel criar o usuario</i>
      */
     public Administrador(String senha, String nome, String cargo, String id) throws AdministradorException {
         try {
@@ -28,14 +28,14 @@ public class Administrador extends Pessoa implements Serializable {
             throw new AdministradorException(createUser, null);
         }
     }
-    /**Metodo responsavel por retornar o cargo do Usuario
-     * @return cargo do usuario*/
+    /**<p>Metodo responsavel por retornar o <b>cargo</b> do Usuario</p>
+     * @return <b>String</b> - <i>cargo do usuario</i> */
     public String getCargo() {
         return cargo;
     }
 
-    /**Metodo responsavel por settar o cargo do usuario
-     * @param cargo */
+    /**<p>Metodo responsavel por settar o cargo do usuario</p>
+     * @param cargo <b>String</b>*/
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
