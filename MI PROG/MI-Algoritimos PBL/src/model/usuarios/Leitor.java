@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Classes modelo para usuarios do tipo leitor*/
+ * <p>Classes modelo para usuarios do tipo leitor</p>*/
 public class Leitor extends Pessoa implements Serializable {
     private boolean  bloqueio;
     private Integer numEmprestimos;
@@ -20,13 +20,13 @@ public class Leitor extends Pessoa implements Serializable {
     private Integer maximoDeLivros;
 
     /**
-     * construtor da classe leitor
-     * @param nome nome do usuario
-     * @param senha senha do usuario
-     * @param id numero de identificação do usuario
-     * @param endereco endereco do usuario
-     * @param telefone telefone do usuario
-     * @exception LeitorException*/
+     * <p></p>construtor da classe leitor
+     * @param nome <b>String</b>
+     * @param senha <b>String</b>
+     * @param id <b>String</b>
+     * @param endereco <b>String</b>
+     * @param telefone <b>String</b>
+     * @exception LeitorException <i>caso ocorra algum problema, como cpf invalido</i>*/
     public Leitor (String nome, String senha, String id, String endereco, String telefone) throws LeitorException {
         try {
             super.setNome(nome);
@@ -47,29 +47,29 @@ public class Leitor extends Pessoa implements Serializable {
     }
 
     /**
-     *
-     * @return id do usuario
+     *<p>Metodo responsavel por retornar o <b>id</b> do usuario</p>
+     * @return <b>String</b> - <i>id do usuario</i>
      */
     @Override
     public String getId() {
         return super.getId();
     }
 
-    /**
-     * @return true se usuario bloqueado, false caso contrario*/
+    /** <p>Metodo responsavel por retonar se o usuario esta <b>Bloqueado</b></p>
+     * @return <b>boolean</b>, <b>true</b> - <i>usuario bloqueado</i>, <b>false</b>  - <i>usuario sem bloqueio</i>*/
     public boolean isBloqueio() {
         return bloqueio;
     }
 
-    /**
-     * @return numero de dias que o usuario ainda esta multado*/
+    /**<p>Metodo responsavel por retornar o numero de <b>dias</b> que o usuario ainda esta <b>mutado</b></p>
+     * @return <b>Integer</b> - <i>dias restantes de multa</i>*/
     public Integer getDiasRestantesMulta() {
         return diasRestantesMulta;
     }
 
-    /**
-     * @param isbn do livro que deseja ser pesquisado
-     * @return numero de dias que o usuario tem para devolver o livro*/
+    /**<p>Metodo responsavel por retonar o numero de <b>dias</b> antes de ser necessario a renovação</p>
+     * @param isbn <b>String</b>
+     * @return <b>Integer</b> - <i>numero de dias antes de ser necessario renovar</i>*/
     public Integer getDiasRestantesRenovacao(String isbn) {
         try {
             return MasterDao.getEmprestimoDao().findByUserAndLivro(isbn, this.getId()).getPrazoFinal().getDia();
@@ -78,82 +78,69 @@ public class Leitor extends Pessoa implements Serializable {
         }
     }
 
-    /**
-     * @return numero maximo de livros que o usuario pode pegar*/
+    /**<p>Metodo responsavel por retonar o <b>numero maximo</b> de livros que o usuario ainda pode pegar</p>
+     * @return <b>Integer</b> - <i>numero de livros que o usuario ainda pode pegar</i> */
     public Integer getMaximoDeLivros() {
         return maximoDeLivros;
     }
 
-    /**
-     * @return numero de emprestimos que o usuario realizou*/
+    /**<p>Metodo responsavel por retorna o <b>numero</b> de emprestimos, <b>ativos</b>, que o usario ja realizou</p>
+     * @return <b>Integer</b> - <i>numero de emprestimos</i>*/
     public Integer getNumEmprestimos() {
         return numEmprestimos;
     }
 
-    /**
-     * @return endereço do leitor*/
+    /**<p>Metodo responsavel por retornar o <b>Endereço</b> do leitor</p>
+     * @return <b>String</b> - <i>endereço</i>*/
     public String getEndereco() {
         return endereco;
     }
 
-    /**
-     * @return telefone do leitor*/
+    /**<p>Metodo responsavel por retornar o <b>telefone</b> do leitor</p>
+     * @return <b>String</b> - <i>telefone do leitor</i>*/
     public String getTelefone() {
         return telefone;
     }
 
-    /**
-     * @param diasRestantesMulta
-     * @return void
-     * Metodo para alteração do numero de dias de multa de um usuario
+    /**<p>Metodo resposanvel por settar o <b>numero de dias restante</b> de multas</p>
+     * @param diasRestantesMulta <b>Integer</b>
      * */
     public void setDiasRestantesMulta(Integer diasRestantesMulta) {
         this.diasRestantesMulta = diasRestantesMulta;
     }
 
-    /**
-     * @param maximoDeLivros
-     * @return void
-     * Metodo responsavel por settar o maximo de livros que um usuario pode emrpestar ao mesmo tempo*/
+    /**<p>Metodo responsavel por settar o <b>maximo de livros</b> que o usuario ainda pode emprestar</p>
+     * @param maximoDeLivros <b>Integer</b>*/
     public void setMaximoDeLivros(Integer maximoDeLivros) {
         this.maximoDeLivros = maximoDeLivros;
     }
 
-    /**
-     * @param bloqueio
-     * @return void
-     * Metodo responsavel por settar o bloqueio um usuario*/
+    /**<p>Metodo responsavel por settar o <b>bloqueio</b> do usuario</p>
+     * @param bloqueio <b>boolean</b>*/
     public void setBloqueio(boolean bloqueio) {
         this.bloqueio = bloqueio;
     }
 
-    /**
-     * @param endereco
-     * @return void
-     * Metodo responsavel por settar o endereço um usuario*/
+    /**<p>Metodo responsavel por settar o <b>endereço</b> do usuario</p>
+     * @param endereco <b>String</b>*/
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 
-    /**
-     * @param numEmprestimos
-     * @return void
-     * Metodo responsavel por settar o numero de emprestimos que um usuario pode fazer um usuario*/
+    /** <p>Metodo responsavel por settar o <b>Numero de emprestimo</b> do usuario</p>
+     * @param numEmprestimos <b>Integer</b>*/
     public void setNumEmprestimos(Integer numEmprestimos) {
         this.numEmprestimos = numEmprestimos;
     }
 
-    /**
-     * @param telefone
-     * @return void
-     * Metodo responsavel por settar o telefone um usuario*/
+    /** <p>Metodo responsavel por settar o <b>telefone</b> do usuario</p>
+     * @param telefone <b>String</b>*/
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    /**
-     * @return Lista de emprestimos de um usuario
-     * Metodo responsavel por settar o bloqueio um usuario*/
+    /**<p>Metodo responsavel por retonar uma <b>Lista</b> com os emprestimos de determinado usuario</p>
+     * @return <b>&lt;List&gt;</b> - <i>Emprestimos de um usuario</i>*/
     public List<Emprestimo> getEmprestimos() {
         try {
             return MasterDao.getEmprestimoDao().findByUser(this.getId());

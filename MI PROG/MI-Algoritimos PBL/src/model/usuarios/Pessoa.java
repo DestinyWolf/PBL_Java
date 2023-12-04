@@ -3,7 +3,7 @@ package model.usuarios;
 import java.io.Serializable;
 
 /**
- * classe abstrata usada como base para as classes leitor, administrador e bibliotecario
+ * <p>Classe <b>abstrata</b> usada como base para as classes leitor, administrador e bibliotecario</p>
  * */
 public abstract class Pessoa implements Serializable {
     private String nome;
@@ -11,50 +11,44 @@ public abstract class Pessoa implements Serializable {
     private Cpf cpf;
 
 
-    /**
+    /**<p>Metodo responvavel por settar o <b>id</b> do usuario</p>
      * @param id
-     * @return void
-     * Metodo responvavel por setar o id do usuario*/
+     * */
     public void setId(String id) throws Exception{
            this.cpf = new Cpf();
            this.cpf.setCpf(id);
 
     }
 
-    /**
-     * @param nome
-     * @return void
-     * Metodo responvavel por setar o nome do usuario*/
+    /**<p>Metodo responvavel por settar o <b>nome</b> do usuario</p>
+     * @param nome*/
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @param senha
-     * @return void
-     * Metodo responvavel por setar a senha do usuario*/
+     *<p>Metodo responvavel por settar a <b>senha</b> do usuario</p>
+     * @param senha*/
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
-    /**
-     * @return id do usuario
-     * Metodo responsavel por retornar o id do usuario
+    /**<p>Metodo responsavel por retornar o <b>id</b> do usuario</p>
+     * @return <b>String</b> - <i>id do usuario</i>
      */
     public String getId() {
         return this.cpf.getCpf();
     }
 
-    /**
-     * @return nome do usuario
-     * Metodo responsavel por retornar o nome do usuario*/
+    /**<p>Metodo responsavel por retornar o <b>nome</b> do usuario</p>
+     * @return <b>String</b> - <i>nome do usuario</i>*/
     public String getNome() {
         return nome;
     }
 
     /**
-     * Metodo responsavel por retornar a senha do usuario
-     * @return senha do usuario*/
+     * <p>Metodo responsavel por retornar a <b>senha</b> do usuario</p>
+     * @return <b>String</b> - <i>senha do usuario</i>*/
     public String getSenha() {
         return senha;
     }

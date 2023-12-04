@@ -7,24 +7,24 @@ public class Cpf implements Serializable {
     private String cpf;
 
     /**
-     * construtor da classe cpf
+     * <p>construtor da classe <b>cpf</b></p>
      */
     public Cpf(){
         this.cpf = "";
     }
 
     /**
-     *
-     * @return o cpf
+     *<p>Metodo responsavel por retornar o cpf</p>
+     * @return <b>String</b> - <i>cpf</i>
      */
     public String getCpf() {
         return cpf;
     }
 
     /**
-     * setta o cpf do usuario e faz a validação
-     * @param cpf
-     * @throws Exception
+     * <p>Metodo responsavel por settar o <b>cpf</b> e realizar a <b>validação</b></p>
+     * @param cpf <b>String</b>
+     * @throws Exception <i>Caso o cpf seja invalido, retorna uma exceção de cpf invalido</i>
      */
     public void setCpf(String cpf) throws Exception{
         int digt1 = 0;
