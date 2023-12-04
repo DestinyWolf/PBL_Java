@@ -21,6 +21,11 @@ import java.util.List;
  */
 public class FileManeger {
 
+    /**
+     * <p>Metodo <b>statico</b> responsavel por gerar as pastas e os arquivos de persitencia de dados</p>
+     * @throws Exception <i>caso ocorra algum problema no momento da crição por exemplo, não haja permissão para
+     * criar arquivos naquela pasta</i>
+     */
     public static void generateCache() throws Exception{
         if(!(new File("cache")).exists()){
             File file = new File("cache");
@@ -50,6 +55,11 @@ public class FileManeger {
         }
     }
 
+    /**
+     * <p>Metodo <b>statico</b> responsavel por salvar <b>em arquivo</b> os dados armazenados no DAO da fila de reserva</p>
+     * @param filasDeReserva <b>HashMap&lt;String, FilaDeReserva&gt;</b>
+     * @throws ReservarException <i>Caso haja algum problema no momento do salvamento no arquivo</i>
+     */
     public static void saveFilaDeReserva(HashMap<String, FilaDeReserva> filasDeReserva) throws ReservarException {
         try{
             File path = new File("cache\\filaDeReserva.bin");
@@ -62,6 +72,11 @@ public class FileManeger {
         }
     }
 
+    /**
+     *  <p>Metodo <b>statico</b> responsavel por salvar <b>em arquivo</b> os dados armazenados no DAO dos emprestimos</p>
+     * @param emprestimos <b>HashMap&lt;String, Emprestimo&gt;</b>
+     * @throws EmprestimoException <i>Caso haja algum problema no momento do salvamento no arquivo</i>
+     */
     public static void saveEmprestimo(HashMap<String,Emprestimo> emprestimos) throws EmprestimoException {
         try{
             File path = new File("cache\\emprestimo.bin");
@@ -73,6 +88,11 @@ public class FileManeger {
         }
     }
 
+    /**
+     *  <p>Metodo <b>statico</b> responsavel por salvar <b>em arquivo</b> os dados armazenados no DAO dos livros</p>
+     * @param livros <b>HashMap&lt;String, Livro&gt;</b>
+     * @throws LivroException <i>Caso haja algum problema no momento do salvamento no arquivo</i>
+     */
     public static void saveLivro(HashMap<String, Livro> livros) throws LivroException {
         try{
             File path = new File("cache\\livro.bin");
@@ -85,6 +105,11 @@ public class FileManeger {
         }
     }
 
+    /**
+     * <p>Metodo <b>statico</b> responsavel por salvar <b>em arquivo</b> os dados armazenados no DAO dos bibliotecarios</p>
+     * @param bibliotecarios <b>HashMap&lt;String, Bibliotecario&gt;</b>
+     * @throws BibliotecarioException <i>Caso haja algum problema no momento do salvamento no arquivo</i>
+     */
     public static void saveBibliotecario(HashMap<String, Bibliotecario> bibliotecarios) throws BibliotecarioException {
         try{
             File path = new File("cache\\bibliotecario.bin");
@@ -97,6 +122,11 @@ public class FileManeger {
         }
     }
 
+    /**
+     * <p>Metodo <b>statico</b> responsavel por salvar <b>em arquivo</b> os dados armazenados no DAO dos administradores</p>
+     * @param administradores <b>HashMap&lt;String, Administrador&gt;</b>
+     * @throws AdministradorException <i>Caso haja algum problema no momento do salvamento no arquivo</i>
+     */
     public static void saveAdministrador(HashMap<String, Administrador> administradores) throws AdministradorException {
         try{
             File path = new File("cache\\administrador.bin");
@@ -109,6 +139,11 @@ public class FileManeger {
         }
     }
 
+    /**
+     * <p>Metodo <b>statico</b> responsavel por salvar <b>em arquivo</b> os dados armazenados no DAO dos leitores</p>
+     * @param leitores <b>HashMap&lt;String, Leitor&gt;</b>
+     * @throws LeitorException <i>Caso haja algum problema no momento do salvamento no arquivo</i>
+     */
     public static void saveLeitor(HashMap<String, Leitor> leitores) throws LeitorException {
         try{
             File path = new File("cache\\leitor.bin");
@@ -121,6 +156,13 @@ public class FileManeger {
         }
     }
 
+    /**
+     *<p>Metodo responsavel por retornar um <b>HashMap</b> contendo os leitores salvos no arquivo, em caso do
+     * arquivo estar vazio, cria e retorna um <b>novo HashMap</b></p>
+     * @return <b>HashMap&lt;String, Leitor&gt;</b> - <i>HashMap contendo como chave o cpf e
+     * como valor um objeto do tipo Leitor</i>
+     * @throws LeitorException <i>caso ocorra erro ao buscar o arquivo, a mensagem respectivva ao erro será exibida</i>
+     */
     public static HashMap<String, Leitor> openLeitor() throws LeitorException {
             try {
                 FileInputStream path = new FileInputStream("cache\\leitor.bin");
@@ -141,6 +183,13 @@ public class FileManeger {
 
     }
 
+    /**
+     * <p>Metodo responsavel por retornar um <b>HashMap</b> contendo os Administradores salvos no arquivo, em caso do
+     * arquivo estar vazio, cria e retorna um <b>novo HashMap</b></p>
+     * @return <b>HashMap&lt;String, Administrador&gt;</b> - <i>HashMap contendo como chave o
+     * cpf e como valor um objeto do tipo Administrador</i>
+     * @throws AdministradorException <i>caso ocorra erro ao buscar o arquivo, a mensagem respectivva ao erro será exibida</i>
+     */
     public static HashMap<String, Administrador> openAdministrador() throws AdministradorException {
         try {
             FileInputStream path = new FileInputStream("cache\\administrador.bin");
@@ -161,6 +210,13 @@ public class FileManeger {
 
     }
 
+    /**
+     * <p>Metodo responsavel por retornar um <b>HashMap</b> contendo os Bibliotecarios salvos no arquivo, em caso do
+     * arquivo estar vazio, cria e retorna um <b>novo HashMap</b></p>
+     * @return <b>HashMap&lt;String, Bibliotecario&gt;</b> - <i>HashMap contendo como chave o cpf e como valor
+     * um objeto do tipo Bibliotecario</i>
+     * @throws BibliotecarioException <i>caso ocorra erro ao buscar o arquivo, a mensagem respectivva ao erro será exibida</i>
+     */
     public static HashMap<String, Bibliotecario> openBibliotecario() throws BibliotecarioException {
         try {
             FileInputStream path = new FileInputStream("cache\\bibliotecario.bin");
@@ -181,6 +237,13 @@ public class FileManeger {
 
     }
 
+    /**
+     * <p>Metodo responsavel por retornar um <b>HashMap</b> contendo os Livros salvos no arquivo, em caso do
+     * arquivo estar vazio, cria e retorna um <b>novo HashMap</b></p>
+     * @return <b>HashMap&lt;String, Livro&gt;</b> - <i>HashMap contendo como chave o codigo ISBN e como valor
+     * um objeto do tipo Livro</i>
+     * @throws LivroException <i>caso ocorra erro ao buscar o arquivo, a mensagem respectivva ao erro será exibida</i>
+     */
     public static HashMap<String, Livro> openLivro() throws LivroException {
         try {
             HashMap<String, Livro> livros = new HashMap<>();
@@ -202,6 +265,13 @@ public class FileManeger {
 
     }
 
+    /**
+     <p>Metodo responsavel por retornar um <b>HashMap</b> contendo os Emprestimos salvos no arquivo, em caso do
+     * arquivo estar vazio, cria e retorna um <b>novo HashMap</b></p>
+     * @return <b>HashMap&lt;String, Emprestimo&gt;</b> - <i>HashMap contendo como chave o Id do Emprestimo e como valor
+     * um objeto do tipo Emprestimo</i>
+     * @throws EmprestimoException <i>caso ocorra erro ao buscar o arquivo, a mensagem respectivva ao erro será exibida</i>
+     */
     public static HashMap<String, Emprestimo> openEmprestimo() throws EmprestimoException {
         try {
             HashMap<String, Emprestimo> emprestimos;
@@ -223,6 +293,13 @@ public class FileManeger {
 
     }
 
+    /**
+     <p>Metodo responsavel por retornar um <b>HashMap</b> contendo as Filas de Reserva salvos no arquivo, em caso do
+     * arquivo estar vazio, cria e retorna um <b>novo HashMap</b></p>
+     * @return <b>HashMap&lt;String, FilaDeReserva&gt;</b> - <i>HashMap contendo como chave o ISBN do livro e como valor
+     * um objeto do tipo FilaDeReserva</i>
+     * @throws ReservarException <i>caso ocorra erro ao buscar o arquivo, a mensagem respectivva ao erro será exibida</i>
+     */
     public static HashMap<String, FilaDeReserva> openFilaDeReserva() throws ReservarException {
         try {
             HashMap<String, FilaDeReserva> filasDeReserva;
