@@ -49,7 +49,7 @@ public class ImDiskAdministradorDaoTest {
 
     @Test
     void update() throws AdministradorException {
-        Administrador novoAdm = new Administrador("222","MaikeTest","Adm","11130521333");
+        Administrador novoAdm = new Administrador("222","MaikeTest","Adm","83383727068");
         MasterDao.getAdministradorDao().Update(novoAdm,adm);
         assertNotEquals(adm,MasterDao.getAdministradorDao().findById(novoAdm.getId()));
     }
@@ -61,7 +61,7 @@ public class ImDiskAdministradorDaoTest {
 
     @Test
     void findLogin() throws AdministradorException{
-        Administrador novoAdm = new Administrador("222","MaikeTest","Adm","11130521333");
+        Administrador novoAdm = new Administrador("222","MaikeTest","Adm","83383727068");
         MasterDao.getAdministradorDao().save(novoAdm);
         Administrador sessao = MasterDao.getAdministradorDao().findLogin(adm.getId(),adm.getSenha());
         assertEquals(adm, sessao);
