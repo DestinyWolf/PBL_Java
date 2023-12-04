@@ -2,9 +2,12 @@ package util;
 
 import java.io.Serializable;
 
+/**
+ * <p>classe reune apenas mensagens para facilitar no laçamento das <b>Exceções</b></p>
+ */
 public class Constantes implements Serializable {
 
-    /**Mensagens customizadas para as exceções, para facilitar no momento da implementação*/
+
     public final static String deleteUser = "Impossivel deletar Usuario";
     public final static String updateUser = "Impossivel atualizar Usuario";
     public final static String createUser = "Impossivel criar Usuario";
