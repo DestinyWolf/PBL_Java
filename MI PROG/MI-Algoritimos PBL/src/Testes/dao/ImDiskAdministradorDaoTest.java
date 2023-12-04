@@ -21,7 +21,7 @@ public class ImDiskAdministradorDaoTest {
     @BeforeEach
     void setUp() throws Exception {
 
-        adm = new Administrador("123","Armando","Ditador","57130521090");
+        adm = new Administrador("123","Armando","Ditador","62909475085");
         MasterDao.getAdministradorDao().save(adm);
 
 

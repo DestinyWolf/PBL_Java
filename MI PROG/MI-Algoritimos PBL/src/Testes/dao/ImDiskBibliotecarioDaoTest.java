@@ -23,7 +23,7 @@ class ImDiskBibliotecarioDaoTest {
     void criar() throws Exception {
 
         FileManeger.generateCache();
-        bibliotecario = new Bibliotecario("ArmandoTest","123","64299259513","Brabo");
+        bibliotecario = new Bibliotecario("ArmandoTest","123","62909475085","Brabo");
         MasterDao.getBibliotecarioDao().save(bibliotecario);
     }
 
