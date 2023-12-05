@@ -7,7 +7,7 @@ import model.usuarios.Bibliotecario;
 
 import java.io.Serializable;
 
-/**Classe model para livro*/
+/** <p>Classe model para livro</p>*/
 public class Livro implements Serializable {
     private String isbn;
     private String autor;
@@ -20,14 +20,14 @@ public class Livro implements Serializable {
     private Integer qntDeBuscas;
 
     /**
-     * Construtor da classe Livro
-     * @param isbn
-     * @param autor
-     * @param categoria
-     * @param enderecoLivro
-     * @param editora
-     * @param anoDePublicacao
-     * @param nome
+     * <p>Construtor da classe Livro</p>
+     * @param isbn <b>String</b>
+     * @param autor <b>String</b>
+     * @param categoria <b>String</b>
+     * @param enderecoLivro <b>String</b>
+     * @param editora <b>String</b>
+     * @param anoDePublicacao <b>Integer</b>
+     * @param nome <b>String</b>
      */
     public Livro (String isbn, String autor, String categoria,String enderecoLivro, String editora, Integer anoDePublicacao, String nome) {
         this.isbn = isbn;
@@ -41,125 +41,125 @@ public class Livro implements Serializable {
         this.qntDeBuscas = 0;
     }
 
-    /**Metodo responsavel por retornar o ano de publicação do livro
-     * @return  ano de publicação do livro*/
+    /**<p>Metodo responsavel por retornar o <b>ano de publicação</b> do livro</p>
+     * @return <b>Integer</b> - <i>ano de publicação do livro</i> */
     public Integer getAnoDePublicacao() {
         return anoDePublicacao;
     }
 
-    /**Metodo responsavel por retornar o codigo isbn do livro
-     * @return  isbn do livro*/
+    /**<p>Metodo responsavel por retornar o <b>codigo isbn</b> do livro</p>
+     * @return <b>String</b> - <i>isbn do livro</i>*/
     public String getIsbn() {
         return isbn;
     }
 
-    /**Metodo responsavel por retornar o autor do livro
-     * @return  autor do livro*/
+    /**<p>Metodo responsavel por retornar o <b>autor</b> do livro</p>
+     * @return  <b>String</b> - <i>autor do livro</i>*/
     public String getAutor() {
         return autor;
     }
 
-    /**Metodo responsavel por retornar a categoria do livro
-     * @return  categoria do livro*/
+    /**<p>Metodo responsavel por retornar a <b>categoria</b> do livro</p>
+     * @return  <b>String</b> - <i>categoria do livro</i>*/
     public String getCategoria() {
         return categoria;
     }
 
-    /**Metodo responsavel por retornar a editora do livro
-     * @return  editora do livro*/
+    /**<p>Metodo responsavel por retornar a <b>editora</b> do livro</p>
+     * @return <b>String</b> - <i>editora do livro</i>*/
     public String getEditora() {
         return editora;
     }
 
-    /**Metodo responsavel por retornar a localização do livro
-     * @return  localização do livro*/
+    /**<p>Metodo responsavel por retornar a <b>localização</b> do livro</p>
+     * @return <b>String</b> - <i>localização do livro</i>*/
     public String getEnderecoLivro() {
         return enderecoLivro;
     }
 
-    /**Metodo responsavel por retornar o nome do livro
-     * @return  nome do livro*/
+    /**<p>Metodo responsavel por retornar o <b>nome</b> do livro</p>
+     * @return <b>String</b> - <i>nome do livro</i>*/
     public String getNome() {
         return nome;
     }
 
     /**
-     * Metodo responsavel por retornar a quantidade de determinado livro
-     * @return quantidade de livros
+     * <p>Metodo responsavel por retornar a <b>quantidade</b> de determinado livro</p>
+     * @return <b>Integer</b> - <i>quantidade de livros</i>
      */
     public Integer getQuantidade() {
         return quantidade;
     }
 
     /**
-     * Metodo responsavel por retonar a quantidade de buscas
-     * @return quantidade de buscas
+     * <p>Metodo responsavel por retonar a <b>quantidade</b> de buscas de um livro</p>
+     * @return <b>Integer</b> - <i>quantidade de buscas</i>
      */
     public Integer getQntDeBuscas() {
         return qntDeBuscas;
     }
 
-    /**Metodo responsavel por settar o ano de publicação do livro
-     *@param anoDePublicacao  */
+    /**<p>Metodo responsavel por settar o <b>ano de publicação</b> do livro</p>
+     *@param anoDePublicacao <b>Integer</b> */
     public void setAnoDePublicacao(Integer anoDePublicacao) {
         this.anoDePublicacao = anoDePublicacao;
     }
 
-    /**Metodo responsavel por settar o autor do livro
-     *@param autor  */
+    /**<p>Metodo responsavel por settar o <b>autor</b> do livro</p>
+     *@param autor <b>String</b> */
     public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    /**Metodo responsavel por settar a categoria do livro
-     *@param categoria  */
+    /**<p>Metodo responsavel por settar a <b>categoria</b> do livro</p>
+     *@param categoria  <b>String</b>*/
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    /**Metodo responsavel por settar a editora do livro
-     *@param editora  */
+    /**<p>Metodo responsavel por settar a <b>editora</b> do livro</p>
+     *@param editora  <b>String</b>*/
     public void setEditora(String editora) {
         this.editora = editora;
     }
 
-    /**Metodo responsavel por settar a localização do livro
-     *@param enderecoLivro  */
+    /**<p>Metodo responsavel por settar a <b>localização</b> do livro</p>
+     *@param enderecoLivro  <b>String</b>*/
     public void setEnderecoLivro(String enderecoLivro) {
         this.enderecoLivro = enderecoLivro;
     }
 
-    /**Metodo responsavel por settar o codigo isbn do livro
-     *@param isbn  */
+    /**<p>Metodo responsavel por settar o <b>codigo isbn</b> do livro</p>
+     *@param isbn  <b>String</b>*/
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    /**Metodo responsavel por settar o nome do livro
-     *@param nome  */
+    /**<p>Metodo responsavel por settar o <b>nome</b> do livro</p>
+     *@param nome  <b>String</b>*/
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * metodo responsavel por settar a quantidade de livros
-     * @param quantidade
+     * <p>Metodo responsavel por settar a <b>quantidade</b> de livros</p>
+     * @param quantidade <b>Integer</b>
      */
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
     /**
-     * metodo responsavel por settar a quantidade de buscas
-     * @param qntDeBuscas
+     * <p>Metodo responsavel por settar a <b>quantidade</b> de buscas</p>
+     * @param qntDeBuscas <b>Integer</b>
      */
     public void setQntDeBuscas(Integer qntDeBuscas) {
         this.qntDeBuscas = qntDeBuscas;
     }
 
     /**
-     * metodo responsavel por retornar a quantidade de emprestimos
-     * @return a quantidade de emprestimos
+     * <p>Metodo responsavel por retornar a <b>quantidade</b> de emprestimos</p>
+     * @return <b>Integer</b> - <i>quantidade de emprestimo</i>
      */
     public Integer getQntDeEmprestimos() {
         try {
