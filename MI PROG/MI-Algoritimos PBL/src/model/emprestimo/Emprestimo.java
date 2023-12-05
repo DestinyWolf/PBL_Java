@@ -13,7 +13,7 @@ import java.util.Objects;
 
 import static util.Constantes.*;
 
-/**Classe model para emprestimos*/
+/**<p>Classe model para emprestimos</p>*/
 public class Emprestimo implements Serializable {
     private Leitor leitor;
     private Livro livro;
@@ -24,9 +24,9 @@ public class Emprestimo implements Serializable {
     private String id;
     private Integer renovacoes;
 
-    /**Construtor da classe emprestimo
-     * @param leitor
-     * @param livro*/
+    /**<p>Construtor da classe emprestimo, é <b>necessario um leitor e um livro</b> para se criar um emprestimo</p>
+     * @param leitor <b>Leitor</b>
+     * @param livro <b>Livro</b>*/
     public Emprestimo(Leitor leitor, Livro livro) throws EmprestimoException {
         try {
             this.leitor = leitor;
@@ -45,72 +45,72 @@ public class Emprestimo implements Serializable {
         }
     }
 
-    /**Metodo responsavel por retornar a data de devolução do livro
-     * @return Data de devolução do livro*/
+    /**<p>Metodo responsavel por retornar o <b>prazo final</b> de devolução ou renovação do livro</p>
+     * @return <b>Data</b> - <i>data final para devolução do livro</i>*/
     public Data getPrazoFinal() {
         return prazoFinal;
     }
 
-    /**Metodo responsavel por retornar a data de emprestimo do livro
-     * @return Data de emprestimo do livro*/
+    /**<p>Metodo responsavel por retornar a <b>data de emprestimo</b> do livro</p>
+     * @return <b>Data</b> - <i>Data de emprestimo do livro</i>*/
     public Data getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    /**Metodo responsavel por retornar o leitor que pegou livro emprestado
-     * @return leitor que pegou o livro emprestado*/
+    /**<p>Metodo responsavel por retornar o <b>leitor</b> que pegou livro emprestado</p>
+     * @return <b>Leitor</b> - <i>leitor que pegou o livro emprestado</i>*/
     public Leitor getLeitor() {
         return leitor;
     }
 
-    /**Metodo responsavel por retornar o livro que foi pego emprestado
-     * @return Livro que foi emprestado*/
+    /**<p>Metodo responsavel por retornar o <b>livro</b> que foi pego emprestado</p>
+     * @return <b>Livro</b> - <i>livro que foi emprestado</i>*/
     public Livro getLivro() {
         return livro;
     }
 
-    /**Metodo que retorna se o livro foi devolvido ou não
-     * @return Livro devolvido*/
+    /**<p>Metodo que retorna se o livro foi <b>devolvido</b> </p>
+     * @return <b>boolean</b> - <i><b>true</b> se o livro foi devolvido, <b>false</b> se o livro ainda ta emprestado</i>*/
     public boolean isDevolvido() {
         return devolvido;
     }
 
-    /**Metodo responsavel por retornar o Id do emprestimo
-     * @return Id do emprestimo*/
+    /**<p>Metodo responsavel por retornar o <b>Id</b> do emprestimo</p>
+     * @return <b>String</b> - <i>id do emprestimo</i>*/
     public String getId() {
         return id;
     }
 
-    /**Metodo responsavel por retornar a quantidade de renovações deste emprestimo
-     * @return renovações do emprestimo*/
+    /**<p>Metodo responsavel por retornar a <b>quantidade de renovações</b> deste emprestimo</p>
+     * @return <b>Integer</b> - <i>numero de renovações do emprestimo</i>*/
     public Integer getRenovacoes() {
         return renovacoes;
     }
 
     /**
-     * Metodo retorna a data que o emprestimo foi efetivamente devolvido
-     * @return Data que o livro foi devolvido
+     * <p>Metodo retorna a <b>data que o livro foi devolvido</b></p>
+     * @return <b>Data</b> - <i>Data que o livro foi devolvido</i>
      */
     public Data getDataDevolucao() {
         return dataDevolucao;
     }
 
-    /**Metodo responsavel por settar a data de devolução do livro
-     * @param prazoFinal */
+    /**<p>Metodo responsavel por settar o <b>Prazo final</b> de devolução ou renovação do livro</p>
+     * @param prazoFinal <b>Data</b>*/
     public void setPrazoFinal(Data prazoFinal) {
         this.prazoFinal = prazoFinal;
     }
 
-    /**Metodo responsavel por settar a data de emprestimo do livro
-     * @param dataEmprestimo */
+    /**<p>Metodo responsavel por settar a <b>data de emprestimo</b> do livro</p>
+     * @param dataEmprestimo <b>Data</b>*/
     public void setDataEmprestimo(Data dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
     /**
-     * Metodo responsavel por settar se o livro foi devolvido
-     * @param devolvido
-     * @throws EmprestimoException
+     * <p>Metodo responsavel por settar se o <b>livro foi devolvido</b></p>
+     * @param devolvido <b>boolean</b>
+     * @throws EmprestimoException <i>Caso ocorra algum erro no momento de devolver o livro</i>
      */
     public void setDevolvido(boolean devolvido) throws EmprestimoException{
         try {
@@ -129,44 +129,44 @@ public class Emprestimo implements Serializable {
         }
     }
 
-    /**Metodo responsavel por settar o leitor que fez o emprestimo
-     * @param leitor */
+    /**<p>Metodo responsavel por settar o <b>leitor</b> que fez o emprestimo</p>
+     * @param leitor <b>Leitor</b>*/
     public void setLeitor(Leitor leitor) {
         this.leitor = leitor;
     }
 
-    /**Metodo responsavel por settar o livro emprestado
-     * @param livro */
+    /**<p>Metodo responsavel por settar o <b>livro emprestado</b></p>
+     * @param livro <b>Livro</b>*/
     public void setLivro(Livro livro) {
         this.livro = livro;
     }
 
-    /**Metodo responsavel por settar o id do emprestimo
-     * @param id */
+    /**<p>Metodo responsavel por settar o <b>id</b> do emprestimo</p>
+     * @param id <b>String</b>*/
     public void setId(String id) {
         this.id = id;
     }
 
-    /**Metodo responsavel por settar as rennovações do emprestimo
-     * @param renovacoes */
+    /**<p>Metodo responsavel por settar as <b>renovações</b> do emprestimo</p>
+     * @param renovacoes <b>Integer</b>*/
     public void setRenovacoes(Integer renovacoes) {
         this.renovacoes = renovacoes;
     }
 
-
     /**
-     * metodo responsavel por settar data livro devolvido
-     * @param dataDevolucao
+     * <p>Metodo responsavel por settar a <b>data de devolução</b> do livro</p>
+     * @param dataDevolucao <b>Data</b>
      */
     public void setDataDevolucao(Data dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
     /**
-     * Metodo responsavel por renovar o emprestimo do livro
-     * @param isbn
-     * @param id
-     * @throws EmprestimoException
+     * <p>Metodo responsavel por <b>renovar</b> o emprestimo do livro</p>
+     * @param isbn <b>String</b>
+     * @param id <b>String</b>
+     * @throws EmprestimoException <i> caso o leitor esteja bloqueado, tenha atingido o numero de renovações,
+     * o livro esteja reservado ou ocorra algum outro problema durante a renovação</i>
      */
     public void renovacaoEmprestimo(String isbn, String id) throws EmprestimoException {
 
