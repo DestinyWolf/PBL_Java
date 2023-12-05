@@ -45,7 +45,7 @@ public class ImDiskLivroDao implements LivroDao{
 
         if (this.livros.get(livro.getIsbn()) != null) {
             Livro livros = this.livros.get(livro.getIsbn());
-            livros.setQuantidade(livro.getQuantidade()+1);
+            livros.setQuantidade(livros.getQuantidade()+1);
             this.livros.put(livro.getIsbn(), livros);
         } else {
             this.livros.put(livro.getIsbn(), livro);
